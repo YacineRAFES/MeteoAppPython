@@ -1,0 +1,35 @@
+/*
+ * style - Qt Style Sheet
+ * Created: 12/03/2026
+ *
+ * QSS Toolkit Quick Tips:
+ * - Press Ctrl+Space (Cmd+Space) for intelligent auto-completion
+ * - Use Ctrl+/ (Cmd+/) to comment/uncomment code blocks
+ * - Click color gutter icons to open the visual color picker
+ * - Type :: for sub-controls (e.g., QScrollBar::handle)
+ * - Type : for pseudo-states (e.g., QPushButton:hover)
+ * - RGB/RGBA colors: rgb(255, 0, 0) or rgba(255, 0, 0, 128)
+ */
+
+/* Add your QSS styles here */
+
+#tempLabel{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#code_country {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#nomville {
+    font-size: 15px;
+}
+
+#bloc_ville {
+    border: 1px solid red;
+
+
+}
+
