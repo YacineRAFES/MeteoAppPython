@@ -19,10 +19,8 @@ class current_weather:
             }
         elif response.status_code == 400:
             data = response.json()
-            return {
-                print(data["error"] + " : " + data["reason"])
-            }
+            print(data["error"] + " : " + data["reason"])
+            return None
         else:
-            return {
-                print("Erreur lors de la requête : " + str(response.status_code))
-            }
+            print("Erreur lors de la requête : " + str(response.status_code))
+            return None
