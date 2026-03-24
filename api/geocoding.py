@@ -1,5 +1,6 @@
 import requests
 
+
 class GeoCoding:
     def GetGeo(self, nomville):
         url = f"https://geocoding-api.open-meteo.com/v1/search?name={nomville}&count=1&language=en&format=json"
