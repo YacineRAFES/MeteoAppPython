@@ -6,7 +6,6 @@ from utilitaire.weather_thread import WeatherThread
 
 VILLES = ["Paris", "New York", "Tokyo", "Quebec", "Londres", "Berlin", "Amsterdam"]
 
-
 class VilleWidget(QWidget):
     def __init__(self, ville):
         super().__init__()
