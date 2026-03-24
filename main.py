@@ -1,10 +1,10 @@
 import sys
 
-from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
-from view.header.les_villes_internationales import VilleWidget, VILLES
-from api.geocoding import GeoCoding
+
+from view.body import RechercherUneVille
+from view.les_villes_internationales import VilleWidget, VILLES
 
 
 # On définit une classe de fenêtre par héritage.
@@ -25,6 +25,9 @@ class MyWindow(QMainWindow):
 
         layout_main.addLayout(layout_meteoInternational)
         layout_main.addStretch()
+
+        body_meteo = RechercherUneVille()
+        layout_main.addWidget(body_meteo)
 
         central_widget = QWidget()
         central_widget.setLayout(layout_main)
