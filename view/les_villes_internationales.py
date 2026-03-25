@@ -9,12 +9,12 @@ VILLES = ["Paris", "New York", "Tokyo", "Quebec", "Londres", "Berlin", "Amsterda
 class VilleWidget(QWidget):
     def __init__(self, ville):
         super().__init__()
+        self.setAttribute(Qt.WA_StyledBackground, True)
         self.ville = ville
         self.layout_principal = QVBoxLayout()
         self.setLayout(self.layout_principal)
 
         # Afficher un état de chargement
-        self.header_du_bloc(ville, "")
         self.loading_label = QLabel("Chargement...")
         self.loading_label.setObjectName("loadingLabel")
         self.layout_principal.addWidget(self.loading_label)
@@ -31,6 +31,7 @@ class VilleWidget(QWidget):
         self.loading_label.deleteLater()
 
         # Afficher les données
+        self.header_du_bloc(ville, results["code_country"])
         self.corps_du_bloc(str(results["temperature_2m"]) + "°C", results["description"])
 
     def on_weather_error(self, ville, error_message):
