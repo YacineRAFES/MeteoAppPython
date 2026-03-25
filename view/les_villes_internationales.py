@@ -4,7 +4,7 @@ from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
 
-VILLES = ["Paris", "New York", "Tokyo", "Quebec", "Londres", "Berlin", "Amsterdam"]
+VILLES = ["Paris", "New York", "Tokyo", "Quebec", "London", "Berlin", "Amsterdam"]
 
 class VilleWidget(QWidget):
     def __init__(self, ville):
