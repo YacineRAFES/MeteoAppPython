@@ -1,5 +1,6 @@
 import sys
 
+from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
 
@@ -21,6 +22,7 @@ class MyWindow(QMainWindow):
 
         for ville in VILLES:
             widget_ville = VilleWidget(ville)
+            widget_ville.setObjectName("widgetVille")
             layout_meteoInternational.addWidget(widget_ville)
 
         layout_main.addLayout(layout_meteoInternational)
@@ -37,10 +39,27 @@ class MyWindow(QMainWindow):
 if __name__ == "__main__":
     # On crée l'instance d'application en lui passant le tableau des arguments.
     app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+
+    palette = QPalette()
+    # Fond blanc
+    palette.setColor(QPalette.Window, QColor(233, 236, 239))
+    # Texte noir
+    palette.setColor(QPalette.WindowText, QColor(0, 0, 0))
+    # Fond des widgets
+    palette.setColor(QPalette.Base, QColor(255, 255, 255))
+    # Texte des widgets
+    palette.setColor(QPalette.Text, QColor(0, 0, 0))
+    # Boutons gris clair
+    palette.setColor(QPalette.Button, QColor(240, 240, 240))
+    # Texte des boutons
+    palette.setColor(QPalette.ButtonText, QColor(0, 0, 0))
+    app.setPalette(palette)
 
     # On instancie une fenêtre graphique et l'affiche.
     myWindow = MyWindow()
     myWindow.show()
+
 
     with open('style.qss', 'r') as f:
         style = f.read()

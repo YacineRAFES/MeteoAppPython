@@ -18,6 +18,10 @@
     font-weight: bold;
 }
 
+#tempsLabel {
+    font-size: 15px;
+}
+
 #code_country {
     font-size: 15px;
     font-weight: bold;
@@ -27,8 +31,9 @@
     font-size: 15px;
 }
 
-#bloc_ville {
-    border: 1px solid red;
+#widgetVille {
+    border-radius: 10px;
+    background-color: #FFFFFF;
 
 
 }
