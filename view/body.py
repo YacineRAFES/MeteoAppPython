@@ -73,6 +73,30 @@ class RechercherUneVille(QWidget):
             meteoJournee.addLayout(meteoHeure)
 
         # Affichage de la prévision météo sur 7 jours d'une ville recherchée
+        meteoSemaine = QHBoxLayout()
+        for i in range(7):
+            meteoJour = QVBoxLayout()
+
+            meteoJourLabel = QLabel(f"Jour {i + 1}")
+            meteoJourLabel.setObjectName("meteoJourLabel")
+            meteoJour.addWidget(meteoJourLabel)
+
+            icons = QLabel()
+            pixmap = QPixmap("img.png")
+            icons.setPixmap(pixmap.scaled(50, 50))
+            meteoJour.addWidget(icons)
+
+            meteoTemp = QLabel(f"{25 + i}°C")
+            meteoTemp.setObjectName("meteoTemp")
+            meteoJour.addWidget(meteoTemp)
+
+            meteoHum = QLabel(f"Humidité : {60 - i * 5}%")
+            meteoHum.setObjectName("meteoHum")
+            meteoJour.addWidget(meteoHum)
+
+            meteoSemaine.addLayout(meteoJour)
+
+
 
 
         # Ajout des différentes parties au layout principal
@@ -80,5 +104,6 @@ class RechercherUneVille(QWidget):
         meteoActuelle.addLayout(meteoTempsHumidity)
         layout_principal.addLayout(meteoActuelle)
         layout_principal.addLayout(meteoJournee)
+        layout_principal.addLayout(meteoSemaine)
 
         self.setLayout(layout_principal)

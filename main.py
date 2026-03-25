@@ -42,7 +42,7 @@ if __name__ == "__main__":
     app.setStyle("Fusion")
 
     palette = QPalette()
-    # Fond blanc
+    # Fond de l'application
     palette.setColor(QPalette.Window, QColor(233, 236, 239))
     # Texte noir
     palette.setColor(QPalette.WindowText, QColor(0, 0, 0))
