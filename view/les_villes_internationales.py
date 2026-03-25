@@ -71,6 +71,7 @@ class VilleWidget(QWidget):
 
         temps_label = QLabel(temps)
         temps_label.setObjectName("tempsLabel")
+        temps_label.setWordWrap(True)
         layout_temp_temps.addWidget(temps_label)
 
         layout_icons_temp.addLayout(layout_icons)
