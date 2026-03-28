@@ -14,12 +14,15 @@
 
 #nomville {
     font-size: 15px;
-    text-transform: uppercase;
 }
 
 #widgetVille {
-    border-radius: 10px;
-    background-color: #FFFFFF;
     max-width: 228px;
+}
+
+/* background blanc */
+#widgetVille, #meteoActuelle, #meteoJour, #meteoJournee {
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
 

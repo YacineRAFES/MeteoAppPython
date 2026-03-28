@@ -7,7 +7,6 @@ class RechercherUneVille(QWidget):
     def __init__(self):
         super().__init__()
 
-
         layout_principal = QVBoxLayout()
 
         # Barre de recherche d'une ville
@@ -17,8 +16,7 @@ class RechercherUneVille(QWidget):
         layout_principal.addWidget(input)
 
         # Affichage des données météo d'une ville recherchée
-            # Affichage de la ville actuelle, de sa température et de son temps
-        meteoActuelle = QHBoxLayout()
+        meteoActuelleLayout = QHBoxLayout()
         meteoVilleDateIconTemp = QVBoxLayout()
         meteoTempsHumidity = QVBoxLayout()
 
@@ -47,9 +45,17 @@ class RechercherUneVille(QWidget):
         meteoHumidity.setObjectName("meteoHumidity")
         meteoTempsHumidity.addWidget(meteoHumidity)
 
+        meteoActuelleLayout.addLayout(meteoVilleDateIconTemp)
+        meteoActuelleLayout.addLayout(meteoTempsHumidity)
+
+        meteoActuelle = QWidget()
+        meteoActuelle.setObjectName("meteoActuelle")
+        meteoActuelle.setLayout(meteoActuelleLayout)
+
         # Affichage de la prévision météo sur les prochaines heures d'une ville recherchée
 
-        meteoJournee = QHBoxLayout()
+        meteoJourneeLayout = QHBoxLayout()
+
         for i in range(5):
             meteoHeure = QVBoxLayout()
 
@@ -70,40 +76,44 @@ class RechercherUneVille(QWidget):
             meteoHum.setObjectName("meteoHum")
             meteoHeure.addWidget(meteoHum)
 
-            meteoJournee.addLayout(meteoHeure)
+            meteoJourneeLayout.addLayout(meteoHeure)
+
+        meteoJournee = QWidget()
+        meteoJournee.setObjectName("meteoJournee")
+        meteoJournee.setLayout(meteoJourneeLayout)
 
         # Affichage de la prévision météo sur 7 jours d'une ville recherchée
         meteoSemaine = QHBoxLayout()
+        meteoSemaine.setObjectName("meteoSemaine")
         for i in range(7):
-            meteoJour = QVBoxLayout()
+            meteoJourLayout = QVBoxLayout()
 
             meteoJourLabel = QLabel(f"Jour {i + 1}")
             meteoJourLabel.setObjectName("meteoJourLabel")
-            meteoJour.addWidget(meteoJourLabel)
+            meteoJourLayout.addWidget(meteoJourLabel)
 
             icons = QLabel()
             pixmap = QPixmap("img.png")
             icons.setPixmap(pixmap.scaled(50, 50))
-            meteoJour.addWidget(icons)
+            meteoJourLayout.addWidget(icons)
 
             meteoTemp = QLabel(f"{25 + i}°C")
             meteoTemp.setObjectName("meteoTemp")
-            meteoJour.addWidget(meteoTemp)
+            meteoJourLayout.addWidget(meteoTemp)
 
             meteoHum = QLabel(f"Humidité : {60 - i * 5}%")
             meteoHum.setObjectName("meteoHum")
-            meteoJour.addWidget(meteoHum)
+            meteoJourLayout.addWidget(meteoHum)
 
-            meteoSemaine.addLayout(meteoJour)
+            meteoJour = QWidget()
+            meteoJour.setObjectName("meteoJour")
+            meteoJour.setLayout(meteoJourLayout)
 
-
-
+            meteoSemaine.addWidget(meteoJour)
 
         # Ajout des différentes parties au layout principal
-        meteoActuelle.addLayout(meteoVilleDateIconTemp)
-        meteoActuelle.addLayout(meteoTempsHumidity)
-        layout_principal.addLayout(meteoActuelle)
-        layout_principal.addLayout(meteoJournee)
+        layout_principal.addWidget(meteoActuelle)
+        layout_principal.addWidget(meteoJournee)
         layout_principal.addLayout(meteoSemaine)
 
         self.setLayout(layout_principal)
