@@ -1,19 +1,32 @@
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
 from PySide6.QtCore import Qt
 
 
 class RechercherUneVille(QWidget):
-    def __init__(self):
+    def __init__(self,):
         super().__init__()
 
+        self.buttoninput = None
         layout_principal = QVBoxLayout()
 
+        layout_input = QHBoxLayout()
+
         # Barre de recherche d'une ville
-        input = QLineEdit()
-        input.setPlaceholderText("Entrez une ville")
-        input.setObjectName("inputVille")
-        layout_principal.addWidget(input)
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Entrez une ville")
+        self.input.setObjectName("inputVille")
+
+        self.buttoninput = QPushButton("Rechercher")
+        self.buttoninput.setObjectName("buttonInput")
+        self.buttoninput.clicked.connect(self.button_rechercher)
+
+        layout_input.addWidget(self.input)
+        layout_input.addWidget(self.buttoninput)
+
+        layout_principal.addLayout(layout_input)
+
+
 
         # Affichage des données météo d'une ville recherchée
         meteoActuelleLayout = QHBoxLayout()
@@ -117,3 +130,6 @@ class RechercherUneVille(QWidget):
         layout_principal.addLayout(meteoSemaine)
 
         self.setLayout(layout_principal)
+    def button_rechercher(self):
+        nomVille = self.input.text()
+        print(f"Recherche de la ville : {nomVille}")
