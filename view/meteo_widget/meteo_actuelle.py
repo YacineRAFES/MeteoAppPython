@@ -1,7 +1,7 @@
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel
 
-class meteo_aujourdhui(QWidget):
+class MeteoAujourdhui(QWidget):
     def __init__(self, data):
         super().__init__()
         self.data = data
