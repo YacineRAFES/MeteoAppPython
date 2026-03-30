@@ -26,10 +26,10 @@ class MyWindow(QMainWindow):
             layout_meteoInternational.addWidget(widget_ville)
 
         layout_main.addLayout(layout_meteoInternational)
-        layout_main.addStretch()
 
         body_meteo = RechercherUneVille()
         layout_main.addWidget(body_meteo)
+        layout_main.addStretch()
 
         central_widget = QWidget()
         central_widget.setLayout(layout_main)

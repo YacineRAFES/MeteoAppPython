@@ -11,6 +11,7 @@ class RechercherUneVille(QWidget):
         super().__init__()
 
         layout_principal = QVBoxLayout()
+        layout_principal.setContentsMargins(0, 0, 0, 0)
 
         layout_input = QHBoxLayout()
 
@@ -36,6 +37,8 @@ class RechercherUneVille(QWidget):
         layout_principal.addWidget(self.meteo_aujourdhui)
         layout_principal.addWidget(self.meteo_journee)
         layout_principal.addWidget(self.meteo_semaine)
+
+
 
         self.setLayout(layout_principal)
     def button_rechercher(self):

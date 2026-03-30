@@ -6,6 +6,10 @@ class MeteoAujourdhui(QWidget):
         super().__init__()
         self.nomville = nomville
 
+        self.layout_principal = QVBoxLayout()
+        self.layout_principal.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_principal)
+
         # Affichage des données météo d'une ville recherchée
         meteoActuelleLayout = QHBoxLayout()
         meteoVilleDateIconTemp = QVBoxLayout()
@@ -42,4 +46,6 @@ class MeteoAujourdhui(QWidget):
         meteoActuelle = QWidget()
         meteoActuelle.setObjectName("meteoActuelle")
         meteoActuelle.setLayout(meteoActuelleLayout)
+
+        self.layout_principal.addWidget(meteoActuelle)
 

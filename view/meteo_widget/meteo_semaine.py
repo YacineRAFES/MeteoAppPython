@@ -7,6 +7,10 @@ class MeteoSemaine(QWidget):
         super().__init__()
         self.nomville = nomville
 
+        self.layout_principal = QVBoxLayout()
+        self.layout_principal.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_principal)
+
         # Affichage de la prévision météo sur 7 jours d'une ville recherchée
         meteoSemaine = QHBoxLayout()
         meteoSemaine.setObjectName("meteoSemaine")
@@ -35,3 +39,6 @@ class MeteoSemaine(QWidget):
             meteoJour.setLayout(meteoJourLayout)
 
             meteoSemaine.addWidget(meteoJour)
+
+
+        self.layout_principal.addLayout(meteoSemaine)

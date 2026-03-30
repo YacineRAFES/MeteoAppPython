@@ -7,6 +7,10 @@ class MeteoJournee(QWidget):
         super().__init__()
         self.nomville = nomville
 
+        self.layout_principal = QVBoxLayout()
+        self.layout_principal.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_principal)
+
         meteoJourneeLayout = QHBoxLayout()
 
         for i in range(5):
@@ -34,3 +38,5 @@ class MeteoJournee(QWidget):
         meteoJournee = QWidget()
         meteoJournee.setObjectName("meteoJournee")
         meteoJournee.setLayout(meteoJourneeLayout)
+
+        self.layout_principal.addWidget(meteoJournee)
