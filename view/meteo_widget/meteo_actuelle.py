@@ -2,9 +2,9 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel
 
 class MeteoAujourdhui(QWidget):
-    def __init__(self, data):
+    def __init__(self, nomville):
         super().__init__()
-        self.data = data
+        self.nomville = nomville
 
         # Affichage des données météo d'une ville recherchée
         meteoActuelleLayout = QHBoxLayout()

@@ -3,9 +3,9 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
 
 class MeteoJournee(QWidget):
-    def __init__(self, data):
+    def __init__(self, nomville):
         super().__init__()
-        self.data = data
+        self.nomville = nomville
 
         meteoJourneeLayout = QHBoxLayout()
 

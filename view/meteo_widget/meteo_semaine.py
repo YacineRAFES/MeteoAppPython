@@ -3,9 +3,9 @@ from PySide6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QLabel
 
 
 class MeteoSemaine(QWidget):
-    def __init__(self, data):
+    def __init__(self, nomville):
         super().__init__()
-        self.data = data
+        self.nomville = nomville
 
         # Affichage de la prévision météo sur 7 jours d'une ville recherchée
         meteoSemaine = QHBoxLayout()
