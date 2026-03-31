@@ -24,6 +24,9 @@ class RechercherUneVille(QWidget):
         self.buttoninput.setObjectName("buttonInput")
         self.buttoninput.clicked.connect(self.button_rechercher)
 
+        self.shortcut_enter = QShortcut(Qt.Key_Return, self)
+        self.shortcut_enter.activated.connect(self.button_rechercher)
+
         layout_input.addWidget(self.input)
         layout_input.addWidget(self.buttoninput)
 
