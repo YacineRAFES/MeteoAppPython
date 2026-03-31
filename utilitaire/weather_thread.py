@@ -1,5 +1,6 @@
 from PySide6.QtCore import QThread, Signal
-from api.current_weather import current_weather
+from api.current_weather import CurrentWeather
+from api.geocoding import GeoCoding
 
 
 class WeatherThread(QThread):
@@ -16,7 +17,10 @@ class WeatherThread(QThread):
 
     def run(self):
         try:
-            results = current_weather().get_current_weather(self.ville)
+            geo = GeoCoding()
+            geocoding = geo.GetGeo(self.ville)
+
+            results = CurrentWeather().get_current_weather(geocoding["latitude"], geocoding["longitude"])
             if results:
                 self.finished.emit(self.ville, results)
             else:

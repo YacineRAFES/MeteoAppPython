@@ -33,15 +33,17 @@ class RechercherUneVille(QWidget):
 
         layout_principal.addLayout(layout_input)
 
-        # Connexion du signal de recherche de ville aux widgets météo
-        self.ville_recherchee.connect(self.meteo_aujourdhui.set_ville)
-        self.ville_recherchee.connect(self.meteo_journee.set_ville)
-        self.ville_recherchee.connect(self.meteo_semaine.set_ville)
 
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui(nomville="")
         self.meteo_journee = MeteoJournee(nomville="")
         self.meteo_semaine = MeteoSemaine(nomville="")
+
+
+        # Connexion du signal de recherche de ville aux widgets météo
+        self.ville_recherchee.connect(self.meteo_aujourdhui.set_ville)
+        self.ville_recherchee.connect(self.meteo_journee.set_ville)
+        self.ville_recherchee.connect(self.meteo_semaine.set_ville)
 
         layout_principal.addWidget(self.meteo_aujourdhui)
         layout_principal.addWidget(self.meteo_journee)

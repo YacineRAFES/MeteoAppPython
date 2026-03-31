@@ -31,7 +31,7 @@ class VilleWidget(QWidget):
         self.loading_label.deleteLater()
 
         # Afficher les données
-        self.header_du_bloc(ville, results["code_country"])
+        self.header_du_bloc(ville, "N/A") #TODO A FAIRE
         self.corps_du_bloc(str(results["temperature_2m"]) + "°C", results["description"])
 
     def on_weather_error(self, ville, error_message):

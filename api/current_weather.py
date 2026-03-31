@@ -2,11 +2,16 @@ import requests
 from utilitaire.get_weather_icon import weather_icon
 from api.geocoding import GeoCoding
 
-class current_weather:
+class CurrentWeather:
 
-    def get_current_weather(self, nomville):
-        geo = GeoCoding.GetGeo(self, nomville)
-        url_weather = f"https://api.open-meteo.com/v1/forecast?latitude={geo['latitude']}&longitude={geo['longitude']}&current=temperature_2m,is_day,weather_code&timeformat=unixtime"
+    def get_current_weather(self, lat, lon):
+        url_weather = (f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+                       f"&current="
+                       f"temperature_2m,"
+                       f"is_day,"
+                       f"weather_code,"
+                       f"relative_humidity_2m"
+                       f"&timeformat=unixtime")
         response = requests.get(url_weather)
         if response.status_code == 200:
             data = response.json()
@@ -15,7 +20,8 @@ class current_weather:
                 "temperature_2m": round(data["current"]["temperature_2m"]),
                 "icon": weather["icon"],
                 "description": weather["description"],
-                "code_country": geo["code_country"]
+                "humidity": data["current"]["relative_humidity_2m"],
+                "time": data["current"]["time"]
             }
         elif response.status_code == 400:
             data = response.json()
