@@ -1,12 +1,13 @@
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QShortcut
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from view.meteo_widget.meteo_actuelle import MeteoAujourdhui
 from view.meteo_widget.meteo_journee import MeteoJournee
 from view.meteo_widget.meteo_semaine import MeteoSemaine
 
 
 class RechercherUneVille(QWidget):
+    ville_recherchee = Signal(str)
     def __init__(self,):
         super().__init__()
 
@@ -32,6 +33,11 @@ class RechercherUneVille(QWidget):
 
         layout_principal.addLayout(layout_input)
 
+        # Connexion du signal de recherche de ville aux widgets météo
+        self.ville_recherchee.connect(self.meteo_aujourdhui.set_ville)
+        self.ville_recherchee.connect(self.meteo_journee.set_ville)
+        self.ville_recherchee.connect(self.meteo_semaine.set_ville)
+
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui(nomville="")
         self.meteo_journee = MeteoJournee(nomville="")
@@ -46,5 +52,8 @@ class RechercherUneVille(QWidget):
         self.setLayout(layout_principal)
     def button_rechercher(self):
         nomville = self.input.text()
+        print("Ville recherchée : ", nomville)
+
+        self.ville_recherchee.emit(nomville)
 
         return nomville
