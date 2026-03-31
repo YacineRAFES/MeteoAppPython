@@ -1,3 +1,4 @@
+from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel
 
@@ -5,6 +6,8 @@ class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
         super().__init__()
         self.nomville = nomville
+
+        print("MeteoAujourdhui : ", self.nomville)
 
         self.layout_principal = QVBoxLayout()
         self.layout_principal.setContentsMargins(0, 0, 0, 0)
@@ -48,4 +51,9 @@ class MeteoAujourdhui(QWidget):
         meteoActuelle.setLayout(meteoActuelleLayout)
 
         self.layout_principal.addWidget(meteoActuelle)
+
+    @Slot(str)
+    def set_ville(self, nomville):
+        self.nomville = nomville
+        # appel api
 
