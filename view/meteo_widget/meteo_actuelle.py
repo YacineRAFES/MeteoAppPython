@@ -1,9 +1,12 @@
+from datetime import datetime
+
 from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
 from api.geocoding import GeoCoding
 from api.current_weather import CurrentWeather
+from utilitaire.conversion import Conversion
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
@@ -65,11 +68,11 @@ class MeteoAujourdhui(QWidget):
         geocoding = geo.GetGeo(nomville)
         # recupère les données météo de la ville
         weather = CurrentWeather()
-        current_weather = weather.GetCurrentWeather(geocoding["latitude"], geocoding["longitude"])
+        current_weather = weather.get_current_weather(geocoding["latitude"], geocoding["longitude"])
 
         # met à jour les labels avec les données récupérées
-        self.findChild(QLabel, "meteoNomVille").setText(nomville)
-        self.findChild(QLabel, "meteoDateActuelle").setText("mardi 25 juin 2024 à 14:00")
+        self.findChild(QLabel, "meteoNomVille").setText(nomville.capitalize())
+        self.findChild(QLabel, "meteoDateActuelle").setText("Dernière mise à jour : " + Conversion.from_timestamp_to_datetime(current_weather['time']))
         self.findChild(QLabel, "meteoTemperature").setText(f"{current_weather['temperature_2m']}°C")
         self.findChild(QLabel, "meteoTemps").setText(current_weather["description"])
         self.findChild(QLabel, "meteoHumidity").setText(f"Humidité : {current_weather['humidity']}%")
