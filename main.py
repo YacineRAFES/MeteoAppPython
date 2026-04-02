@@ -1,3 +1,4 @@
+import locale
 import sys
 
 from PySide6.QtGui import QPalette, QColor
@@ -8,6 +9,7 @@ from view.body import RechercherUneVille
 from view.les_villes_internationales import VilleWidget, VILLES
 
 
+locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
 # On définit une classe de fenêtre par héritage.
 class MyWindow(QMainWindow):
 
