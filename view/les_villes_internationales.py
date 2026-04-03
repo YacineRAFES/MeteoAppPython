@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
+from utilitaire.load_image_url import LoadImageUrl
 
 VILLES = ["Paris", "New York", "Tokyo", "Quebec", "London", "Berlin", "Amsterdam"]
 
@@ -32,7 +33,7 @@ class VilleWidget(QWidget):
 
         # Afficher les données
         self.header_du_bloc(ville, "N/A") #TODO A FAIRE
-        self.corps_du_bloc(str(results["temperature_2m"]) + "°C", results["description"])
+        self.corps_du_bloc(str(results["temperature_2m"]), results["description"], results["icon"])
 
     def on_weather_error(self, ville, error_message):
         """Appelé en cas d'erreur"""
@@ -53,7 +54,7 @@ class VilleWidget(QWidget):
 
         self.layout_principal.addLayout(layout_nomville_codecountry)
 
-    def corps_du_bloc(self, temperature, temps):
+    def corps_du_bloc(self, temperature, temps, icon):
         layout_icons_temp = QHBoxLayout()
         layout_icons_temp.setAlignment(Qt.AlignLeft)
 
@@ -61,11 +62,16 @@ class VilleWidget(QWidget):
         layout_temp_temps = QVBoxLayout()
 
         icons = QLabel()
-        pixmap = QPixmap("img.png")
+
+        chargerimage = LoadImageUrl()
+        image_data = chargerimage.load_image_url(icon)
+        pixmap = QPixmap()
+        if image_data:
+            pixmap.loadFromData(image_data)
         icons.setPixmap(pixmap.scaled(100, 100))
         layout_icons.addWidget(icons)
 
-        temp = QLabel(temperature)
+        temp = QLabel(temperature + "°C")
         temp.setObjectName("tempLabel")
         layout_temp_temps.addWidget(temp)
 

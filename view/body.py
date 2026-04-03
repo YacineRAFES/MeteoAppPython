@@ -4,6 +4,10 @@ from PySide6.QtCore import Qt, Signal
 from view.meteo_widget.meteo_actuelle import MeteoAujourdhui
 from view.meteo_widget.meteo_journee import MeteoJournee
 from view.meteo_widget.meteo_semaine import MeteoSemaine
+# TODO : A revoir les icons sur la meteo actuelle qui ne change pas
+# TODO : Meteo Actuelle à revoir sur les styles (la taille de la police et les couleurs)
+# TODO : Meteo Journee à faire
+# TODO : Meteo Semaine à faire
 
 
 class RechercherUneVille(QWidget):

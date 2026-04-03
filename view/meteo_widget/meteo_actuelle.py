@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from api.geocoding import GeoCoding
 from api.current_weather import CurrentWeather
 from utilitaire.conversion import Conversion
+from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
@@ -81,6 +82,7 @@ class MeteoAujourdhui(QWidget):
         self.findChild(QLabel, "meteoTemperature").setText(
             f"{current_weather['temperature_2m']}°C"
         )
+
         # Description du temps (ensoleillé, nuageux, etc.)
         self.findChild(QLabel, "meteoTemps").setText(
             current_weather["description"]
