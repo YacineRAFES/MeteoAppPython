@@ -23,39 +23,39 @@ class MeteoAujourdhui(QWidget):
         meteoVilleDateIconTemp = QVBoxLayout()
         meteoTempsHumidity = QVBoxLayout()
 
-        meteoNomVille = QLabel("Ville")
-        meteoNomVille.setObjectName("meteoNomVille")
-        meteoVilleDateIconTemp.addWidget(meteoNomVille)
+        meteo_nom_ville = QLabel()
+        meteo_nom_ville.setObjectName("meteo_nom_ville")
+        meteoVilleDateIconTemp.addWidget(meteo_nom_ville)
 
-        meteoDateActuelle = QLabel("mardi 25 juin 2024 à 14:00")
-        meteoDateActuelle.setObjectName("meteoDateActuelle")
-        meteoVilleDateIconTemp.addWidget(meteoDateActuelle)
+        meteo_date_actuelle = QLabel()
+        meteo_date_actuelle.setObjectName("meteo_date_actuelle")
+        meteoVilleDateIconTemp.addWidget(meteo_date_actuelle)
 
         icons = QLabel()
-        pixmap = QPixmap("img.png")
+        pixmap = QPixmap()
         icons.setPixmap(pixmap.scaled(100, 100))
         meteoVilleDateIconTemp.addWidget(icons)
 
-        meteoTemperature = QLabel("25°C")
-        meteoTemperature.setObjectName("meteoTemperature")
-        meteoVilleDateIconTemp.addWidget(meteoTemperature)
+        meteo_temperature = QLabel()
+        meteo_temperature.setObjectName("meteo_temperature")
+        meteoVilleDateIconTemp.addWidget(meteo_temperature)
 
-        meteoTemps = QLabel("Ensoleillé")
-        meteoTemps.setObjectName("meteoTemps")
-        meteoTempsHumidity.addWidget(meteoTemps)
+        meteo_temps = QLabel()
+        meteo_temps.setObjectName("meteo_temps")
+        meteoTempsHumidity.addWidget(meteo_temps)
 
-        meteoHumidity = QLabel("Humidité : 60%")
-        meteoHumidity.setObjectName("meteoHumidity")
-        meteoTempsHumidity.addWidget(meteoHumidity)
+        meteo_humidity = QLabel()
+        meteo_humidity.setObjectName("meteo_humidity")
+        meteoTempsHumidity.addWidget(meteo_humidity)
 
         meteoActuelleLayout.addLayout(meteoVilleDateIconTemp)
         meteoActuelleLayout.addLayout(meteoTempsHumidity)
 
-        meteoActuelle = QWidget()
-        meteoActuelle.setObjectName("meteoActuelle")
-        meteoActuelle.setLayout(meteoActuelleLayout)
+        meteo_actuelle = QWidget()
+        meteo_actuelle.setObjectName("meteo_actuelle")
+        meteo_actuelle.setLayout(meteoActuelleLayout)
 
-        self.layout_principal.addWidget(meteoActuelle)
+        self.layout_principal.addWidget(meteo_actuelle)
 
     @Slot(str)
     def set_ville(self, nomville):
@@ -71,24 +71,24 @@ class MeteoAujourdhui(QWidget):
 
         # met à jour les labels avec les données récupérées
         # Nom de la ville
-        self.findChild(QLabel, "meteoNomVille").setText(
+        self.findChild(QLabel, "meteo_nom_ville").setText(
             nomville.capitalize()
         )
         # Date de la dernière mise à jour
-        self.findChild(QLabel, "meteoDateActuelle").setText(
+        self.findChild(QLabel, "meteo_date_actuelle").setText(
             "Dernière mise à jour : " + Conversion.from_timestamp_to_datetime(current_weather['time'])
         )
         # Température actuelle
-        self.findChild(QLabel, "meteoTemperature").setText(
+        self.findChild(QLabel, "meteo_temperature").setText(
             f"{current_weather['temperature_2m']}°C"
         )
 
         # Description du temps (ensoleillé, nuageux, etc.)
-        self.findChild(QLabel, "meteoTemps").setText(
+        self.findChild(QLabel, "meteo_temps").setText(
             current_weather["description"]
         )
         # Humidité
-        self.findChild(QLabel, "meteoHumidity").setText(
+        self.findChild(QLabel, "meteo_humidity").setText(
             f"Humidité : {current_weather['humidity']}%"
         )
 
