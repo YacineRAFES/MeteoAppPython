@@ -5,7 +5,6 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from api.geocoding import GeoCoding
 from api.current_weather import CurrentWeather
 from utilitaire.conversion import Conversion
-from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
