@@ -1,5 +1,5 @@
-from PySide6.QtGui import QPixmap, QShortcut
-from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
+from PySide6.QtGui import QShortcut
+from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton
 from PySide6.QtCore import Qt, Signal
 
 from api.geocoding import GeoCoding
@@ -52,9 +52,9 @@ class RechercherUneVille(QWidget):
 
 
         # Ajout des différentes parties au layout principal
-        self.meteo_aujourdhui = MeteoAujourdhui(nomville="")
-        self.meteo_journee = MeteoJournee(nomville="")
-        self.meteo_semaine = MeteoSemaine(nomville="")
+        self.meteo_aujourdhui = MeteoAujourdhui(0, 0, "")
+        self.meteo_journee = MeteoJournee(0, 0, "")
+        self.meteo_semaine = MeteoSemaine(0, 0, "")
 
         self.meteo_aujourdhui.setVisible(False)
         self.meteo_journee.setVisible(False)

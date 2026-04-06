@@ -8,7 +8,7 @@ from utilitaire.conversion import Conversion
 from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
-    def __init__(self, nomville):
+    def __init__(self, lat, lon, nomville):
         super().__init__()
         self.nomville = nomville
 

@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QLabel
 
 
 class MeteoSemaine(QWidget):
-    def __init__(self, nomville):
+    def __init__(self, lat, lon, nomville):
         super().__init__()
 
         self.layout_principal = QVBoxLayout()
@@ -35,7 +35,7 @@ class MeteoSemaine(QWidget):
             meteoJourLayout.addWidget(meteoHum)
 
             meteoJour = QWidget()
-            meteoJour.setObjectName("meteoJour")
+            meteoJour.setObjectName("meteo_semaine")
             meteoJour.setLayout(meteoJourLayout)
 
             meteoSemaine.addWidget(meteoJour)

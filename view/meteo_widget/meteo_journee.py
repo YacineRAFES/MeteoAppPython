@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
 
 class MeteoJournee(QWidget):
-    def __init__(self, nomville):
+    def __init__(self, lat, lon, nomville):
         super().__init__()
         self.nomville = nomville
 
@@ -16,7 +16,7 @@ class MeteoJournee(QWidget):
 
         meteoJourneeLayout = QHBoxLayout()
 
-        for i in range(5):
+        for i in range(12):
             meteoHeure = QVBoxLayout()
 
             meteoHeureLabel = QLabel(f"{14 + i}h")
@@ -39,12 +39,13 @@ class MeteoJournee(QWidget):
             meteoJourneeLayout.addLayout(meteoHeure)
 
         meteoJournee = QWidget()
-        meteoJournee.setObjectName("meteoJournee")
+        meteoJournee.setObjectName("meteo_journee")
         meteoJournee.setLayout(meteoJourneeLayout)
 
         self.layout_principal.addWidget(meteoJournee)
 
     @Slot(str)
     def set_ville(self, nomville):
+
         self.nomville = nomville
         # appel api
