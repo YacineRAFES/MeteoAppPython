@@ -1,6 +1,8 @@
 from PySide6.QtGui import QPixmap, QShortcut
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
 from PySide6.QtCore import Qt, Signal
+
+from api.geocoding import GeoCoding
 from view.meteo_widget.meteo_actuelle import MeteoAujourdhui
 from view.meteo_widget.meteo_journee import MeteoJournee
 from view.meteo_widget.meteo_semaine import MeteoSemaine
@@ -11,7 +13,7 @@ from view.meteo_widget.meteo_semaine import MeteoSemaine
 
 
 class RechercherUneVille(QWidget):
-    ville_recherchee = Signal(str)
+    ville_recherchee = Signal(float, float, str)
     def __init__(self,):
         super().__init__()
 
@@ -74,7 +76,12 @@ class RechercherUneVille(QWidget):
         nomville = self.input.text()
         print("Ville recherchée : ", nomville)
 
-        self.ville_recherchee.emit(nomville)
+        #appel  api
+        # geocoding pour récupérer les coordonnées de la ville
+        geo = GeoCoding()
+        geocoding = geo.GetGeo(nomville)
+
+        self.ville_recherchee.emit(geocoding["latitude"], geocoding["longitude"], nomville)
 
         self.meteo_aujourdhui.setVisible(True)
         self.meteo_journee.setVisible(True)
