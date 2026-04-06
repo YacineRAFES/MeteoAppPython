@@ -25,9 +25,20 @@ class RechercherUneVille(QWidget):
         self.input.setPlaceholderText("Entrez une ville")
         self.input.setObjectName("inputVille")
 
+        # Position de la barre de recherche au centre
+        layout_input.setAlignment(Qt.AlignCenter)
+        layout_input.setContentsMargins(0, 20, 0, 10)
+
+        # réduire la taille de la barre de recherche
+        self.input.setFixedWidth(300)
+
         self.buttoninput = QPushButton("Rechercher")
         self.buttoninput.setObjectName("buttonInput")
         self.buttoninput.clicked.connect(self.button_rechercher)
+
+        # réduire la taille de bouton de recherche
+        self.buttoninput.setFixedWidth(100)
+
 
         self.shortcut_enter = QShortcut(Qt.Key_Return, self)
         self.shortcut_enter.activated.connect(self.button_rechercher)
@@ -43,6 +54,9 @@ class RechercherUneVille(QWidget):
         self.meteo_journee = MeteoJournee(nomville="")
         self.meteo_semaine = MeteoSemaine(nomville="")
 
+        self.meteo_aujourdhui.setVisible(False)
+        self.meteo_journee.setVisible(False)
+        self.meteo_semaine.setVisible(False)
 
         # Connexion du signal de recherche de ville aux widgets météo
         self.ville_recherchee.connect(self.meteo_aujourdhui.set_ville)
@@ -61,5 +75,9 @@ class RechercherUneVille(QWidget):
         print("Ville recherchée : ", nomville)
 
         self.ville_recherchee.emit(nomville)
+
+        self.meteo_aujourdhui.setVisible(True)
+        self.meteo_journee.setVisible(True)
+        self.meteo_semaine.setVisible(True)
 
         return nomville
