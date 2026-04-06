@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from api.geocoding import GeoCoding
 from api.current_weather import CurrentWeather
 from utilitaire.conversion import Conversion
+from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
@@ -31,6 +32,7 @@ class MeteoAujourdhui(QWidget):
         meteoVilleDateIconTemp.addWidget(meteo_date_actuelle)
 
         icons = QLabel()
+        icons.setObjectName("meteo_icon")
         pixmap = QPixmap()
         icons.setPixmap(pixmap.scaled(100, 100))
         meteoVilleDateIconTemp.addWidget(icons)
@@ -77,6 +79,14 @@ class MeteoAujourdhui(QWidget):
         self.findChild(QLabel, "meteo_date_actuelle").setText(
             "Dernière mise à jour : " + Conversion.from_timestamp_to_datetime(current_weather['time'])
         )
+
+        # Icone météo
+        image_data = LoadImageUrl().load_image_url(current_weather['icon'])
+        if image_data:
+            pixmap = QPixmap()
+            pixmap.loadFromData(image_data)
+            self.findChild(QLabel, "meteo_icon").setPixmap(pixmap.scaled(100, 100))
+
         # Température actuelle
         self.findChild(QLabel, "meteo_temperature").setText(
             f"{current_weather['temperature_2m']}°C"
