@@ -18,10 +18,11 @@
 
 #widgetVille {
     max-width: 228px;
+    min-height: 144px;
 }
 
 /* background blanc */
-#widgetVille, #meteoActuelle, #meteoJour, #meteoJournee {
+#widgetVille, #meteo_actuelle, #meteo_journee, #meteo_semaine {
     background-color: #FFFFFF;
     border-radius: 10px;
 }
