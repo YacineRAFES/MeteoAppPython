@@ -58,17 +58,13 @@ class MeteoAujourdhui(QWidget):
 
         self.layout_principal.addWidget(meteo_actuelle)
 
-    @Slot(str)
-    def set_ville(self, nomville):
+    @Slot(float, float, str)
+    def set_ville(self, lat, lon, nomville):
         self.nomville = nomville
 
-        # appel api
-        # recupère la geolocalisation de la ville
-        geo = GeoCoding()
-        geocoding = geo.GetGeo(nomville)
         # recupère les données météo de la ville
         weather = CurrentWeather()
-        current_weather = weather.get_current_weather(geocoding["latitude"], geocoding["longitude"])
+        current_weather = weather.get_current_weather(lat, lon)
 
         # met à jour les labels avec les données récupérées
         # Nom de la ville
