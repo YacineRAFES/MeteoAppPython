@@ -32,7 +32,7 @@ class VilleWidget(QWidget):
         self.loading_label.deleteLater()
 
         # Afficher les données
-        self.header_du_bloc(ville, "N/A") #TODO A FAIRE
+        self.header_du_bloc(ville, str(results["code_country"]))
         self.corps_du_bloc(str(results["temperature_2m"]), results["description"], results["icon"])
 
     def on_weather_error(self, ville, error_message):
@@ -48,7 +48,7 @@ class VilleWidget(QWidget):
         layout_nomville_codecountry.addWidget(nomville)
 
         if code_country:
-            code_label = QLabel(f"({code_country})")
+            code_label = QLabel("("+code_country+")")
             code_label.setObjectName("code_country")
             layout_nomville_codecountry.addWidget(code_label)
 

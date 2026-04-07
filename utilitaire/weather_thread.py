@@ -1,6 +1,7 @@
 from PySide6.QtCore import QThread, Signal
+
 from api.current_weather import CurrentWeather
-from api.geocoding import GeoCoding
+from utilitaire.geocoding_cache import get_geocoding
 
 
 class WeatherThread(QThread):
@@ -17,13 +18,22 @@ class WeatherThread(QThread):
 
     def run(self):
         try:
-            geo = GeoCoding()
-            geocoding = geo.GetGeo(self.ville)
+            # Récupérer les coordonnées
+            geo = get_geocoding(self.ville)
+            if not geo:
+                self.error.emit(self.ville, "Géocodage impossible")
+                return
 
-            results = CurrentWeather().get_current_weather(geocoding["latitude"], geocoding["longitude"])
-            if results:
-                self.finished.emit(self.ville, results)
-            else:
-                self.error.emit(self.ville, "Impossible de récupérer les données")
+            # Récupérer la météo avec les coordonnées
+            weather = CurrentWeather()
+            results = weather.get_current_weather(geo["latitude"], geo["longitude"])
+            if not results:
+                self.error.emit(self.ville, "Météo indisponible")
+                return
+
+            # Fusionner les données
+            results["code_country"] = geo["code_country"]
+
+            self.finished.emit(self.ville, results)
         except Exception as e:
             self.error.emit(self.ville, str(e))
