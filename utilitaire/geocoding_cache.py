@@ -1,3 +1,4 @@
+from string import capwords
 import pandas as pd
 from pathlib import Path
 
@@ -26,7 +27,7 @@ def get_geocoding(nomville):
         geo = GeoCoding()
         geocoding = geo.GetGeo(nomville)
         new_row = {
-            "ville": nomville,
+            "ville": capwords(nomville),
             "code_country": geocoding["code_country"],
             "latitude": geocoding["latitude"],
             "longitude": geocoding["longitude"]
