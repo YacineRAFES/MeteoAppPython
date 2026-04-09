@@ -20,14 +20,10 @@ class MyWindow(QMainWindow):
 
         layout_main = QVBoxLayout()
         layout_main.setAlignment(Qt.AlignTop)
-        layout_meteoInternational = QHBoxLayout()
 
-        for ville in VILLES:
-            widget_ville = VilleWidget(ville)
-            widget_ville.setObjectName("widgetVille")
-            layout_meteoInternational.addWidget(widget_ville)
+        widget_ville = VilleWidget()
 
-        layout_main.addLayout(layout_meteoInternational)
+        layout_main.addWidget(widget_ville)
 
         body_meteo = RechercherUneVille()
         layout_main.addWidget(body_meteo)

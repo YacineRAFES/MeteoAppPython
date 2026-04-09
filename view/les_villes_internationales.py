@@ -8,38 +8,52 @@ from utilitaire.load_image_url import LoadImageUrl
 VILLES = ["Paris", "New York", "Tokyo", "Quebec", "London", "Berlin", "Amsterdam"]
 
 class VilleWidget(QWidget):
-    def __init__(self, ville):
+    def __init__(self):
         super().__init__()
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.ville = ville
-        self.layout_principal = QVBoxLayout()
-        self.setLayout(self.layout_principal)
+        self.layout_meteoInternational = QHBoxLayout()
+        self.layout_meteoInternational.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout_meteoInternational)
 
         # Afficher un état de chargement
         self.loading_label = QLabel("Chargement...")
         self.loading_label.setObjectName("loadingLabel")
-        self.layout_principal.addWidget(self.loading_label)
+        self.layout_meteoInternational.addWidget(self.loading_label)
 
-        # Lancer le thread pour récupérer les données
-        self.worker = WeatherThread(ville)
-        self.worker.finished.connect(self.on_weather_loaded)
-        self.worker.error.connect(self.on_weather_error)
-        self.worker.start()
+        self.worker = []
+        for ville in VILLES:
+            # Lancer le thread pour récupérer les données
+            worker = WeatherThread(ville)
+            worker.finished.connect(self.on_weather_loaded)
+            worker.error.connect(self.on_weather_error)
+            self.worker.append(worker)
+            worker.start()
 
     def on_weather_loaded(self, ville, results):
         """Appelé quand les données météo sont prêtes"""
         # Supprimer le label de chargement
-        self.loading_label.deleteLater()
+        if self.loading_label and self.loading_label.parent():
+            self.loading_label.deleteLater()
+            self.loading_label = None
+
+        ville_widget = QWidget()
+        ville_widget.setObjectName("widgetVille")
+
+        layout_ville = QVBoxLayout()
+        ville_widget.setLayout(layout_ville)
 
         # Afficher les données
-        self.header_du_bloc(ville, str(results["code_country"]))
-        self.corps_du_bloc(str(results["temperature_2m"]), results["description"], results["icon"])
+        self.header_du_bloc(layout_ville, ville, str(results["code_country"]))
+        self.corps_du_bloc(layout_ville, str(results["temperature_2m"]), results["description"], results["icon"])
 
-    def on_weather_error(self, ville, error_message):
+        self.layout_meteoInternational.addWidget(ville_widget)
+
+    def on_weather_error(self, error_message):
         """Appelé en cas d'erreur"""
-        self.loading_label.setText(f"Erreur: {error_message}")
+        if self.loading_label and self.loading_label.parent():
+            self.loading_label.setText(f"Erreur: {error_message}")
 
-    def header_du_bloc(self, ville, code_country):
+    def header_du_bloc(self, layout_ville, ville, code_country):
         layout_nomville_codecountry = QHBoxLayout()
         layout_nomville_codecountry.setAlignment(Qt.AlignLeft)
 
@@ -52,9 +66,11 @@ class VilleWidget(QWidget):
             code_label.setObjectName("code_country")
             layout_nomville_codecountry.addWidget(code_label)
 
-        self.layout_principal.addLayout(layout_nomville_codecountry)
+        layout_ville.addLayout(layout_nomville_codecountry)
 
-    def corps_du_bloc(self, temperature, temps, icon):
+
+
+    def corps_du_bloc(self, layout_ville, temperature, temps, icon):
         layout_icons_temp = QHBoxLayout()
         layout_icons_temp.setAlignment(Qt.AlignLeft)
 
@@ -83,4 +99,4 @@ class VilleWidget(QWidget):
         layout_icons_temp.addLayout(layout_icons)
         layout_icons_temp.addLayout(layout_temp_temps)
 
-        self.layout_principal.addLayout(layout_icons_temp)
+        layout_ville.addLayout(layout_icons_temp)
