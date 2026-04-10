@@ -8,6 +8,7 @@ from utilitaire.load_image_url import LoadImageUrl
 VILLES = ["Paris", "New York", "Tokyo", "Quebec", "London", "Berlin", "Amsterdam"]
 
 class VilleWidget(QWidget):
+    # TODO : Si une ou des villes internationales n'a été affiché, on refait l'opération
     def __init__(self):
         super().__init__()
         self.setAttribute(Qt.WA_StyledBackground, True)
