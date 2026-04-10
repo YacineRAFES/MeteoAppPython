@@ -18,7 +18,7 @@ def get_geocoding(nomville):
         df = pd.DataFrame(columns=["ville", "code_country", "latitude", "longitude"])
 
     print("Recherche de la ville dans le cache..." + nomville)
-    result = df[df["ville"] == nomville]
+    result = df[df["ville"] == capwords(nomville)]
 
 
     # Si la ville n'existe pas, je la rajoute dans le cache
