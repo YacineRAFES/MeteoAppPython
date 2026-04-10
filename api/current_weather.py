@@ -1,6 +1,5 @@
 import requests
 from utilitaire.get_weather_icon import weather_icon
-from api.geocoding import GeoCoding
 
 class CurrentWeather:
 
