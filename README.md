@@ -100,8 +100,6 @@ Modifiez le fichier `style.qss` pour personnaliser l'apparence de l'application.
 ### Villes affichées par défaut
 Modifiez la liste `VILLES` dans `view/les_villes_internationales.py` pour afficher d'autres villes.
 
-Consultez les commentaires TODO dans le code pour plus de détails.
-
 ## Documentation du code
 
 Le code est documenté avec des commentaires et des docstrings. Les fonctions principales incluent :
