@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, Q
 from PySide6.QtCore import Qt
 
 from view.body import RechercherUneVille
-from view.les_villes_internationales import VilleWidget, VILLES
+from view.les_villes_internationales import VilleWidget
 
 
 locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
