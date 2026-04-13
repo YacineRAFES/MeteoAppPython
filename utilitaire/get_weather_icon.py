@@ -6,7 +6,10 @@ with open("./assets/weather_code.json") as f:
 class weather_icon:
     @staticmethod
     def get_weather_icon(weather_code, is_day):
-        period = "day" if is_day else "night"
+        if is_day:
+            period = "day"
+        else:
+            period = "night"
         weather = WEATHER_DATA[str(weather_code)][period]
         print(f"Code météo: {weather_code}, Période: {period}, Icon: {weather['image']}, Description: {weather['description']}")
 
