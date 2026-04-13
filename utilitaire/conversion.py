@@ -11,3 +11,6 @@ class Conversion:
         hour = datetime.fromtimestamp(int(timestamp))
         return hour.strftime("%H:%M")
 
+    def from_timestamp_to_day(timestamp: int) -> str:
+        day = datetime.fromtimestamp(int(timestamp))
+        return day.strftime("%A")
