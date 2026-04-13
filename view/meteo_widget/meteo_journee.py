@@ -7,7 +7,7 @@ from utilitaire.load_image_url import LoadImageUrl
 
 
 class MeteoJournee(QWidget):
-    def __init__(self, lat, lon, nomville):
+    def __init__(self, nomville):
         super().__init__()
         self.nomville = nomville
 
