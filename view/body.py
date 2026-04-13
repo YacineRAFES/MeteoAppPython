@@ -52,9 +52,9 @@ class RechercherUneVille(QWidget):
 
 
         # Ajout des différentes parties au layout principal
-        self.meteo_aujourdhui = MeteoAujourdhui(0, 0, "")
-        self.meteo_journee = MeteoJournee(0, 0, "")
-        self.meteo_semaine = MeteoSemaine(0, 0, "")
+        self.meteo_aujourdhui = MeteoAujourdhui("")
+        self.meteo_journee = MeteoJournee("")
+        self.meteo_semaine = MeteoSemaine("")
 
         self.meteo_aujourdhui.setVisible(False)
         self.meteo_journee.setVisible(False)
