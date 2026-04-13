@@ -24,7 +24,7 @@ class WeekWeather:
                 "temperature_max": [round(temp) for temp in data["daily"]["temperature_2m_max"]],
                 "icon": [w["icon"] for w in weather],
                 "preci_proba": [preci for preci in data["daily"]["precipitation_probability_max"]],
-                "time": [Conversion.from_timestamp_to_datetime(time) for time in data["daily"]["time"]]
+                "time": [Conversion.from_timestamp_to_day(time) for time in data["daily"]["time"]]
             }
         elif response.status_code == 400:
             data = response.json()
