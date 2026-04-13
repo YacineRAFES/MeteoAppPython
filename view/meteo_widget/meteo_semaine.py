@@ -14,6 +14,8 @@ class MeteoSemaine(QWidget):
         print("MeteoSemaine : ", self.nomville)
 
         self.layout_principal = QVBoxLayout()
+        self.layout_principal.setContentsMargins(0, 0, 0, 0)
+        self.layout_principal.addStretch()
         self.setLayout(self.layout_principal)
 
         # Affichage de la prévision météo sur 7 jours d'une ville recherchée
@@ -36,6 +38,7 @@ class MeteoSemaine(QWidget):
                 week_weather["preci_proba"]):
 
             meteo_jour_layout = QVBoxLayout()
+            meteo_jour_layout.addStretch()
 
             meteo_jour_label = QLabel(str(time))
             meteo_jour_label.setAlignment(Qt.AlignCenter)
@@ -70,6 +73,7 @@ class MeteoSemaine(QWidget):
             meteo_jour = QWidget()
             meteo_jour.setObjectName("meteo_semaine")
             meteo_jour.setLayout(meteo_jour_layout)
+
             self.meteo_semaine.addWidget(meteo_jour)
 
         self.layout_principal.addLayout(self.meteo_semaine)
