@@ -1,5 +1,6 @@
 import requests
 from utilitaire.get_weather_icon import weather_icon
+from utilitaire.conversion import Conversion
 
 class CurrentWeather:
 
@@ -14,13 +15,14 @@ class CurrentWeather:
         response = requests.get(url_weather)
         if response.status_code == 200:
             data = response.json()
-            weather = weather_icon.get_weather_icon(self, data["current"]["weather_code"], data["current"]["is_day"])
+            weather = weather_icon.get_weather_icon(data["current"]["weather_code"], data["current"]["is_day"])
+            time = Conversion.from_timestamp_to_datetime(data["current"]["time"])
             return {
                 "temperature_2m": round(data["current"]["temperature_2m"]),
                 "icon": weather["icon"],
                 "description": weather["description"],
                 "humidity": data["current"]["relative_humidity_2m"],
-                "time": data["current"]["time"]
+                "time": time
             }
         elif response.status_code == 400:
             data = response.json()
