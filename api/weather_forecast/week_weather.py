@@ -17,8 +17,8 @@ class WeekWeather:
         response = requests.get(url_weather)
         if response.status_code == 200:
             data = response.json()
-            weather = [weather_icon.get_weather_icon(weather_code, is_day)
-                       for weather_code, is_day in zip(data["daily"]["weather_code"], [1])]
+            weather = [weather_icon.get_weather_icon(weather_code, 1)
+                       for weather_code in data["daily"]["weather_code"]]
             return {
                 "temperature_min": [round(temp) for temp in data["daily"]["temperature_2m_min"]],
                 "temperature_max": [round(temp) for temp in data["daily"]["temperature_2m_max"]],
