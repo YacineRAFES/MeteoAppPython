@@ -37,8 +37,8 @@ class MeteoJournee(QWidget):
                 dayweather["time"],
                 dayweather["icon"],
                 dayweather["temperature_2m"],
-                dayweather["preci_proba"]
-        ):
+                dayweather["preci_proba"]):
+
             meteoHeure = QVBoxLayout()
 
             # Heure
