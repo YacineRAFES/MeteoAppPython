@@ -72,7 +72,7 @@ class MeteoAujourdhui(QWidget):
         )
         # Date de la dernière mise à jour
         self.findChild(QLabel, "meteo_date_actuelle").setText(
-            "Dernière mise à jour : " + Conversion.from_timestamp_to_datetime(current_weather['time'])
+            "Dernière mise à jour : " + current_weather['time']
         )
 
         # Icone météo
