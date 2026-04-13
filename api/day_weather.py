@@ -19,7 +19,7 @@ class DayWeather:
         response = requests.get(url_weather)
         if response.status_code == 200:
             data = response.json()
-            weather = [weather_icon.get_weather_icon(self, weather_code, is_day)
+            weather = [weather_icon.get_weather_icon(weather_code, is_day)
                         for weather_code, is_day in zip(data["hourly"]["weather_code"], data["hourly"]["is_day"])]
             return {
                 "temperature_2m": [round(temp) for temp in data["hourly"]["temperature_2m"]],
