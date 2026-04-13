@@ -2,8 +2,7 @@ from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
-from api.day_weather import DayWeather
-from utilitaire.conversion import Conversion
+from api.weather_forecast.day_weather import DayWeather
 from utilitaire.load_image_url import LoadImageUrl
 
 
