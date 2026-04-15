@@ -56,12 +56,8 @@ class MeteoAujourdhui(QWidget):
         self.layout_principal.addWidget(meteo_actuelle)
 
     @Slot(float, float, str)
-    def set_ville(self, lat, lon, nomville):
-        self.nomville = nomville
-
-        # recupère les données météo de la ville
-        weather = CurrentWeather()
-        current_weather = weather.get_current_weather(lat, lon)
+    def maj_current(self, current, nomville):
+        icon, desc = current.get_weather_code
 
         # met à jour les labels avec les données récupérées
         # Nom de la ville
@@ -70,11 +66,11 @@ class MeteoAujourdhui(QWidget):
         )
         # Date de la dernière mise à jour
         self.findChild(QLabel, "meteo_date_actuelle").setText(
-            "Dernière mise à jour : " + current_weather['time']
+            "Dernière mise à jour : " + current.get_time()
         )
 
         # Icone météo
-        image_data = LoadImageUrl().load_image_url(current_weather['icon'])
+        image_data = LoadImageUrl().load_image_url(icon)
         if image_data:
             pixmap = QPixmap()
             pixmap.loadFromData(image_data)
@@ -82,14 +78,14 @@ class MeteoAujourdhui(QWidget):
 
         # Température actuelle
         self.findChild(QLabel, "meteo_temperature").setText(
-            f"{current_weather['temperature_2m']}°C"
+            f"{current.get_temperature()}°C"
         )
 
         # Description du temps (ensoleillé, nuageux, etc.)
         self.findChild(QLabel, "meteo_temps").setText(
-            current_weather["description"]
+            desc
         )
         # Humidité
         self.findChild(QLabel, "meteo_humidity").setText(
-            f"Humidité : {current_weather['humidity']}%"
+            f"Humidité : {current.get_humidity()}%"
         )
