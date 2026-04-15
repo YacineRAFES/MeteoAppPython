@@ -2,7 +2,7 @@ import locale
 import sys
 
 from PySide6.QtGui import QPalette, QColor
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 from PySide6.QtCore import Qt
 
 from view.body import RechercherUneVille
