@@ -23,7 +23,7 @@ def get_geocoding(nomville):
     # Si la ville n'existe pas, je la rajoute dans le cache
     if result.empty:
         print("Ville non trouvée dans le cache, ajout en cours..." + nomville)
-        geo = GeoCoding()
+        geo = get_geo(nomville)
         geocoding = geo.GetGeo(nomville)
         new_row = {
             "ville": capwords(nomville),
