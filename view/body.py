@@ -2,16 +2,12 @@ from PySide6.QtGui import QShortcut
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton
 from PySide6.QtCore import Qt, Signal
 
-from utilitaire.geocoding_cache import get_geocoding
 from view.meteo_widget.meteo_actuelle import MeteoAujourdhui
 from view.meteo_widget.meteo_journee import MeteoJournee
 from view.meteo_widget.meteo_semaine import MeteoSemaine
+from controllers.weather_controller import WeatherController
 
 # TODO : Meteo Actuelle à revoir sur les styles (la taille de la police et les couleurs)
-# TODO : Meteo Journee à faire
-# TODO : Meteo Semaine à faire
-
-
 class RechercherUneVille(QWidget):
     ville_recherchee = Signal(float, float, str)
     def __init__(self):
@@ -50,7 +46,6 @@ class RechercherUneVille(QWidget):
 
         layout_principal.addLayout(layout_input)
 
-
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
         self.meteo_journee = MeteoJournee("")
@@ -60,27 +55,17 @@ class RechercherUneVille(QWidget):
         self.meteo_journee.setVisible(False)
         self.meteo_semaine.setVisible(False)
 
-        # Connexion du signal de recherche de ville aux widgets météo
-        self.ville_recherchee.connect(self.meteo_aujourdhui.set_ville)
-        self.ville_recherchee.connect(self.meteo_journee.set_ville)
-        self.ville_recherchee.connect(self.meteo_semaine.set_ville)
-
         layout_principal.addWidget(self.meteo_aujourdhui)
         layout_principal.addWidget(self.meteo_journee)
         layout_principal.addWidget(self.meteo_semaine)
-
-
 
         self.setLayout(layout_principal)
     def button_rechercher(self):
         nomville = self.input.text()
         print("Ville recherchée : ", nomville)
 
-        #appel  api
-        # geocoding pour récupérer les coordonnées de la ville
-        geocoding = get_geocoding(nomville)
-
-        self.ville_recherchee.emit(geocoding["latitude"], geocoding["longitude"], nomville)
+        controller = WeatherController(self)
+        controller.load_weather(nomville)
 
         self.meteo_aujourdhui.setVisible(True)
         self.meteo_journee.setVisible(True)
