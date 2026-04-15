@@ -39,4 +39,4 @@ def fetch_weather(lat: float, lon: float):
         return None
 
     response.raise_for_status()
-    print(response.url)
+    return response.json()
