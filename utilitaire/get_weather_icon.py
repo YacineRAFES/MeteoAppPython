@@ -11,7 +11,6 @@ class weather_icon:
         else:
             period = "night"
         weather = WEATHER_DATA[str(weather_code)][period]
-        print(f"Code météo: {weather_code}, Période: {period}, Icon: {weather['image']}, Description: {weather['description']}")
 
         return {
             "icon": weather['image'],
