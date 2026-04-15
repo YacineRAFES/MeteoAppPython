@@ -1,6 +1,6 @@
 from PySide6.QtCore import QThread, Signal
 
-from api.weather_forecast.current_weather import CurrentWeather
+from services.weather.current_weather import CurrentWeather
 from utilitaire.geocoding_cache import get_geocoding
 
 

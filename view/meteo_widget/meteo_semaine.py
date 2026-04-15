@@ -2,7 +2,7 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QLabel
 
-from api.weather_forecast.week_weather import WeekWeather
+from services.weather.week_weather import WeekWeather
 from utilitaire.load_image_url import LoadImageUrl
 
 
@@ -23,24 +23,14 @@ class MeteoSemaine(QWidget):
         self.meteo_semaine.setObjectName("meteo_semaine")
 
     @Slot(float, float, str)
-    def set_ville(self, lat, lon, nomville):
-        self.nomville = nomville
+    def set_ville(self, data):
 
-        # Récupère les données météo de la ville
-        weather = WeekWeather()
-        week_weather = weather.get_week_weather(lat, lon)
-
-        for time, icon, temp_min, temp_max, proba in zip(
-                week_weather["time"],
-                week_weather["icon"],
-                week_weather["temperature_min"],
-                week_weather["temperature_max"],
-                week_weather["preci_proba"]):
+        for daily in data:
 
             meteo_jour_layout = QVBoxLayout()
             meteo_jour_layout.addStretch()
 
-            meteo_jour_label = QLabel(str(time))
+            meteo_jour_label = QLabel(daily.get)
             meteo_jour_label.setAlignment(Qt.AlignCenter)
             meteo_jour_label.setObjectName("meteo_jour_label")
             meteo_jour_layout.addWidget(meteo_jour_label)

@@ -2,7 +2,6 @@ from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
-from api.weather_forecast.day_weather import DayWeather
 from utilitaire.load_image_url import LoadImageUrl
 
 
@@ -25,24 +24,15 @@ class MeteoJournee(QWidget):
 
         self.layout_principal.addWidget(meteoJournee)
 
-    @Slot(float, float, str)
-    def set_ville(self, lat, lon, nomville):
-        self.nomville = nomville
+    def maj_journee(self, data):
 
-        # Récupère les données météo de la ville
-        weather = DayWeather()
-        dayweather = weather.get_day_weather(lat, lon)
-
-        for time, icon, temp, proba in zip(
-                dayweather["time"],
-                dayweather["icon"],
-                dayweather["temperature_2m"],
-                dayweather["preci_proba"]):
+        for hourly in data:
+            icon, desc = hourly.get_weather_code(hourly)
 
             meteoHeure = QVBoxLayout()
 
             # Heure
-            heure_label = QLabel(str(time))
+            heure_label = QLabel(hourly.get_time())
             heure_label.setObjectName("meteoHeureLabel")
             meteoHeure.addWidget(heure_label)
 
