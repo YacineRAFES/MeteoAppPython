@@ -33,5 +33,10 @@ def fetch_weather(lat: float, lon: float):
     }
 
     response = requests.get(BASE_URL, params=params)
+
+    if response.status_code != 200:
+        print(f"Erreur API: {response.status_code}")
+        return None
+
     response.raise_for_status()
     print(response.url)
