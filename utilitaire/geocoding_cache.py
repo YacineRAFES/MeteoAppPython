@@ -2,8 +2,7 @@ from string import capwords
 import pandas as pd
 from pathlib import Path
 
-from api.geo.geocoding import GeoCoding
-
+from services.geo.geocoding import get_geo
 
 CACHE_PATH = Path(__file__).parent.parent / "cache" / "geocoding.csv"
 
