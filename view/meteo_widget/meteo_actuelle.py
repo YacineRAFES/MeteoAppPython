@@ -2,7 +2,6 @@ from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
-from api.weather_forecast.current_weather import CurrentWeather
 from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
