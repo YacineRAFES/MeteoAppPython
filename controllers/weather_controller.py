@@ -33,6 +33,6 @@ class WeatherController:
         daily = WeatherDaily(daily_data)
 
         # Mise à jour UI
-        self.view.meteo_aujourdhui.maj_current(current, nomville)
-        # self.view.meteo_journee.maj_journee(hourly)
-        # self.view.meteo_semaine.maj_daily(daily)
+        self.view.meteo_aujourdhui.maj_current(current, nomville) # appel du widget meteo_actuelle.py
+        self.view.meteo_journee.maj_journee(hourly) # appel du widget meteo_journee.py
+        self.view.meteo_semaine.maj_daily(daily) # appel du widget meteo_semaine.py
