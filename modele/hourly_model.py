@@ -11,7 +11,7 @@ class WeatherHourly:
         self.times = data["time"]
 
     def get_temperatures(self, index):
-        return self.temperatures[index]
+        return round(self.temperatures[index])
 
     def get_weather_code(self, index):
         weather = weather_icon.get_weather_icon(self.weather_code[index], self.is_day[index])
