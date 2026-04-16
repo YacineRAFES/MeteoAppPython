@@ -11,14 +11,13 @@ class WeatherDaily:
         self.times = data["time"]
 
     def get_temp_min(self, index):
-        return self.temp_min[index]
+        return round(self.temp_min[index])
 
     def get_temp_max(self, index):
-        return self.temp_max[index]
+        return round(self.temp_max[index])
 
-    @property
-    def get_weather_code(self):
-        weather = weather_icon.get_weather_icon(self.weather_code, 1)
+    def get_weather_code(self, index):
+        weather = weather_icon.get_weather_icon(self.weather_code[index], 1)
 
         icon = weather["icon"]
         description = weather["description"]
