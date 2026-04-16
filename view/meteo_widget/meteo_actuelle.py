@@ -55,7 +55,6 @@ class MeteoAujourdhui(QWidget):
 
         self.layout_principal.addWidget(meteo_actuelle)
 
-    @Slot(float, float, str)
     def maj_current(self, current, nomville):
         icon, desc = current.get_weather_code
 
