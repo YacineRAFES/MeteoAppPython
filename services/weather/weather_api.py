@@ -27,7 +27,7 @@ def fetch_weather(lat: float, lon: float):
             "precipitation_probability_max",
 
         "timeformat": "unixtime",
-        "forecast_days": 6, # Retourne en espace de 1 jour
+        "forecast_days": 6, 
         "forecast_hours": 24,
         "temporal_resolution": "hourly_3"
     }
