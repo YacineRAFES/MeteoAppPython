@@ -1,5 +1,4 @@
 def parse_current(data):
-    print("parse_current called with data:", data)  # Debug print
     current = data["current"]
 
     return {
