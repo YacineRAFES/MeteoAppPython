@@ -1,5 +1,3 @@
-from urllib.parse import urlencode
-
 import requests
 
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
@@ -27,7 +25,7 @@ def fetch_weather(lat: float, lon: float):
             "precipitation_probability_max",
 
         "timeformat": "unixtime",
-        "forecast_days": 6, 
+        "forecast_days": 6,
         "forecast_hours": 24,
         "temporal_resolution": "hourly_3"
     }
