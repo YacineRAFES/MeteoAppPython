@@ -24,15 +24,15 @@ class MeteoJournee(QWidget):
 
         self.layout_principal.addWidget(meteoJournee)
 
-    def maj_journee(self, data):
+    def maj_journee(self, hourly):
 
-        for hourly in data:
-            icon, desc = hourly.get_weather_code(hourly)
+        for i in range(len(hourly.times)):
+            icon, desc = hourly.get_weather_code(i)
 
             meteoHeure = QVBoxLayout()
 
             # Heure
-            heure_label = QLabel(hourly.get_time())
+            heure_label = QLabel(hourly.get_times(i))
             heure_label.setObjectName("meteoHeureLabel")
             meteoHeure.addWidget(heure_label)
 
@@ -46,12 +46,16 @@ class MeteoJournee(QWidget):
                 meteoHeure.addWidget(icons)
 
             # Température
-            temp_label = QLabel(str(temp) + "°C")
+            temp_label = QLabel(
+                f"{hourly.get_temperatures(i)}°C"
+            )
             temp_label.setObjectName("meteoTemp")
             meteoHeure.addWidget(temp_label)
 
             # Precipitation probabilité
-            precip_label = QLabel(str(proba) + " %")
+            precip_label = QLabel(
+                f"{hourly.get_precipitations(i)} %"
+            )
             precip_label.setObjectName("precipProba")
             meteoHeure.addWidget(precip_label)
 
