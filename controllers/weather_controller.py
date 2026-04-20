@@ -4,6 +4,7 @@ from modele.hourly_model import WeatherHourly
 from services.geo.geocoding import get_geo
 from services.weather.weather_api import fetch_weather
 from services.weather.weather_parser import parse_current, parse_hourly, parse_daily
+from utilitaire.geocoding_cache import get_geocoding
 
 
 class WeatherController:
@@ -14,7 +15,7 @@ class WeatherController:
         print(f"Appel depuis le controllers load_weather pour {nomville}...")
 
         # Appel géocoding
-        geo = get_geo(nomville)
+        geo = get_geocoding(nomville)
 
         # Appel API
         data = fetch_weather(geo["latitude"], geo["longitude"])
