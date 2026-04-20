@@ -2,7 +2,6 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QLabel
 
-from services.weather.week_weather import WeekWeather
 from utilitaire.load_image_url import LoadImageUrl
 
 
