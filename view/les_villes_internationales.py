@@ -1,11 +1,12 @@
+from pathlib import Path
+
+import pandas as pd
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
 from utilitaire.load_image_url import LoadImageUrl
-
-VILLES = ["Paris", "New York", "Tokyo", "Quebec", "London", "Berlin", "Amsterdam"]
 
 class VilleWidget(QWidget):
     # TODO : Si une ou des villes internationales n'a été affiché, on refait l'opération
@@ -22,6 +23,9 @@ class VilleWidget(QWidget):
         self.layout_meteoInternational.addWidget(self.loading_label)
 
         self.worker = []
+
+        VILLES = self.get_villes()
+
         for ville in VILLES:
             # Lancer le thread pour récupérer les données
             worker = WeatherThread(ville)
@@ -37,6 +41,8 @@ class VilleWidget(QWidget):
             self.loading_label.deleteLater()
             self.loading_label = None
 
+        icon, desc = results.get_weather_code
+
         ville_widget = QWidget()
         ville_widget.setObjectName("widgetVille")
 
@@ -44,15 +50,15 @@ class VilleWidget(QWidget):
         ville_widget.setLayout(layout_ville)
 
         # Afficher les données
-        self.header_du_bloc(layout_ville, ville, str(results["code_country"]))
-        self.corps_du_bloc(layout_ville, str(results["temperature_2m"]), results["description"], results["icon"])
+        self.header_du_bloc(layout_ville, ville, results.code_country)
+        self.corps_du_bloc(layout_ville, str(results.get_temperature()), desc, icon)
 
         self.layout_meteoInternational.addWidget(ville_widget)
 
-    def on_weather_error(self, error_message):
+    def on_weather_error(self, ville, error_message):
         """Appelé en cas d'erreur"""
         if self.loading_label and self.loading_label.parent():
-            self.loading_label.setText(f"Erreur: {error_message}")
+            self.loading_label.setText(f"Erreur: {error_message}, ville: {ville}")
 
     def header_du_bloc(self, layout_ville, ville, code_country):
         layout_nomville_codecountry = QHBoxLayout()
@@ -101,3 +107,9 @@ class VilleWidget(QWidget):
         layout_icons_temp.addLayout(layout_temp_temps)
 
         layout_ville.addLayout(layout_icons_temp)
+
+    def get_villes(self):
+        INTERNATIONAL_FILE = Path(__file__).parent.parent / "cache" / "villes_international.csv"
+        df = pd.read_csv(INTERNATIONAL_FILE)
+
+        return df["ville"].tolist()
