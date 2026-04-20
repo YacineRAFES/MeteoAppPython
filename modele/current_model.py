@@ -9,6 +9,7 @@ class WeatherCurrent:
         self.is_day = data["is_day"]
         self.humidity = data["humidity"]
         self.time = data["time"]
+        self.code_country = None
 
     # logique
     def get_temperature(self):
