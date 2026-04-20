@@ -60,3 +60,24 @@ class MeteoJournee(QWidget):
             meteoHeure.addWidget(precip_label)
 
             self.meteoJourneeLayout.addLayout(meteoHeure)
+
+    def vider(self):
+        while self.meteoJourneeLayout.count():
+            item = self.meteoJourneeLayout.takeAt(0)
+
+            # C'est un layout (QVBoxLayout), pas un widget direct
+            layout = item.layout()
+            if layout is not None:
+                # Supprimer tous les widgets du sous-layout
+                while layout.count():
+                    sous_item = layout.takeAt(0)
+                    widget = sous_item.widget()
+                    if widget is not None:
+                        widget.deleteLater()
+                # Supprimer le layout lui-même
+                layout.deleteLater()
+
+            # Au cas où il y aurait un widget direct
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()

@@ -74,3 +74,10 @@ class MeteoSemaine(QWidget):
             self.meteo_semaine.addWidget(meteo_jour)
 
         self.layout_principal.addLayout(self.meteo_semaine)
+
+    def vider(self):
+        while self.meteo_semaine.count():
+            item = self.meteo_semaine.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()

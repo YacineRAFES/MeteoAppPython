@@ -88,3 +88,11 @@ class MeteoAujourdhui(QWidget):
         self.findChild(QLabel, "meteo_humidity").setText(
             f"Humidité : {current.get_humidity()}%"
         )
+
+    def vider(self):
+        self.findChild(QLabel, "meteo_nom_ville").setText("")
+        self.findChild(QLabel, "meteo_date_actuelle").setText("")
+        self.findChild(QLabel, "meteo_icon").setPixmap(QPixmap())
+        self.findChild(QLabel, "meteo_temperature").setText("")
+        self.findChild(QLabel, "meteo_temps").setText("")
+        self.findChild(QLabel, "meteo_humidity").setText("")
