@@ -1,6 +1,6 @@
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy
 
 from utilitaire.load_image_url import LoadImageUrl
 
@@ -20,41 +20,43 @@ class MeteoAujourdhui(QWidget):
 
         premiere_colonne = QVBoxLayout()
         deuxieme_colonne = QVBoxLayout()
+        deuxieme_colonne.addStretch()
 
         meteo_nom_ville = QLabel()
         meteo_nom_ville.setObjectName("meteo_nom_ville")
-        meteoVilleDateIconTemp.addWidget(meteo_nom_ville)
-
-        meteo_date_actuelle = QLabel()
-        meteo_date_actuelle.setObjectName("meteo_date_actuelle")
-        meteoVilleDateIconTemp.addWidget(meteo_date_actuelle)
+        premiere_colonne.addWidget(meteo_nom_ville)
 
         icons = QLabel()
         icons.setObjectName("meteo_icon")
         pixmap = QPixmap()
-        icons.setPixmap(pixmap.scaled(100, 100))
-        meteoVilleDateIconTemp.addWidget(icons)
-
-        meteo_temperature = QLabel()
-        meteo_temperature.setObjectName("meteo_temperature")
-        meteoVilleDateIconTemp.addWidget(meteo_temperature)
+        icons.setPixmap(pixmap.scaled(150, 150))
+        premiere_colonne.addWidget(icons)
 
         meteo_temps = QLabel()
         meteo_temps.setObjectName("meteo_temps")
-        meteoTempsHumidity.addWidget(meteo_temps)
+        deuxieme_colonne.addWidget(meteo_temps)
+
+        meteo_temperature = QLabel()
+        meteo_temperature.setObjectName("meteo_temperature")
+        deuxieme_colonne.addWidget(meteo_temperature)
 
         meteo_humidity = QLabel()
         meteo_humidity.setObjectName("meteo_humidity")
-        meteoTempsHumidity.addWidget(meteo_humidity)
+        deuxieme_colonne.addWidget(meteo_humidity)
 
-        meteoActuelleLayout.addLayout(meteoVilleDateIconTemp)
-        meteoActuelleLayout.addLayout(meteoTempsHumidity)
+        deuxieme_colonne.addStretch()
+
+        meteoActuelleLayout.addLayout(premiere_colonne)
+        meteoActuelleLayout.addLayout(deuxieme_colonne)
+
+        meteoActuelleLayout.addStretch()
 
         meteo_actuelle = QWidget()
         meteo_actuelle.setObjectName("meteo_actuelle")
         meteo_actuelle.setLayout(meteoActuelleLayout)
 
         self.layout_principal.addWidget(meteo_actuelle)
+        self.layout_principal.addStretch()
 
     def maj_current(self, current, nomville):
         icon, desc = current.get_weather_code
@@ -63,10 +65,6 @@ class MeteoAujourdhui(QWidget):
         # Nom de la ville
         self.findChild(QLabel, "meteo_nom_ville").setText(
             nomville.capitalize()
-        )
-        # Date de la dernière mise à jour
-        self.findChild(QLabel, "meteo_date_actuelle").setText(
-            "Dernière mise à jour : " + current.get_time()
         )
 
         # Icone météo
@@ -87,12 +85,11 @@ class MeteoAujourdhui(QWidget):
         )
         # Humidité
         self.findChild(QLabel, "meteo_humidity").setText(
-            f"Humidité : {current.get_humidity()}%"
+            f"{current.get_humidity()}%"
         )
 
     def vider(self):
         self.findChild(QLabel, "meteo_nom_ville").setText("")
-        self.findChild(QLabel, "meteo_date_actuelle").setText("")
         self.findChild(QLabel, "meteo_icon").setPixmap(QPixmap())
         self.findChild(QLabel, "meteo_temperature").setText("")
         self.findChild(QLabel, "meteo_temps").setText("")

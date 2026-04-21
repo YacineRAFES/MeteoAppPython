@@ -27,3 +27,20 @@
     border-radius: 10px;
 }
 
+#meteo_nom_ville {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#meteo_temps {
+    font-size: 15px;
+}
+
+#meteo_temperature {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#meteo_humidity {
+    font-size: 25px;
+}

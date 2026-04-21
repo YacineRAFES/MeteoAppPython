@@ -19,7 +19,7 @@ class RechercherUneVille(QWidget):
         layout_input = QHBoxLayout()
 
         # Barre de recherche d'une ville
-        self.input = QLineEdit()
+        self.input = QLineEdit("nancy")
         self.input.setPlaceholderText("Entrez une ville")
         self.input.setObjectName("inputVille")
 
@@ -55,9 +55,15 @@ class RechercherUneVille(QWidget):
         self.meteo_journee.setVisible(False)
         self.meteo_semaine.setVisible(False)
 
-        layout_principal.addWidget(self.meteo_aujourdhui)
-        layout_principal.addWidget(self.meteo_journee)
+        # Layout pour la météo actuelle et la journée
+        layout_meteo_AJ = QHBoxLayout()
+        layout_meteo_AJ.addWidget(self.meteo_aujourdhui, 0)
+        layout_meteo_AJ.addWidget(self.meteo_journee, 1)
+
+        layout_principal.addLayout(layout_meteo_AJ)
+
         layout_principal.addWidget(self.meteo_semaine)
+        layout_principal.addStretch()
 
         self.setLayout(layout_principal)
     def button_rechercher(self):
