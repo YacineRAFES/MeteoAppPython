@@ -17,8 +17,9 @@ class MeteoAujourdhui(QWidget):
 
         # Affichage des données météo d'une ville recherchée
         meteoActuelleLayout = QHBoxLayout()
-        meteoVilleDateIconTemp = QVBoxLayout()
-        meteoTempsHumidity = QVBoxLayout()
+
+        premiere_colonne = QVBoxLayout()
+        deuxieme_colonne = QVBoxLayout()
 
         meteo_nom_ville = QLabel()
         meteo_nom_ville.setObjectName("meteo_nom_ville")
