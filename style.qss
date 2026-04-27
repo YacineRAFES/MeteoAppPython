@@ -23,7 +23,7 @@
 
 /* background blanc */
 #widgetVille, #meteo_actuelle, #meteo_journee, #meteo_semaine {
-    background-color: #FFFFFF;
+    background-color: #D2D2D2;
     border-radius: 10px;
 }
 
