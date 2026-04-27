@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     palette = QPalette()
     # Fond de l'application
-    palette.setColor(QPalette.Window, QColor(186, 186, 186))
+    palette.setColor(QPalette.Window, QColor(0, 0, 0))
     # Texte noir
     palette.setColor(QPalette.WindowText, QColor(0, 0, 0))
     # Fond des widgets
