@@ -86,12 +86,9 @@ class VilleWidget(QWidget):
 
         icons = QLabel()
 
-        chargerimage = LoadImageUrl()
-        image_data = chargerimage.load_image_url(icon)
-        pixmap = QPixmap()
-        if image_data:
-            pixmap.loadFromData(image_data)
-        icons.setPixmap(pixmap.scaled(100, 100))
+        pixmap = QPixmap(icon)
+        if not pixmap.isNull():
+            icons.setPixmap(pixmap.scaled(200, 200))
         layout_icons.addWidget(icons)
 
         temp = QLabel(temperature + "°C")
