@@ -25,23 +25,47 @@ class MeteoAujourdhui(QWidget):
         meteo_nom_ville.setObjectName("meteo_nom_ville")
         premiere_colonne.addWidget(meteo_nom_ville)
 
+        meteo_temps = QLabel()
+        meteo_temps.setObjectName("meteo_temps")
+        premiere_colonne.addWidget(meteo_temps)
+
         icons = QLabel()
         icons.setObjectName("meteo_icon")
         pixmap = QPixmap()
         icons.setPixmap(pixmap.scaled(200, 200))
         premiere_colonne.addWidget(icons)
 
-        meteo_temps = QLabel()
-        meteo_temps.setObjectName("meteo_temps")
-        deuxieme_colonne.addWidget(meteo_temps)
+        # ---------- PARTIE TEMPÉRATURE ----------
+        layout_temperature = QHBoxLayout()
+
+        icons_thermometre = QLabel()
+        icons_thermometre.setObjectName("meteo_icon_thermometre")
+        pixmap_thermometre = QPixmap("assets/thermometer.png")
+        icons_thermometre.setPixmap(pixmap_thermometre.scaled(30, 30))
+        layout_temperature.addWidget(icons_thermometre)
 
         meteo_temperature = QLabel()
         meteo_temperature.setObjectName("meteo_temperature")
-        deuxieme_colonne.addWidget(meteo_temperature)
+        layout_temperature.addWidget(meteo_temperature)
+
+        deuxieme_colonne.addLayout(layout_temperature)
+        # ---------- FIN DE PARTIE TEMPÉRATURE ----------
+
+        # ---------- PARTIE HUMIDITÉ ----------
+        layout_humidity = QHBoxLayout()
+
+        icons_humidity = QLabel()
+        icons_humidity.setObjectName("meteo_icon_humidity")
+        pixmap_humidity = QPixmap("assets/humidity.png")
+        icons_humidity.setPixmap(pixmap_humidity.scaled(30, 30))
+        layout_humidity.addWidget(icons_humidity)
 
         meteo_humidity = QLabel()
         meteo_humidity.setObjectName("meteo_humidity")
-        deuxieme_colonne.addWidget(meteo_humidity)
+        layout_humidity.addWidget(meteo_humidity)
+
+        deuxieme_colonne.addLayout(layout_humidity)
+        # ---------- FIN DE PARTIE HUMIDITÉ ----------
 
         deuxieme_colonne.addStretch()
 
