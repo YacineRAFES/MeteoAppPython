@@ -2,7 +2,6 @@ from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
-from utilitaire.load_image_url import LoadImageUrl
 
 
 class MeteoJournee(QWidget):
@@ -37,13 +36,10 @@ class MeteoJournee(QWidget):
             meteoHeure.addWidget(heure_label)
 
             # Icône
-            image_data = LoadImageUrl().load_image_url(icon)
-            if image_data:
-                pixmap = QPixmap()
-                pixmap.loadFromData(image_data)
-                icons = QLabel("meteo_icon")
-                icons.setPixmap(pixmap.scaled(100, 100))
-                meteoHeure.addWidget(icons)
+            pixmap = QPixmap(icon)
+            icons = QLabel("meteo_icon")
+            icons.setPixmap(pixmap.scaled(200, 200))
+            meteoHeure.addWidget(icons)
 
             # Température
             temp_label = QLabel(

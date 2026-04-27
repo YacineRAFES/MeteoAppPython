@@ -2,7 +2,6 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy
 
-from utilitaire.load_image_url import LoadImageUrl
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
@@ -29,7 +28,7 @@ class MeteoAujourdhui(QWidget):
         icons = QLabel()
         icons.setObjectName("meteo_icon")
         pixmap = QPixmap()
-        icons.setPixmap(pixmap.scaled(150, 150))
+        icons.setPixmap(pixmap.scaled(200, 200))
         premiere_colonne.addWidget(icons)
 
         meteo_temps = QLabel()
@@ -68,11 +67,8 @@ class MeteoAujourdhui(QWidget):
         )
 
         # Icone météo
-        image_data = LoadImageUrl().load_image_url(icon)
-        if image_data:
-            pixmap = QPixmap()
-            pixmap.loadFromData(image_data)
-            self.findChild(QLabel, "meteo_icon").setPixmap(pixmap.scaled(100, 100))
+        pixmap = QPixmap(icon)
+        self.findChild(QLabel, "meteo_icon").setPixmap(pixmap.scaled(300, 300))
 
         # Température actuelle
         self.findChild(QLabel, "meteo_temperature").setText(
