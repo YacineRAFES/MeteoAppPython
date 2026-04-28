@@ -8,7 +8,7 @@ class WeatherDaily:
         self.temp_max = data["temperature_max"]
         self.weather_code = data["weather_code"]
         self.precipitations = data["preci_proba"]
-        self.times = data["time"]
+        self.day = data["time"]
 
     def get_temp_min(self, index):
         return round(self.temp_min[index])
@@ -27,5 +27,5 @@ class WeatherDaily:
     def get_precipitations(self, index):
         return self.precipitations[index]
 
-    def get_times(self, index):
-        return Conversion.from_timestamp_to_day(self.times[index])
+    def get_day(self, index):
+        return Conversion.from_timestamp_to_day(self.day[index])
