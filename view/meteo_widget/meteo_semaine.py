@@ -22,25 +22,30 @@ class MeteoSemaine(QWidget):
 
     def maj_daily(self, daily):
 
-        for i in range(len(daily.times)):
+        for i in range(len(daily.day)):
             icon, desc = daily.get_weather_code(i)
 
             meteo_jour_layout = QVBoxLayout()
             meteo_jour_layout.addStretch()
 
             meteo_jour_label = QLabel(
-                f"{daily.get_times(i)}"
+                f"{daily.get_day(i)}"
             )
             meteo_jour_label.setAlignment(Qt.AlignCenter)
             meteo_jour_label.setObjectName("meteo_jour_semaine")
             meteo_jour_layout.addWidget(meteo_jour_label)
+
+            premier_colonne = QVBoxLayout()
+            deuxieme_colonne = QVBoxLayout()
+
+            deuxieme_colonne.addStretch()
 
             # Icône
             pixmap = QPixmap(icon)
             icons = QLabel("meteo_icon")
             icons.setPixmap(pixmap.scaled(200, 200))
             icons.setAlignment(Qt.AlignCenter)
-            meteo_jour_layout.addWidget(icons)
+            premier_colonne.addWidget(icons)
 
             meteo_temp_layout = QHBoxLayout()
 
@@ -66,7 +71,7 @@ class MeteoSemaine(QWidget):
 
             meteo_temp_layout.addStretch()
 
-            meteo_jour_layout.addLayout(meteo_temp_layout)
+            deuxieme_colonne.addLayout(meteo_temp_layout)
 
             meteo_preci = QLabel(
                 f"{daily.get_precipitations(i)} %"
@@ -74,7 +79,15 @@ class MeteoSemaine(QWidget):
             meteo_preci.setObjectName("meteo_preci_semaine")
             meteo_preci.setAlignment(Qt.AlignCenter)
             meteo_preci.setToolTip("Probabilité de précipitation")
-            meteo_jour_layout.addWidget(meteo_preci)
+            deuxieme_colonne.addWidget(meteo_preci)
+
+            deuxieme_colonne.addStretch()
+
+            ligne_layout = QHBoxLayout()
+            ligne_layout.addLayout(premier_colonne)
+            ligne_layout.addLayout(deuxieme_colonne)
+
+            meteo_jour_layout.addLayout(ligne_layout)
 
             meteo_jour = QWidget()
             meteo_jour.setObjectName("meteo_semaine")
