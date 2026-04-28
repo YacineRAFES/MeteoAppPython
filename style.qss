@@ -44,3 +44,41 @@
 #meteo_humidity {
     font-size: 25px;
 }
+
+/*Meteo Journee*/
+
+#meteoHeureLabel {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#meteo_icon {
+
+}
+
+#meteoTemp {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#precipProba {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Meteo Semaine */
+
+#meteo_jour_semaine {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#meteo_temp_semaine {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#meteo_preci_semaine {
+    font-size: 18px;
+    font-weight: bold;
+}
