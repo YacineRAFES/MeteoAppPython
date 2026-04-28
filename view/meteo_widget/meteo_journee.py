@@ -1,5 +1,5 @@
 from PySide6.QtCore import Slot
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, Qt
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 
 
@@ -33,12 +33,14 @@ class MeteoJournee(QWidget):
             # Heure
             heure_label = QLabel(hourly.get_times(i))
             heure_label.setObjectName("meteoHeureLabel")
+            heure_label.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(heure_label)
 
             # Icône
             pixmap = QPixmap(icon)
             icons = QLabel("meteo_icon")
             icons.setPixmap(pixmap.scaled(200, 200))
+            icons.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(icons)
 
             # Température
@@ -46,6 +48,7 @@ class MeteoJournee(QWidget):
                 f"{hourly.get_temperatures(i)}°C"
             )
             temp_label.setObjectName("meteoTemp")
+            temp_label.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(temp_label)
 
             # Precipitation probabilité
@@ -53,6 +56,7 @@ class MeteoJournee(QWidget):
                 f"{hourly.get_precipitations(i)} %"
             )
             precip_label.setObjectName("precipProba")
+            precip_label.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(precip_label)
 
             self.meteoJourneeLayout.addLayout(meteoHeure)
