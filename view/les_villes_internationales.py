@@ -6,7 +6,6 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
 from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
-from utilitaire.load_image_url import LoadImageUrl
 
 class VilleWidget(QWidget):
     # TODO : Si une ou des villes internationales n'a été affiché, on refait l'opération
