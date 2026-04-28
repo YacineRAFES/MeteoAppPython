@@ -73,13 +73,28 @@ class MeteoSemaine(QWidget):
 
             deuxieme_colonne.addLayout(meteo_temp_layout)
 
+            # Precipitation probabilité
+            meteo_preci_layout = QHBoxLayout()
+
+            meteo_preci_layout.addStretch()
+
+            icons_precipitation = QLabel()
+            icons_precipitation.setObjectName("meteo_icon_precipitation")
+            pixmap_precipitation = QPixmap("assets/precipitation.png")
+            icons_precipitation.setPixmap(pixmap_precipitation.scaled(30, 30))
+            meteo_preci_layout.addWidget(icons_precipitation)
+
             meteo_preci = QLabel(
-                f"{daily.get_precipitations(i)} %"
+                f" {daily.get_precipitations(i)} %"
             )
             meteo_preci.setObjectName("meteo_preci_semaine")
             meteo_preci.setAlignment(Qt.AlignCenter)
             meteo_preci.setToolTip("Probabilité de précipitation")
-            deuxieme_colonne.addWidget(meteo_preci)
+            meteo_preci_layout.addWidget(meteo_preci)
+
+            meteo_preci_layout.addStretch()
+
+            deuxieme_colonne.addLayout(meteo_preci_layout)
 
             deuxieme_colonne.addStretch()
 
