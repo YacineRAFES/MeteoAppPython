@@ -32,35 +32,48 @@ class MeteoSemaine(QWidget):
                 f"{daily.get_times(i)}"
             )
             meteo_jour_label.setAlignment(Qt.AlignCenter)
-            meteo_jour_label.setObjectName("meteo_jour_label")
+            meteo_jour_label.setObjectName("meteo_jour_semaine")
             meteo_jour_layout.addWidget(meteo_jour_label)
 
             # Icône
             pixmap = QPixmap(icon)
             icons = QLabel("meteo_icon")
             icons.setPixmap(pixmap.scaled(200, 200))
+            icons.setAlignment(Qt.AlignCenter)
             meteo_jour_layout.addWidget(icons)
 
             meteo_temp_layout = QHBoxLayout()
 
+            meteo_temp_layout.addStretch()
+
             meteo_temp_min = QLabel(
-                f"{daily.get_temp_min(i)}°C"
+                f"{daily.get_temp_min(i)}°"
             )
-            meteo_temp_min.setObjectName("meteo_temp_min")
+            meteo_temp_min.setToolTip("Température minimale")
+            meteo_temp_min.setObjectName("meteo_temp_semaine")
             meteo_temp_layout.addWidget(meteo_temp_min)
 
+            meteo_temp_separateur = QLabel(" / ")
+            meteo_temp_separateur.setObjectName("meteo_temp_semaine")
+            meteo_temp_layout.addWidget(meteo_temp_separateur)
+
             meteo_temp_max = QLabel(
-                f"{daily.get_temp_max(i)}°C"
+                f"{daily.get_temp_max(i)}°"
             )
-            meteo_temp_max.setObjectName("meteo_temp_max")
+            meteo_temp_max.setToolTip("Température maximale")
+            meteo_temp_max.setObjectName("meteo_temp_semaine")
             meteo_temp_layout.addWidget(meteo_temp_max)
+
+            meteo_temp_layout.addStretch()
 
             meteo_jour_layout.addLayout(meteo_temp_layout)
 
             meteo_preci = QLabel(
                 f"{daily.get_precipitations(i)} %"
             )
-            meteo_preci.setObjectName("meteo_preci")
+            meteo_preci.setObjectName("meteo_preci_semaine")
+            meteo_preci.setAlignment(Qt.AlignCenter)
+            meteo_preci.setToolTip("Probabilité de précipitation")
             meteo_jour_layout.addWidget(meteo_preci)
 
             meteo_jour = QWidget()
