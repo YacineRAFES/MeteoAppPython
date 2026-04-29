@@ -82,3 +82,19 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+#boutonMenu {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    border-radius: 0px;
+}
+
+#boutonMenu:hover {
+    background-color: #45a049;
+}
+
+#boutonMenu:pressed {
+    background-color: #ffffff;
+    color: #4CAF50;
+}
