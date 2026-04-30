@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
 
-class VilleWidget(QWidget):
+class Header(QWidget):
     # TODO : Si une ou des villes internationales n'a été affiché, on refait l'opération
     def __init__(self):
         super().__init__()
@@ -105,7 +105,7 @@ class VilleWidget(QWidget):
         layout_ville.addLayout(layout_icons_temp)
 
     def get_villes(self):
-        INTERNATIONAL_FILE = Path(__file__).parent.parent / "cache" / "villes_international.csv"
+        INTERNATIONAL_FILE = Path(__file__).parent.parent.parent / "cache" / "villes_international.csv"
         df = pd.read_csv(INTERNATIONAL_FILE)
 
         return df["ville"].tolist()

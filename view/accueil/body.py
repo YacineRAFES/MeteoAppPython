@@ -2,13 +2,13 @@ from PySide6.QtGui import QShortcut
 from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton
 from PySide6.QtCore import Qt, Signal
 
-from view.meteo_widget.meteo_actuelle import MeteoAujourdhui
-from view.meteo_widget.meteo_journee import MeteoJournee
-from view.meteo_widget.meteo_semaine import MeteoSemaine
+from view.accueil.meteo_widget.meteo_actuelle import MeteoAujourdhui
+from view.accueil.meteo_widget.meteo_journee import MeteoJournee
+from view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
 from controllers.weather_controller import WeatherController
 
 # TODO : Meteo Actuelle à revoir sur les styles (la taille de la police et les couleurs)
-class RechercherUneVille(QWidget):
+class Body(QWidget):
     ville_recherchee = Signal(float, float, str)
     def __init__(self):
         super().__init__()
@@ -19,7 +19,7 @@ class RechercherUneVille(QWidget):
         layout_input = QHBoxLayout()
 
         # Barre de recherche d'une ville
-        self.input = QLineEdit("nancy")
+        self.input = QLineEdit()
         self.input.setPlaceholderText("Entrez une ville")
         self.input.setObjectName("inputVille")
 
@@ -66,6 +66,7 @@ class RechercherUneVille(QWidget):
         layout_principal.addStretch()
 
         self.setLayout(layout_principal)
+
     def button_rechercher(self):
         nomville = self.input.text()
         print("Ville recherchée : ", nomville)
