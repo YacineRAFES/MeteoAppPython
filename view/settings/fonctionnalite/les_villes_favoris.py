@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QTextEdit, \
-    QListWidgetItem
+    QListWidgetItem, QMessageBox
 
 from controllers.city_favourite_controller import CityFavouriteController
 
@@ -17,6 +17,7 @@ class FavouriteCity(QWidget):
         self.layout.addWidget(self.titre)
 
         self.layout_add_city = QHBoxLayout()
+        self.layout_add_city.addStretch()
 
         self.input_text = QTextEdit()
         self.input_text.setPlaceholderText("Ajouter une ville")
@@ -31,16 +32,40 @@ class FavouriteCity(QWidget):
 
         self.button_add_city.clicked.connect(self.add_city)
 
+        # Layout : Listes des villes et les boutons supprimer, modifier.
+        self.layout_liste_villes = QHBoxLayout()
 
-        self.list_favorite_cities = QListWidget()
+        # Création de la liste
+        self.liste_widget = QListWidget()
 
-        item = QListWidgetItem(self.list_favorite_cities)
-        button_remove = QPushButton("Supprimer")
-        item.setSizeHint(button_remove.sizeHint())
-        self.list_favorite_cities.setItemWidget(item, button_remove)
+        # Appel au controller pour récupérer la liste des villes en favoris
+        controller = CityFavouriteController()
+        villes_favoris = controller.GetFavoriteCities()
 
+        # Ajout les villes dans la liste
+        self.liste_widget.addItems(villes_favoris)
+
+        # Ajout le WidgetList dans la layout
+        self.layout_liste_villes.addWidget(self.liste_widget)
+
+        # Créer des boutons : supprimer, modifier
+        # Création un layout pour les boutons
+        self.layout_boutons = QVBoxLayout()
+
+        # Bouton Supprimer
+        supprimer_bouton = QPushButton('Supprimer')
+        supprimer_bouton.clicked.connect(self.supprimer)
+
+        # Assemblages des widget dans le layout des boutons
+        self.layout_boutons.addWidget(supprimer_bouton)
+
+        # Ajout le layout des boutons dans la layout des listes
+        self.layout_liste_villes.addLayout(self.layout_boutons)
+
+
+        # -- Assemblage des layouts dans la layout principale --
         self.layout.addLayout(self.layout_add_city)
-        self.layout.addWidget(self.list_favorite_cities)
+        self.layout.addLayout(self.layout_liste_villes)
 
         self.layout.addStretch()
 
@@ -52,3 +77,9 @@ class FavouriteCity(QWidget):
         if ville_a_ajouter:
             controller = CityFavouriteController()
             controller.AddCityFavourite(ville_a_ajouter)
+
+    def supprimer(self):
+        ligne_selectionner = self.liste_widget.currentRow()
+        if ligne_selectionner >= 0:
+            objet_actuel = self.liste_widget.item(ligne_selectionner)
+
