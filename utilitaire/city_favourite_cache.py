@@ -35,3 +35,13 @@ def add_city_favourite(nomville):
 
         print("Ville trouvée dans la liste : " + nomville)
         return result.iloc[0].to_dict()
+
+def get_favorite_cities():
+    with _lock:
+        if CACHE_PATH.exists() and CACHE_PATH.stat().st_size > 0:
+            print("get_favorite_cities: Lecture de la liste des villes en favoris...")
+            df = pd.read_csv(CACHE_PATH)
+            return df["ville"].tolist()
+        else:
+            print("get_favorite_cities: city_favourite.csv, aucun favoris trouvé...")
+            return []
