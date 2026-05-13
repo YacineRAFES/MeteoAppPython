@@ -1,5 +1,7 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel
 
+from view.settings.fonctionnalite.les_villes_favoris import FavouriteCity
+
 
 class Parametre(QWidget):
     def __init__(self, parent=None):
@@ -10,5 +12,11 @@ class Parametre(QWidget):
         titre_parametres = QLabel("Paramètres")
         titre_parametres.setObjectName("titreParametres")
         layout_main.addWidget(titre_parametres)
+
+        les_villes_favoris = FavouriteCity()
+
+        layout_main.addWidget(les_villes_favoris)
+
+        layout_main.addStretch()
 
         self.setLayout(layout_main)
