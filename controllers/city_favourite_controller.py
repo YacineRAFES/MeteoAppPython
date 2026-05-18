@@ -1,4 +1,4 @@
-from utilitaire.city_favourite_cache import add_city_favourite, get_favorite_cities
+from utilitaire.city_favourite_cache import add_city_favourite, get_favorite_cities, remove_favorite_cities
 from utilitaire.geocoding_cache import get_geocoding
 
 
@@ -25,6 +25,12 @@ class CityFavouriteController:
             print("Controller : Erreur lors de la récupération de la liste des villes favorites")
         return result
 
+    def RemoveCityFavourite(self, object):
+        nom_ville = object.text()
 
+        result = remove_favorite_cities(nom_ville)
 
-
+        if result:
+            print("Suppression d'une ville a été réussie")
+        else:
+            print("Suppression d'une ville n'a pas fonctionné")

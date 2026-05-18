@@ -45,3 +45,31 @@ def get_favorite_cities():
         else:
             print("get_favorite_cities: city_favourite.csv, aucun favoris trouvé...")
             return []
+
+def remove_favorite_cities(nomville):
+    print("remove_favorite_cities : ", nomville)
+    with _lock:
+        if CACHE_PATH.exists() and CACHE_PATH.stat().st_size > 0:
+            print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
+            df = pd.read_csv(CACHE_PATH)
+
+            # Nettoyage et comparaison
+            nom_nettoye = capwords(nomville.strip())
+            condition = df["ville"].str.strip() == nom_nettoye
+
+            # Si la ville existe bien dans le BDD
+            if condition.any():
+                # On garde tout SAUF cette ville
+                df_modifie = df[~condition]
+
+                # Sauvegarde dans le fichier CSV
+                df_modifie.to_csv(CACHE_PATH, index=False)
+                print(f"remove_favorite_cities: {nom_nettoye} supprimée du CSV.")
+                return True
+            else:
+                print(f"remove_favorite_cities: {nom_nettoye} non trouvée dans le CSV.")
+                return False
+        else:
+            print("remove_favorite_cities: city_favourite.csv, aucun favoris trouvé...")
+            return False
+

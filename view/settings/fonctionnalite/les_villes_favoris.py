@@ -1,5 +1,7 @@
+from string import capwords
+
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QTextEdit, \
-    QListWidgetItem, QMessageBox
+    QListWidgetItem, QMessageBox, QLineEdit
 
 from controllers.city_favourite_controller import CityFavouriteController
 
@@ -19,7 +21,7 @@ class FavouriteCity(QWidget):
         self.layout_add_city = QHBoxLayout()
         self.layout_add_city.addStretch()
 
-        self.input_text = QTextEdit()
+        self.input_text = QLineEdit()
         self.input_text.setPlaceholderText("Ajouter une ville")
         self.input_text.setFixedHeight(30)
         self.layout_add_city.addWidget(self.input_text)
@@ -72,14 +74,25 @@ class FavouriteCity(QWidget):
         self.setLayout(self.layout)
 
     def add_city(self):
-        ville_a_ajouter = self.input_text.toPlainText()
+        ville_a_ajouter = self.input_text.text()
         print("Ajouter une ville : ", ville_a_ajouter)
         if ville_a_ajouter:
             controller = CityFavouriteController()
             controller.AddCityFavourite(ville_a_ajouter)
 
+            # ajoute dans la liste
+            self.liste_widget.addItem(capwords(ville_a_ajouter))
+
     def supprimer(self):
+        print("appel au suppression d'une ville")
         ligne_selectionner = self.liste_widget.currentRow()
         if ligne_selectionner >= 0:
             objet_actuel = self.liste_widget.item(ligne_selectionner)
+
+            # Appel au controller pour la suppression dans le CSV
+            controller = CityFavouriteController()
+            controller.RemoveCityFavourite(objet_actuel)
+
+            # supprime dans la liste
+            self.liste_widget.takeItem(ligne_selectionner)
 
