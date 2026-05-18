@@ -5,6 +5,7 @@ from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QStackedWidget
 
 from view.accueil.accueil import Accueil
+from view.accueil.header import Header
 from view.settings.parametre import Parametre
 
 locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
@@ -40,8 +41,10 @@ class MyWindow(QMainWindow):
         # QStackedWidget : une page visible à la fois
         self.stack = QStackedWidget()
 
-        self.accueil_page = Accueil()
-        self.settings_page = Parametre()
+        self.header_global = Header()
+
+        self.accueil_page = Accueil(header_instance=self.header_global)
+        self.settings_page = Parametre(main_header=self.header_global)
 
         self.stack.addWidget(self.accueil_page)   # index 0
         self.stack.addWidget(self.settings_page)  # index 1

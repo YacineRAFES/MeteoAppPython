@@ -5,14 +5,14 @@ from view.accueil.header import Header
 
 
 class Accueil(QWidget):
-    def __init__(self, /):
+    def __init__(self, header_instance):
 
         super().__init__()
         layout_main = QVBoxLayout()
 
         # Affichage des villes internationales
-        header = Header()
-        layout_main.addWidget(header)
+        self.header = header_instance
+        layout_main.addWidget(self.header)
 
         # Affichage de la barre de recherche d'une ville
         body = Body()

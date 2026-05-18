@@ -1,5 +1,6 @@
 from string import capwords
 
+from PySide6.QtGui import QShortcut, QKeySequence
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QTextEdit, \
     QListWidgetItem, QMessageBox, QLineEdit
 
@@ -7,8 +8,9 @@ from controllers.city_favourite_controller import CityFavouriteController
 
 
 class FavouriteCity(QWidget):
-    def __init__(self):
+    def __init__(self, header_instance=None):
         super().__init__()
+        self.header_instance = header_instance
         self.city_name = "City Name"
 
         self.layout = QVBoxLayout()
@@ -33,6 +35,9 @@ class FavouriteCity(QWidget):
         self.layout_add_city.addStretch()
 
         self.button_add_city.clicked.connect(self.add_city)
+
+        self.shortcut_enter = QShortcut(QKeySequence("Return"), self)
+        self.shortcut_enter.activated.connect(self.add_city)
 
         # Layout : Listes des villes et les boutons supprimer, modifier.
         self.layout_liste_villes = QHBoxLayout()
@@ -82,6 +87,10 @@ class FavouriteCity(QWidget):
 
             # ajoute dans la liste
             self.liste_widget.addItem(capwords(ville_a_ajouter))
+            self.input_text.clear()
+
+            if self.header_instance:
+                self.header_instance.refresh()
 
     def supprimer(self):
         print("appel au suppression d'une ville")
@@ -95,4 +104,8 @@ class FavouriteCity(QWidget):
 
             # supprime dans la liste
             self.liste_widget.takeItem(ligne_selectionner)
+            self.input_text.clear()
+
+            if self.header_instance:
+                self.header_instance.refresh()
 

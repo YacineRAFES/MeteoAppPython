@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import pandas as pd
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
@@ -8,34 +7,59 @@ from PySide6.QtCore import Qt
 from utilitaire.weather_thread import WeatherThread
 
 class Header(QWidget):
-    # TODO : Si une ou des villes internationales n'a été affiché, on refait l'opération
     def __init__(self):
         super().__init__()
         self.setAttribute(Qt.WA_StyledBackground, True)
+
+        # Initialisation du layout principal
         self.layout_meteoInternational = QHBoxLayout()
         self.layout_meteoInternational.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout_meteoInternational)
 
-        # Afficher un état de chargement
+        self.loading_label = None
+        self.worker = []
+
+        # Premier chargement au lancement du widget
+        self.charger_meteo()
+
+    def charger_meteo(self):
+        """Méthode unique pour vider l'ancien affichage et lancer les threads"""
+        # 1. Nettoyage complet du layout (utilisé lors du refresh)
+        while self.layout_meteoInternational.count() > 0:
+            item = self.layout_meteoInternational.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+        # 2. Création et affichage du label de chargement
         self.loading_label = QLabel("Chargement...")
         self.loading_label.setObjectName("loadingLabel")
         self.layout_meteoInternational.addWidget(self.loading_label)
 
-        self.worker = []
+        # 3. Arrêt et vidage des anciens workers
+        self.worker.clear()
 
-        VILLES = self.get_villes()
+        # 4. Récupération et lancement des nouveaux threads
+        villes = self.get_villes()
+        if not villes:
+            self.loading_label.setText("Aucune ville dans les favoris.")
+            return
 
-        for ville in VILLES:
-            # Lancer le thread pour récupérer les données
+        for ville in villes:
             worker = WeatherThread(ville)
             worker.finished.connect(self.on_weather_loaded)
             worker.error.connect(self.on_weather_error)
             self.worker.append(worker)
             worker.start()
 
+    def refresh(self):
+        """Appelé depuis l'extérieur pour rafraîchir la liste"""
+        print("Header: Rafraîchissement de la météo des favoris...")
+        self.charger_meteo()
+
     def on_weather_loaded(self, ville, results):
         """Appelé quand les données météo sont prêtes"""
-        # Supprimer le label de chargement
+        # Masquer le chargement dès qu'une première ville répond
         if self.loading_label and self.loading_label.parent():
             self.loading_label.deleteLater()
             self.loading_label = None
@@ -68,13 +92,11 @@ class Header(QWidget):
         layout_nomville_codecountry.addWidget(nomville)
 
         if code_country:
-            code_label = QLabel("("+code_country+")")
+            code_label = QLabel(f"({code_country})")
             code_label.setObjectName("code_country")
             layout_nomville_codecountry.addWidget(code_label)
 
         layout_ville.addLayout(layout_nomville_codecountry)
-
-
 
     def corps_du_bloc(self, layout_ville, temperature, temps, icon):
         layout_icons_temp = QHBoxLayout()
@@ -84,7 +106,6 @@ class Header(QWidget):
         layout_temp_temps = QVBoxLayout()
 
         icons = QLabel()
-
         pixmap = QPixmap(icon)
         if not pixmap.isNull():
             icons.setPixmap(pixmap.scaled(200, 200))
@@ -105,7 +126,11 @@ class Header(QWidget):
         layout_ville.addLayout(layout_icons_temp)
 
     def get_villes(self):
-        INTERNATIONAL_FILE = Path(__file__).parent.parent.parent / "cache" / "villes_international.csv"
-        df = pd.read_csv(INTERNATIONAL_FILE)
+        FAVOURITE_CITY = Path(__file__).parent.parent.parent / "cache" / "favourite_city.csv"
 
-        return df["ville"].tolist()
+        # Si le fichier n'existe pas encore ou il est vide
+        if not FAVOURITE_CITY.exists() or FAVOURITE_CITY.stat().st_size == 0:
+            return []
+
+        df = pd.read_csv(FAVOURITE_CITY)
+        return df["ville"].dropna().tolist()

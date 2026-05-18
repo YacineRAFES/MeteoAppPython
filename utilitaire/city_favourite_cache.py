@@ -5,7 +5,7 @@ from pathlib import Path
 
 from services.geo.geocoding import get_geo
 
-CACHE_PATH = Path(__file__).parent.parent / "cache" / "city_favourite.csv"
+CACHE_PATH = Path(__file__).parent.parent / "cache" / "favourite_city.csv"
 _lock = Lock()
 
 def add_city_favourite(nomville):
@@ -16,7 +16,7 @@ def add_city_favourite(nomville):
             print("add_city_favourite: Lecture de la liste des villes en favoris...")
             df = pd.read_csv(CACHE_PATH)
         else:
-            print("add_city_favourite: city_favourite.csv, création d'un nouveau fichier csv...")
+            print("add_city_favourite: favourite_city.csv, création d'un nouveau fichier csv...")
             df = pd.DataFrame(columns=["ville"])
 
         print("Recherche de la ville dans la liste..." + nomville)
@@ -43,7 +43,7 @@ def get_favorite_cities():
             df = pd.read_csv(CACHE_PATH)
             return df["ville"].tolist()
         else:
-            print("get_favorite_cities: city_favourite.csv, aucun favoris trouvé...")
+            print("get_favorite_cities: favourite_city.csv, aucun favoris trouvé...")
             return []
 
 def remove_favorite_cities(nomville):
@@ -70,6 +70,6 @@ def remove_favorite_cities(nomville):
                 print(f"remove_favorite_cities: {nom_nettoye} non trouvée dans le CSV.")
                 return False
         else:
-            print("remove_favorite_cities: city_favourite.csv, aucun favoris trouvé...")
+            print("remove_favorite_cities: favourite_city.csv, aucun favoris trouvé...")
             return False
 
