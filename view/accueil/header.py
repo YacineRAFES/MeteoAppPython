@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QScrollArea
 from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
@@ -11,13 +11,30 @@ class Header(QWidget):
         super().__init__()
         self.setAttribute(Qt.WA_StyledBackground, True)
 
+        layout_principal = QVBoxLayout()
+        layout_principal.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(layout_principal)
+
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area.setFrameShape(QScrollArea.NoFrame)
+        layout_principal.addWidget(self.scroll_area)
+
         # Initialisation du layout principal
+        self.conteneur_scroll = QWidget()
         self.layout_meteoInternational = QHBoxLayout()
-        self.layout_meteoInternational.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.layout_meteoInternational)
+        self.layout_meteoInternational.setContentsMargins(10, 10, 10, 10)
+        self.layout_meteoInternational.setSpacing(15)
+        self.conteneur_scroll.setLayout(self.layout_meteoInternational)
+
+        self.scroll_area.setWidget(self.conteneur_scroll)
 
         self.loading_label = None
         self.worker = []
+
+        self.setFixedHeight(230)
 
         # Premier chargement au lancement du widget
         self.charger_meteo()

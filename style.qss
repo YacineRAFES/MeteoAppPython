@@ -18,7 +18,10 @@
 
 #widgetVille {
     max-width: 228px;
-    min-height: 144px;
+    min-width: 228px;
+
+    min-height: 160px;
+    max-height: 160px;
 }
 
 /* background blanc */
