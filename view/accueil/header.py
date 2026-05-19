@@ -94,6 +94,7 @@ class Header(QWidget):
         self.corps_du_bloc(layout_ville, str(results.get_temperature()), desc, icon)
 
         self.layout_meteoInternational.addWidget(ville_widget)
+        self.layout_meteoInternational.setAlignment(Qt.AlignCenter)
 
     def on_weather_error(self, ville, error_message):
         """Appelé en cas d'erreur"""
