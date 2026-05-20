@@ -3,7 +3,7 @@ from PySide6.QtCore import QThread, Signal
 from modele.current_model import WeatherCurrent
 from services.weather.weather_api import fetch_weather
 from services.weather.weather_parser import parse_current
-from utilitaire.geocoding_cache import get_geocoding
+from manager.geocoding_cache import get_geocoding
 
 
 class WeatherThread(QThread):
