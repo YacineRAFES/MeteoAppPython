@@ -144,7 +144,7 @@ class Header(QWidget):
         layout_ville.addLayout(layout_icons_temp)
 
     def get_villes(self):
-        FAVOURITE_CITY = Path(__file__).parent.parent.parent / "cache" / "favourite_city.csv"
+        FAVOURITE_CITY = Path(__file__).parent.parent.parent / "cache" / "favorites_city.csv"
 
         # Si le fichier n'existe pas encore ou il est vide
         if not FAVOURITE_CITY.exists() or FAVOURITE_CITY.stat().st_size == 0:
