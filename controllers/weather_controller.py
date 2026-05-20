@@ -1,7 +1,6 @@
 from modele.current_model import WeatherCurrent
 from modele.daily_model import WeatherDaily
 from modele.hourly_model import WeatherHourly
-from services.geo.geocoding import get_geo
 from services.weather.weather_api import fetch_weather
 from services.weather.weather_parser import parse_current, parse_hourly, parse_daily
 from manager.geocoding_cache import get_geocoding
