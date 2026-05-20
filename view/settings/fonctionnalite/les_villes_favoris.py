@@ -4,7 +4,8 @@ from PySide6.QtGui import QShortcut, QKeySequence
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QTextEdit, \
     QListWidgetItem, QMessageBox, QLineEdit
 
-from controllers.city_favourite_controller import CityFavouriteController
+from controllers.favorites_city_controller import CityFavouriteController
+from utilitaire.msg_box import message_box
 
 
 class FavouriteCity(QWidget):
