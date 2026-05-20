@@ -4,54 +4,59 @@ import pandas as pd
 from pathlib import Path
 
 from services.geo.geocoding import get_geo
+from utilitaire.gestion_erreur import gestion_erreur
 
-CACHE_PATH = Path(__file__).parent.parent / "cache" / "favourite_city.csv"
+FAVORITES_CITY = Path(__file__).parent.parent / "cache" / "favorites_city.csv"
 _lock = Lock()
 
-def add_city_favourite(nomville):
+def add_favorite_city(nomville):
 
     with _lock:
-        # Je vérifie si la ville existe dans le geocoding cache
-        if CACHE_PATH.exists() and CACHE_PATH.stat().st_size > 0:
+        # Je vérifie si la ville existe dans le FAVORITES_CITY
+        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
             print("add_city_favourite: Lecture de la liste des villes en favoris...")
-            df = pd.read_csv(CACHE_PATH)
+            df = pd.read_csv(FAVORITES_CITY)
         else:
-            print("add_city_favourite: favourite_city.csv, création d'un nouveau fichier csv...")
+            print("add_city_favourite: favorites_city.csv, création d'un nouveau fichier csv...")
             df = pd.DataFrame(columns=["ville"])
 
         print("Recherche de la ville dans la liste..." + nomville)
-        result = df[df["ville"] == capwords(nomville)]
+        resultat_apres_la_recherche = df[df["ville"] == capwords(nomville)]
 
 
-        # Si la ville n'existe pas, je la rajoute dans le cache
-        if result.empty:
+        # Si la ville n'existe pas, je la rajoute dans le FAVOURITE_CITY
+        if resultat_apres_la_recherche.empty:
+
             print("Ville non trouvée dans la liste, ajout en cours..." + nomville)
+
             new_row = {
                 "ville": capwords(nomville)
             }
+
             df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-            df.to_csv(CACHE_PATH, index=False)
-            return new_row
+            df.to_csv(FAVORITES_CITY, index=False)
+
+            return True
 
         print("Ville trouvée dans la liste : " + nomville)
-        return result.iloc[0].to_dict()
+        return False
 
 def get_favorite_cities():
     with _lock:
-        if CACHE_PATH.exists() and CACHE_PATH.stat().st_size > 0:
+        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
             print("get_favorite_cities: Lecture de la liste des villes en favoris...")
-            df = pd.read_csv(CACHE_PATH)
+            df = pd.read_csv(FAVORITES_CITY)
             return df["ville"].tolist()
         else:
-            print("get_favorite_cities: favourite_city.csv, aucun favoris trouvé...")
+            print("get_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return []
 
 def remove_favorite_cities(nomville):
     print("remove_favorite_cities : ", nomville)
     with _lock:
-        if CACHE_PATH.exists() and CACHE_PATH.stat().st_size > 0:
+        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
             print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
-            df = pd.read_csv(CACHE_PATH)
+            df = pd.read_csv(FAVORITES_CITY)
 
             # Nettoyage et comparaison
             nom_nettoye = capwords(nomville.strip())
@@ -63,13 +68,13 @@ def remove_favorite_cities(nomville):
                 df_modifie = df[~condition]
 
                 # Sauvegarde dans le fichier CSV
-                df_modifie.to_csv(CACHE_PATH, index=False)
+                df_modifie.to_csv(FAVORITES_CITY, index=False)
                 print(f"remove_favorite_cities: {nom_nettoye} supprimée du CSV.")
                 return True
             else:
                 print(f"remove_favorite_cities: {nom_nettoye} non trouvée dans le CSV.")
                 return False
         else:
-            print("remove_favorite_cities: favourite_city.csv, aucun favoris trouvé...")
+            print("remove_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return False
 
