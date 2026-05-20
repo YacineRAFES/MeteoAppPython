@@ -14,6 +14,9 @@ class FavouriteCity(QWidget):
         self.header_instance = header_instance
         self.city_name = "City Name"
 
+        controller = CityFavouriteController()
+        self.villes_favoris = controller.GetFavoriteCities()
+
         self.layout = QVBoxLayout()
         self.layout.addStretch()
 
@@ -46,12 +49,8 @@ class FavouriteCity(QWidget):
         # Création de la liste
         self.liste_widget = QListWidget()
 
-        # Appel au controller pour récupérer la liste des villes en favoris
-        controller = CityFavouriteController()
-        villes_favoris = controller.GetFavoriteCities()
-
         # Ajout les villes dans la liste
-        self.liste_widget.addItems(villes_favoris)
+        self.liste_widget.addItems(self.villes_favoris)
 
         # Ajout le WidgetList dans la layout
         self.layout_liste_villes.addWidget(self.liste_widget)
@@ -80,18 +79,40 @@ class FavouriteCity(QWidget):
         self.setLayout(self.layout)
 
     def add_city(self):
-        ville_a_ajouter = self.input_text.text()
+        # On récupère le nom de la ville saisie et on l'enregistre dans la variable
+        ville_a_ajouter = self.input_text.text().strip().lower()
         print("Ajouter une ville : ", ville_a_ajouter)
-        if ville_a_ajouter:
-            controller = CityFavouriteController()
-            controller.AddCityFavourite(ville_a_ajouter)
 
-            # ajoute dans la liste
+        # Si la saisie est vide, on annule
+        if not ville_a_ajouter:
+            print("La saisie est vide, donc return")
+            return
+
+        # On enregistre les villes existantes qui se trouve dans la liste widget dans une array
+        liste_widget_villes = []
+        for i in range(self.liste_widget.count()):
+            liste_widget_villes = self.liste_widget.item(i).text().lower()
+
+        # On vérifie si la ville saisie existe dans la liste de widgets, si la ville saisie existe donc on return
+        if ville_a_ajouter.lower() in liste_widget_villes:
+            print("La ville existe déjà dans la liste widgets")
+            return
+
+        # -- Appel au controller --
+        controller = CityFavouriteController()
+        sauvegarde_resultat = controller.AddCityFavourite(ville_a_ajouter)
+
+        if not sauvegarde_resultat["erreur"]:
             self.liste_widget.addItem(capwords(ville_a_ajouter))
             self.input_text.clear()
+            message_box(sauvegarde_resultat["message"])
+        else:
+            message_box(sauvegarde_resultat["message"])
 
-            if self.header_instance:
-                self.header_instance.refresh()
+        # ajoute dans la liste
+
+        if self.header_instance:
+            self.header_instance.refresh()
 
     def supprimer(self):
         print("appel au suppression d'une ville")
@@ -101,12 +122,15 @@ class FavouriteCity(QWidget):
 
             # Appel au controller pour la suppression dans le CSV
             controller = CityFavouriteController()
-            controller.RemoveCityFavourite(objet_actuel)
+            suppression_resultat = controller.RemoveCityFavourite(objet_actuel)
 
-            # supprime dans la liste
-            self.liste_widget.takeItem(ligne_selectionner)
-            self.input_text.clear()
+            if not suppression_resultat["erreur"]:
+                # supprime dans la liste
+                self.liste_widget.takeItem(ligne_selectionner)
+                self.input_text.clear()
+                message_box(suppression_resultat["message"])
 
-            if self.header_instance:
-                self.header_instance.refresh()
-
+                if self.header_instance:
+                    self.header_instance.refresh()
+            else:
+                message_box(suppression_resultat["message"])
