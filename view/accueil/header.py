@@ -20,6 +20,7 @@ class Header(QWidget):
         self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area.setFrameShape(QScrollArea.NoFrame)
+        QScroller.grabGesture(self.scroll_area, QScroller.LeftMouseButtonGesture)
         layout_principal.addWidget(self.scroll_area)
 
         # Initialisation du layout principal
