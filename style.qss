@@ -112,10 +112,10 @@
     margin: 2px;
 }
 
-#ListeWidget::item:selected {
-    background-color: #2885C7;
-}
-
 #ListeWidget::item:hover {
     background-color: #0093F9;
+}
+
+#ListeWidget::item:selected {
+    background-color: #2885C7;
 }
