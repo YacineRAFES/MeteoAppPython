@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QScrollArea
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QScrollArea, QScroller
 from PySide6.QtCore import Qt
 
 from utilitaire.weather_thread import WeatherThread
