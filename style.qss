@@ -108,7 +108,7 @@
     padding: 8px;
     border-radius: 5px;
     color: black;
-    font-weight: bold;
+    font-weight: 20px;
     margin: 2px;
 }
 
@@ -118,4 +118,21 @@
 
 #ListeWidget::item:selected {
     background-color: #2885C7;
+}
+
+/* Bouton de ville favoris */
+#buttonAddCity {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #217AA3;
+    background-color: #0093D6;
+}
+
+#buttonAddCity:hover {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #0093D6;
+    background-color: #217AA3;
 }

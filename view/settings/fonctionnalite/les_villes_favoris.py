@@ -24,7 +24,6 @@ class FavouriteCity(QWidget):
         self.layout.addWidget(self.titre)
 
         self.layout_add_city = QHBoxLayout()
-        self.layout_add_city.addStretch()
 
         self.input_text = QLineEdit()
         self.input_text.setPlaceholderText("Ajouter une ville")
@@ -34,8 +33,6 @@ class FavouriteCity(QWidget):
         self.button_add_city = QPushButton("Ajouter")
         self.button_add_city.setObjectName("buttonAddCity")
         self.layout_add_city.addWidget(self.button_add_city)
-
-        self.layout_add_city.addStretch()
 
         self.button_add_city.clicked.connect(self.add_city)
 

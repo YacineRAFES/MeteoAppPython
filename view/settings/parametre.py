@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout
 
 from view.settings.fonctionnalite.les_villes_favoris import FavouriteCity
 from view.accueil.header import Header
@@ -9,6 +9,7 @@ class Parametre(QWidget):
         super().__init__(parent)
 
         layout_main = QVBoxLayout()
+        layout_ligne_un = QHBoxLayout()
 
         # Ajoutez ici les éléments de votre page de paramètres
         titre_parametres = QLabel("Paramètres")
@@ -17,7 +18,9 @@ class Parametre(QWidget):
 
         les_villes_favoris = FavouriteCity(header_instance=main_header)
 
-        layout_main.addWidget(les_villes_favoris)
-        layout_main.addStretch()
+        layout_ligne_un.addWidget(les_villes_favoris)
+        layout_ligne_un.addStretch()
+
+        layout_main.addLayout(layout_ligne_un)
 
         self.setLayout(layout_main)
