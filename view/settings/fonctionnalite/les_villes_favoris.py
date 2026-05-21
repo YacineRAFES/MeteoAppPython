@@ -1,8 +1,7 @@
 from string import capwords
 
 from PySide6.QtGui import QShortcut, QKeySequence
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QTextEdit, \
-    QListWidgetItem, QMessageBox, QLineEdit
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit
 
 from controllers.favorites_city_controller import CityFavouriteController
 from utilitaire.msg_box import message_box
@@ -48,6 +47,8 @@ class FavouriteCity(QWidget):
 
         # Création de la liste
         self.liste_widget = QListWidget()
+        self.liste_widget.setObjectName("ListeWidget")
+        self.liste_widget.setFixedHeight(400)
 
         # Ajout les villes dans la liste
         self.liste_widget.addItems(self.villes_favoris)
@@ -57,7 +58,7 @@ class FavouriteCity(QWidget):
 
         # Créer des boutons : supprimer, modifier
         # Création un layout pour les boutons
-        self.layout_boutons = QVBoxLayout()
+        self.layout_boutons = QHBoxLayout()
 
         # Bouton Supprimer
         supprimer_bouton = QPushButton('Supprimer')
@@ -65,14 +66,12 @@ class FavouriteCity(QWidget):
 
         # Assemblages des widget dans le layout des boutons
         self.layout_boutons.addWidget(supprimer_bouton)
-
-        # Ajout le layout des boutons dans la layout des listes
-        self.layout_liste_villes.addLayout(self.layout_boutons)
-
+        self.layout_boutons.addStretch()
 
         # -- Assemblage des layouts dans la layout principale --
         self.layout.addLayout(self.layout_add_city)
         self.layout.addLayout(self.layout_liste_villes)
+        self.layout.addLayout(self.layout_boutons)
 
         self.layout.addStretch()
 
