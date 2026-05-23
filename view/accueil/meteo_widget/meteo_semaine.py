@@ -79,6 +79,7 @@ class MeteoSemaine(QWidget):
             meteo_preci_layout.addStretch()
 
             icons_precipitation = QLabel()
+            icons_precipitation.setToolTip("Probabilité de précipitation")
             icons_precipitation.setObjectName("meteo_icon_precipitation")
             pixmap_precipitation = QPixmap("assets/precipitation.png")
             icons_precipitation.setPixmap(pixmap_precipitation.scaled(30, 30))
