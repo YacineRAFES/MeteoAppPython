@@ -3,8 +3,6 @@ from threading import Lock
 import pandas as pd
 from pathlib import Path
 
-from services.geo.geocoding import get_geo
-from utilitaire.gestion_erreur import gestion_erreur
 
 FAVORITES_CITY = Path(__file__).parent.parent / "cache" / "favorites_city.csv"
 _lock = Lock()
@@ -18,7 +16,7 @@ def add_favorite_city(nomville):
             df = pd.read_csv(FAVORITES_CITY)
         else:
             print("add_city_favourite: favorites_city.csv, création d'un nouveau fichier csv...")
-            df = pd.DataFrame(columns=["ville"])
+            df = pd.DataFrame(columns=["ville", "code_country", "latitude", "longitude"])
 
         print("Recherche de la ville dans la liste..." + nomville)
         resultat_apres_la_recherche = df[df["ville"] == capwords(nomville)]
