@@ -1,7 +1,6 @@
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QMessageBox, QHBoxLayout, QLabel, QPushButton, QGridLayout, QWidget, QDialog
 
-
 def message_box(message):
     msgBox = QMessageBox()
     msgBox.setText(message)
