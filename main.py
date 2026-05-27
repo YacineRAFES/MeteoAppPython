@@ -4,6 +4,7 @@ import sys
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QStackedWidget
 
+from utilitaire.msg_box import message_box_geocoding
 from view.accueil.accueil import Accueil
 from view.accueil.header import Header
 from view.settings.parametre import Parametre
