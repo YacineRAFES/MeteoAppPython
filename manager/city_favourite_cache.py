@@ -7,7 +7,7 @@ from pathlib import Path
 FAVORITES_CITY = Path(__file__).parent.parent / "cache" / "favorites_city.csv"
 _lock = Lock()
 
-def add_favorite_city(nomville):
+def add_favorite_city(geo):
 
     with _lock:
         # Je vérifie si la ville existe dans le FAVORITES_CITY
@@ -16,19 +16,26 @@ def add_favorite_city(nomville):
             df = pd.read_csv(FAVORITES_CITY)
         else:
             print("add_city_favourite: favorites_city.csv, création d'un nouveau fichier csv...")
-            df = pd.DataFrame(columns=["ville", "code_country", "latitude", "longitude"])
+            df = pd.DataFrame(columns=["ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"])
 
-        print("Recherche de la ville dans la liste..." + nomville)
-        resultat_apres_la_recherche = df[df["ville"] == capwords(nomville)]
+        print("Recherche de la ville dans la liste...")
+        resultat = df[df["ville"] == capwords(geo["city"])]
 
 
         # Si la ville n'existe pas, je la rajoute dans le FAVOURITE_CITY
-        if resultat_apres_la_recherche.empty:
+        if resultat.empty:
 
             print("Ville non trouvée dans la liste, ajout en cours..." + nomville)
 
             new_row = {
-                "ville": capwords(nomville)
+                "ville": resultat["city"],
+                "pays": resultat["country"],
+                "region": resultat["region"],
+                "departement": resultat["department"],
+                "municipale": resultat["region"],
+                "latitude": resultat["latitude"],
+                "longitude": resultat["longitude"],
+                "code_country": resultat["code_country"]
             }
 
             df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
@@ -44,7 +51,7 @@ def get_favorite_cities():
         if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
             print("get_favorite_cities: Lecture de la liste des villes en favoris...")
             df = pd.read_csv(FAVORITES_CITY)
-            return df["ville"].tolist()
+            return df["ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"].tolist()
         else:
             print("get_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return []

@@ -6,23 +6,23 @@ def message_box(message):
     msgBox.setText(message)
     msgBox.exec()
 
-def message_box_geocoding():
+def message_box_geocoding(data):
     fenetre = QDialog()
     fenetre.setWindowTitle("Sélection de la ville")
 
     layout = QGridLayout(fenetre)
 
-    for i in range(5):
+    for i in range(data):
         pixmap = QPixmap("assets/01d@2x.png")
         icon = QLabel()
         icon.setPixmap(pixmap.scaled(32, 32))
         layout.addWidget(icon, i, 0)
 
-        layout.addWidget(QLabel("NomVille"), i, 1)
-        layout.addWidget(QLabel("FR"), i, 2)
-        layout.addWidget(QLabel("France"), i, 3)
-        layout.addWidget(QLabel("48.85°"), i, 4)
-        layout.addWidget(QLabel("2.35°"), i, 5)
+        layout.addWidget(QLabel(data["ville"]), i, 1)
+        layout.addWidget(QLabel(data["code_country"]), i, 2)
+        layout.addWidget(QLabel(data["pays"]), i, 3)
+        layout.addWidget(QLabel(data["latitude"]), i, 4)
+        layout.addWidget(QLabel(data["longitude"]), i, 5)
 
         bouton = QPushButton("Choisir")
         bouton.clicked.connect(fenetre.accept)

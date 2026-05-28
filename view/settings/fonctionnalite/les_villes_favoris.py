@@ -4,7 +4,7 @@ from PySide6.QtGui import QShortcut, QKeySequence
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit
 
 from controllers.favorites_city_controller import CityFavouriteController
-from utilitaire.msg_box import message_box
+from utilitaire.msg_box import message_box, message_box_geocoding
 
 
 class FavouriteCity(QWidget):
@@ -84,26 +84,15 @@ class FavouriteCity(QWidget):
             print("La saisie est vide, donc return")
             return
 
-        # On enregistre les villes existantes qui se trouve dans la liste widget dans une array
-        liste_widget_villes = []
-        for i in range(self.liste_widget.count()):
-            liste_widget_villes = self.liste_widget.item(i).text().lower()
-
-        # On vérifie si la ville saisie existe dans la liste de widgets, si la ville saisie existe donc on return
-        if ville_a_ajouter.lower() in liste_widget_villes:
-            print("La ville existe déjà dans la liste widgets")
-            return
-
         # -- Appel au controller --
         controller = CityFavouriteController()
-        sauvegarde_resultat = controller.AddCityFavourite(ville_a_ajouter)
+        liste_villes = controller.AddCityFavourite(ville_a_ajouter)
 
-        if not sauvegarde_resultat["erreur"]:
-            self.liste_widget.addItem(capwords(ville_a_ajouter))
-            self.input_text.clear()
-            message_box(sauvegarde_resultat["message"])
+        # Verifie le message de controller
+        if not liste_villes["erreur"]:
+            message_box_geocoding(liste_villes)
         else:
-            message_box(sauvegarde_resultat["message"])
+            message_box(liste_villes["message"])
 
         # ajoute dans la liste
 

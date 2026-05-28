@@ -1,11 +1,28 @@
 from manager.city_favourite_cache import add_favorite_city, get_favorite_cities, remove_favorite_cities
-from manager.geocoding_cache import get_geocoding
+from services.geo.geocoding import get_geocoding
 from utilitaire.gestion_erreur import gestion_erreur
 
 
 class CityFavouriteController:
     def AddCityFavourite(self, city_name):
         print("Controller : Ajouter une ville favorite : ", city_name)
+
+        # On envoie une requête geocoding
+
+        geo = get_geocoding(city_name)
+        if geo.empty:
+            print("probleme de geocoding")
+            return {
+                "erreur": True,
+                "message": "Probleme de geocoding"
+            }
+
+        else:
+            print("requete geocoding recu")
+            return {
+                "erreur": False,
+                "data": geo
+            }
 
         # On verifie si la ville existe dans la liste CSV
         villes_existant = self.GetFavoriteCities()
@@ -17,12 +34,12 @@ class CityFavouriteController:
             }
 
         # Appel géocoding
-        geo = get_geocoding(city_name)
+
         if not geo:
             print("Controller : Erreur géocoding pour la ville : ", city_name)
 
         # Ajout de la ville dans la liste des favoris
-        result = add_favorite_city(city_name)
+        result = add_favorite_city(geo)
         if result:
             return gestion_erreur(False, "La ville a été bien enregistrée.")
         else:

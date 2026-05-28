@@ -11,6 +11,7 @@ def get_geocoding(nomville):
 
         for ville in json_results["results"]:
             city_data = {
+                "id": ville.get("id"),
                 "city": ville.get("name"),
                 "country": ville.get("country"),
                 "region": ville.get("admin1"),
