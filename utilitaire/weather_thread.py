@@ -3,7 +3,6 @@ from PySide6.QtCore import QThread, Signal
 from modele.current_model import WeatherCurrent
 from services.weather.weather_api import fetch_weather
 from services.weather.weather_parser import parse_current
-from manager.geocoding_cache import get_geocoding
 
 
 class WeatherThread(QThread):
@@ -18,16 +17,11 @@ class WeatherThread(QThread):
         super().__init__()
         self.ville = ville
 
+
     def run(self):
         try:
-            # Récupérer les coordonnées
-            geo = get_geocoding(self.ville)
-            if not geo:
-                self.error.emit(self.ville, "Géocodage impossible")
-                return
-
             # Récupérer la météo avec les coordonnées
-            data = fetch_weather(geo["latitude"], geo["longitude"])
+            data = fetch_weather(self.ville["latitude"], self.ville["longitude"])
             current_data = parse_current(data)
             current = WeatherCurrent(current_data)
             if not current:
@@ -35,7 +29,7 @@ class WeatherThread(QThread):
                 return
 
             # Fusionner les données
-            current.code_country = geo["code_country"]
+            current.code_country = self.ville["code_country"]
 
             self.finished.emit(self.ville, current)
         except Exception as e:

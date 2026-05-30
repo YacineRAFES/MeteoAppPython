@@ -152,4 +152,4 @@ class Header(QWidget):
             return []
 
         df = pd.read_csv(FAVOURITE_CITY)
-        return df["ville"].dropna().tolist()
+        return df[["id", "ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"]].to_dict('records')

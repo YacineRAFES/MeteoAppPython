@@ -4,46 +4,41 @@ from utilitaire.gestion_erreur import gestion_erreur
 
 
 class CityFavouriteController:
-    def AddCityFavourite(self, city_name):
-        print("Controller : Ajouter une ville favorite : ", city_name)
+    def AddCityFavourite(self, value, action):
+        if action == "Search":
+            print("Controller : Search : " + value)
 
-        # On envoie une requête geocoding
+            # On envoie une requête geocoding
 
-        geo = get_geocoding(city_name)
-        if geo.empty:
-            print("probleme de geocoding")
-            return {
-                "erreur": True,
-                "message": "Probleme de geocoding"
-            }
+            geo = get_geocoding(value)
+            if not geo:
+                print("probleme de geocoding")
+                return {
+                    "erreur": True,
+                    "message": "Probleme de geocoding"
+                }
 
-        else:
-            print("requete geocoding recu")
-            return {
-                "erreur": False,
-                "data": geo
-            }
+            else:
+                print("requete geocoding recu")
+                return {
+                    "erreur": False,
+                    "data": geo
+                }
+        elif action == "Add":
+            print("Controller : Ajouter une ville favorite !")
+            print(value)
+            result = add_favorite_city(value)
 
-        # On verifie si la ville existe dans la liste CSV
-        villes_existant = self.GetFavoriteCities()
-
-        if city_name.lower() in [v.lower() for v in villes_existant]:
-            return {
-                "erreur": True,
-                "message": "Ville déjà existant dans la liste CSV"
-            }
-
-        # Appel géocoding
-
-        if not geo:
-            print("Controller : Erreur géocoding pour la ville : ", city_name)
-
-        # Ajout de la ville dans la liste des favoris
-        result = add_favorite_city(geo)
-        if result:
-            return gestion_erreur(False, "La ville a été bien enregistrée.")
-        else:
-            return gestion_erreur(True, "La ville n'a pas été enregistrée.")
+            if result["erreur"]:
+                return {
+                    "erreur": True,
+                    "message": result["message"]
+                }
+            else:
+                return {
+                    "erreur": False,
+                    "data": result["message"]
+                }
 
     def GetFavoriteCities(self):
         result = get_favorite_cities()

@@ -7,7 +7,7 @@ from pathlib import Path
 FAVORITES_CITY = Path(__file__).parent.parent / "cache" / "favorites_city.csv"
 _lock = Lock()
 
-def add_favorite_city(geo):
+def add_favorite_city(value):
 
     with _lock:
         # Je vérifie si la ville existe dans le FAVORITES_CITY
@@ -16,56 +16,77 @@ def add_favorite_city(geo):
             df = pd.read_csv(FAVORITES_CITY)
         else:
             print("add_city_favourite: favorites_city.csv, création d'un nouveau fichier csv...")
-            df = pd.DataFrame(columns=["ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"])
+            df = pd.DataFrame(
+                columns=[
+                    "id",
+                    "ville",
+                    "pays",
+                    "region",
+                    "departement",
+                    "municipale",
+                    "latitude",
+                    "longitude",
+                    "code_country"
+                ]
+            )
 
         print("Recherche de la ville dans la liste...")
-        resultat = df[df["ville"] == capwords(geo["city"])]
+        resultat = df[
+            df["id"] == value["id"]
+        ]
 
 
         # Si la ville n'existe pas, je la rajoute dans le FAVOURITE_CITY
         if resultat.empty:
+            print("Depuis city favourite cache:" + resultat.columns)
 
-            print("Ville non trouvée dans la liste, ajout en cours..." + nomville)
+            print("Ville non trouvée dans la liste, ajout en cours...")
 
             new_row = {
-                "ville": resultat["city"],
-                "pays": resultat["country"],
-                "region": resultat["region"],
-                "departement": resultat["department"],
-                "municipale": resultat["region"],
-                "latitude": resultat["latitude"],
-                "longitude": resultat["longitude"],
-                "code_country": resultat["code_country"]
+                "id": value["id"],
+                "ville": value["city"],
+                "pays": value["country"],
+                "region": value["region"],
+                "departement": value["department"],
+                "municipale": value["town"],
+                "latitude": value["latitude"],
+                "longitude": value["longitude"],
+                "code_country": value["code_country"]
             }
 
             df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
             df.to_csv(FAVORITES_CITY, index=False)
 
-            return True
+            return {
+                "erreur": False,
+                "message": "Ville ajouté"
+            }
 
-        print("Ville trouvée dans la liste : " + nomville)
-        return False
+        print("Ville trouvée dans la liste : " + resultat["ville"])
+        return {
+            "erreur": True,
+            "message": "Ville déjà existant"
+        }
 
 def get_favorite_cities():
     with _lock:
         if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
             print("get_favorite_cities: Lecture de la liste des villes en favoris...")
             df = pd.read_csv(FAVORITES_CITY)
-            return df["ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"].tolist()
+            return df[["id", "ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"]].to_dict('records')
         else:
             print("get_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return []
 
-def remove_favorite_cities(nomville):
-    print("remove_favorite_cities : ", nomville)
+def remove_favorite_cities(id):
+    print("remove_favorite_cities : ", id)
     with _lock:
-        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
-            print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
-            df = pd.read_csv(FAVORITES_CITY)
+        df = check_csv_exist(FAVORITES_CITY)
+        if df is not None:
 
             # Nettoyage et comparaison
-            nom_nettoye = capwords(nomville.strip())
-            condition = df["ville"].str.strip() == nom_nettoye
+            id_a_nettoyer = capwords(id.strip())
+            condition = df["ville"].str.strip() == id_a_nettoyer
 
             # Si la ville existe bien dans le BDD
             if condition.any():
@@ -74,12 +95,22 @@ def remove_favorite_cities(nomville):
 
                 # Sauvegarde dans le fichier CSV
                 df_modifie.to_csv(FAVORITES_CITY, index=False)
-                print(f"remove_favorite_cities: {nom_nettoye} supprimée du CSV.")
+                print(f"remove_favorite_cities: {id_a_nettoyer} supprimée du CSV.")
                 return True
             else:
-                print(f"remove_favorite_cities: {nom_nettoye} non trouvée dans le CSV.")
+                print(f"remove_favorite_cities: {id_a_nettoyer} non trouvée dans le CSV.")
                 return False
         else:
             print("remove_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return False
 
+
+def check_csv_exist(csv):
+    print("check_csv_exist : ", csv)
+    with _lock:
+        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
+            print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
+            df = pd.read_csv(FAVORITES_CITY)
+
+
+    return df

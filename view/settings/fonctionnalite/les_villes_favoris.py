@@ -48,7 +48,7 @@ class FavouriteCity(QWidget):
         self.liste_widget.setFixedHeight(400)
 
         # Ajout les villes dans la liste
-        self.liste_widget.addItems(self.villes_favoris)
+        self.liste_widget.addItems([ville["ville"] for ville in self.villes_favoris])
 
         # Ajout le WidgetList dans la layout
         self.layout_liste_villes.addWidget(self.liste_widget)
@@ -76,6 +76,7 @@ class FavouriteCity(QWidget):
 
     def add_city(self):
         # On récupère le nom de la ville saisie et on l'enregistre dans la variable
+        ville_selectionner = None
         ville_a_ajouter = self.input_text.text().strip().lower()
         print("Ajouter une ville : ", ville_a_ajouter)
 
@@ -86,13 +87,22 @@ class FavouriteCity(QWidget):
 
         # -- Appel au controller --
         controller = CityFavouriteController()
-        liste_villes = controller.AddCityFavourite(ville_a_ajouter)
+        liste_villes = controller.AddCityFavourite(ville_a_ajouter, "Search")
 
         # Verifie le message de controller
         if not liste_villes["erreur"]:
-            message_box_geocoding(liste_villes)
+            ville_selectionner = message_box_geocoding(liste_villes["data"])
         else:
+            print(liste_villes["erreur"] + liste_villes["message"])
             message_box(liste_villes["message"])
+            return
+
+        if ville_selectionner:
+            controller.AddCityFavourite(ville_selectionner, "Add")
+        else:
+            print("La saisie est vide, donc return")
+            return
+
 
         # ajoute dans la liste
 

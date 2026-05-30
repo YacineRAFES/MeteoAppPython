@@ -8,6 +8,7 @@ def get_geocoding(nomville):
     if response.status_code == 200:
         json_results = response.json()
         city_lists = []
+        print(json_results["results"])
 
         for ville in json_results["results"]:
             city_data = {
@@ -19,7 +20,7 @@ def get_geocoding(nomville):
                 "town": ville.get("admin3"),
                 "latitude": ville.get("latitude"),
                 "longitude": ville.get("longitude"),
-                "code_country": ville.get("country_code")
+                "country_code": ville.get("country_code")
             }
 
             city_lists.append(city_data)
