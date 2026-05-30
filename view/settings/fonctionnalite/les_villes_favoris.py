@@ -92,6 +92,7 @@ class FavouriteCity(QWidget):
         # Verifie le message de controller
         if not liste_villes["erreur"]:
             ville_selectionner = message_box_geocoding(liste_villes["data"])
+            self.input_text.clear()
         else:
             print(liste_villes["erreur"] + liste_villes["message"])
             message_box(liste_villes["message"])
