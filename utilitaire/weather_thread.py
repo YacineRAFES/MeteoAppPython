@@ -13,15 +13,19 @@ class WeatherThread(QThread):
     # Il signale s'il y a une erreur, en envoyant un message d'erreur
     error = Signal(str, str)
 
-    def __init__(self, ville):
+    def __init__(self, ville_data):
         super().__init__()
-        self.ville = ville
+        self.ville = ville_data["ville"]
+        self.code_country = ville_data["code_country"]
+        self.latitude = ville_data["latitude"]
+        self.longitude = ville_data["longitude"]
+        print(self.ville, self.latitude, self.longitude)
 
 
     def run(self):
         try:
             # Récupérer la météo avec les coordonnées
-            data = fetch_weather(self.ville["latitude"], self.ville["longitude"])
+            data = fetch_weather(self.latitude, self.longitude)
             current_data = parse_current(data)
             current = WeatherCurrent(current_data)
             if not current:
@@ -29,8 +33,8 @@ class WeatherThread(QThread):
                 return
 
             # Fusionner les données
-            current.city = self.ville["ville"]
-            current.code_country = self.ville["code_country"]
+            current.city = self.ville
+            current.code_country = self.code_country
 
             self.finished.emit(self.ville, current)
         except Exception as e:
