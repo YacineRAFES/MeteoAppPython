@@ -29,6 +29,7 @@ class WeatherThread(QThread):
                 return
 
             # Fusionner les données
+            current.city = self.ville["ville"]
             current.code_country = self.ville["code_country"]
 
             self.finished.emit(self.ville, current)

@@ -99,6 +99,9 @@ class FavouriteCity(QWidget):
 
         if ville_selectionner:
             controller.AddCityFavourite(ville_selectionner, "Add")
+            self.villes_favoris = controller.GetFavoriteCities()
+            self.liste_widget.clear()
+            self.liste_widget.addItems([ville["ville"] for ville in self.villes_favoris])
         else:
             print("La saisie est vide, donc return")
             return
