@@ -104,13 +104,3 @@ def remove_favorite_cities(id):
             print("remove_favorite_cities: favorites_city.csv, aucun favoris trouvé...")
             return False
 
-
-def check_csv_exist(csv):
-    print("check_csv_exist : ", csv)
-    with _lock:
-        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
-            print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
-            df = pd.read_csv(FAVORITES_CITY)
-
-
-    return df
