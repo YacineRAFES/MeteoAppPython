@@ -1,10 +1,11 @@
 from string import capwords
 
-from PySide6.QtGui import QShortcut, QKeySequence
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit
+from PySide6.QtGui import QShortcut, QKeySequence, Qt
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit, \
+    QListWidgetItem
 
 from controllers.favorites_city_controller import CityFavouriteController
-from utilitaire.msg_box import message_box
+from utilitaire.msg_box import message_box, message_box_geocoding
 
 
 class FavouriteCity(QWidget):
@@ -48,7 +49,10 @@ class FavouriteCity(QWidget):
         self.liste_widget.setFixedHeight(400)
 
         # Ajout les villes dans la liste
-        self.liste_widget.addItems(self.villes_favoris)
+        for ville in self.villes_favoris:
+            item = QListWidgetItem(ville["ville"])  # Texte visible
+            item.setData(Qt.UserRole, ville["id"])    # ID caché
+            self.liste_widget.addItem(item)
 
         # Ajout le WidgetList dans la layout
         self.layout_liste_villes.addWidget(self.liste_widget)
@@ -76,6 +80,7 @@ class FavouriteCity(QWidget):
 
     def add_city(self):
         # On récupère le nom de la ville saisie et on l'enregistre dans la variable
+        ville_selectionner = None
         ville_a_ajouter = self.input_text.text().strip().lower()
         print("Ajouter une ville : ", ville_a_ajouter)
 
@@ -84,26 +89,31 @@ class FavouriteCity(QWidget):
             print("La saisie est vide, donc return")
             return
 
-        # On enregistre les villes existantes qui se trouve dans la liste widget dans une array
-        liste_widget_villes = []
-        for i in range(self.liste_widget.count()):
-            liste_widget_villes = self.liste_widget.item(i).text().lower()
-
-        # On vérifie si la ville saisie existe dans la liste de widgets, si la ville saisie existe donc on return
-        if ville_a_ajouter.lower() in liste_widget_villes:
-            print("La ville existe déjà dans la liste widgets")
-            return
-
         # -- Appel au controller --
         controller = CityFavouriteController()
-        sauvegarde_resultat = controller.AddCityFavourite(ville_a_ajouter)
+        liste_villes = controller.AddCityFavourite(ville_a_ajouter, "Search")
 
-        if not sauvegarde_resultat["erreur"]:
-            self.liste_widget.addItem(capwords(ville_a_ajouter))
+        # Verifie le message de controller
+        if not liste_villes["erreur"]:
+            ville_selectionner = message_box_geocoding(liste_villes["data"])
             self.input_text.clear()
-            message_box(sauvegarde_resultat["message"])
         else:
-            message_box(sauvegarde_resultat["message"])
+            print(liste_villes["erreur"] + liste_villes["message"])
+            message_box(liste_villes["message"])
+            return
+
+        if ville_selectionner:
+            controller.AddCityFavourite(ville_selectionner, "Add")
+            self.villes_favoris = controller.GetFavoriteCities()
+            self.liste_widget.clear()
+            for ville in self.villes_favoris:
+                item = QListWidgetItem(ville["ville"])
+                item.setData(Qt.UserRole, ville["id"])
+                self.liste_widget.addItem(item)
+        else:
+            print("La sélection est vide, donc return")
+            return
+
 
         # ajoute dans la liste
 
@@ -115,10 +125,11 @@ class FavouriteCity(QWidget):
         ligne_selectionner = self.liste_widget.currentRow()
         if ligne_selectionner >= 0:
             objet_actuel = self.liste_widget.item(ligne_selectionner)
+            ville_id = objet_actuel.data(Qt.UserRole)
 
             # Appel au controller pour la suppression dans le CSV
             controller = CityFavouriteController()
-            suppression_resultat = controller.RemoveCityFavourite(objet_actuel)
+            suppression_resultat = controller.RemoveCityFavourite(ville_id)
 
             if not suppression_resultat["erreur"]:
                 # supprime dans la liste

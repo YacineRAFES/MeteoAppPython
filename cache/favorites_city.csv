@@ -1,7 +1,2 @@
-ville
-Nancy
-Nice
-Paris
-Oslo
-Tokyo
-London
+id,ville,pays,region,departement,municipale,latitude,longitude,code_country
+2990999,Nancy,France,Grand Est,Meurthe et Moselle,Arrondissement of Nancy,48.68439,6.18496,FR
