@@ -107,11 +107,11 @@ class FavouriteCity(QWidget):
             self.villes_favoris = controller.GetFavoriteCities()
             self.liste_widget.clear()
             for ville in self.villes_favoris:
-                item = QListWidgetItem(ville["ville"]) 
+                item = QListWidgetItem(ville["ville"])
                 item.setData(Qt.UserRole, ville["id"])
                 self.liste_widget.addItem(item)
         else:
-            print("La saisie est vide, donc return")
+            print("La sélection est vide, donc return")
             return
 
 
