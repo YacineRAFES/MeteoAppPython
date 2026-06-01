@@ -85,8 +85,8 @@ def remove_favorite_cities(id):
         if df is not None:
 
             # Nettoyage et comparaison
-            id_a_nettoyer = capwords(id.strip())
-            condition = df["ville"].str.strip() == id_a_nettoyer
+            id_a_nettoyer = str(id).strip()
+            condition = df["id"].astype(str).str.strip() == id_a_nettoyer
 
             # Si la ville existe bien dans le BDD
             if condition.any():
