@@ -81,8 +81,9 @@ def get_favorite_cities():
 def remove_favorite_cities(id):
     print("remove_favorite_cities : ", id)
     with _lock:
-        df = check_csv_exist(FAVORITES_CITY)
-        if df is not None:
+        if FAVORITES_CITY.exists() and FAVORITES_CITY.stat().st_size > 0:
+            print("remove_favorite_cities: Lecture de la liste des villes en favoris...")
+            df = pd.read_csv(FAVORITES_CITY)
 
             # Nettoyage et comparaison
             id_a_nettoyer = str(id).strip()
