@@ -1,7 +1,8 @@
 from string import capwords
 
-from PySide6.QtGui import QShortcut, QKeySequence
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit
+from PySide6.QtGui import QShortcut, QKeySequence, Qt
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton, QListWidget, QVBoxLayout, QLineEdit, \
+    QListWidgetItem
 
 from controllers.favorites_city_controller import CityFavouriteController
 from utilitaire.msg_box import message_box, message_box_geocoding
