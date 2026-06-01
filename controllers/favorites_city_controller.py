@@ -46,10 +46,9 @@ class CityFavouriteController:
             print("Controller : Erreur lors de la récupération de la liste des villes favorites")
         return result
 
-    def RemoveCityFavourite(self, object):
-        nom_ville = object.text()
+    def RemoveCityFavourite(self, id):
 
-        result = remove_favorite_cities(nom_ville)
+        result = remove_favorite_cities(id)
 
         if result:
             return gestion_erreur(False, "Suppression d'une ville a été réussie.")

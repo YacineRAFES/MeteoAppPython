@@ -89,7 +89,7 @@ def remove_favorite_cities(id):
             id_a_nettoyer = str(id).strip()
             condition = df["id"].astype(str).str.strip() == id_a_nettoyer
 
-            # Si la ville existe bien dans le BDD
+            # Si l'id existe bien dans le BDD
             if condition.any():
                 # On garde tout SAUF cette ville
                 df_modifie = df[~condition]
