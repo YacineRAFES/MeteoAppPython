@@ -48,7 +48,10 @@ class FavouriteCity(QWidget):
         self.liste_widget.setFixedHeight(400)
 
         # Ajout les villes dans la liste
-        self.liste_widget.addItems([ville["ville"] for ville in self.villes_favoris])
+        for ville in self.villes_favoris:
+            item = QListWidgetItem(ville["ville"])  # Texte visible
+            item.setData(Qt.UserRole, ville["id"])    # ID caché
+            self.liste_widget.addItem(item)
 
         # Ajout le WidgetList dans la layout
         self.layout_liste_villes.addWidget(self.liste_widget)
