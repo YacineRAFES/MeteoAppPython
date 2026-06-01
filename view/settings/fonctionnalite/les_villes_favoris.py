@@ -121,6 +121,7 @@ class FavouriteCity(QWidget):
         ligne_selectionner = self.liste_widget.currentRow()
         if ligne_selectionner >= 0:
             objet_actuel = self.liste_widget.item(ligne_selectionner)
+            ville_id = objet_actuel.data(Qt.UserRole)
 
             # Appel au controller pour la suppression dans le CSV
             controller = CityFavouriteController()
