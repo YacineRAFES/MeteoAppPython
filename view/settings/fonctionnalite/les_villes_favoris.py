@@ -125,7 +125,7 @@ class FavouriteCity(QWidget):
 
             # Appel au controller pour la suppression dans le CSV
             controller = CityFavouriteController()
-            suppression_resultat = controller.RemoveCityFavourite(objet_actuel)
+            suppression_resultat = controller.RemoveCityFavourite(ville_id)
 
             if not suppression_resultat["erreur"]:
                 # supprime dans la liste
