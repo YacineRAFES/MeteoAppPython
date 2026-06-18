@@ -7,6 +7,7 @@ from services.weather.weather_parser import parse_current
 
 class WeatherThread(QThread):
     """Traitement qui récupère la météo d'une ville sans bloquer l'interface"""
+    # TODO: Faire une seule requête pour la liste des villes
 
     # Il signale si la récupération est terminée avec succès, en envoyant les données météo
     finished = Signal(str, object)
