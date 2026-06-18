@@ -4,6 +4,7 @@ from modele.current_model import WeatherCurrent
 from services.weather.weather_api import fetch_weather
 from services.weather.weather_parser import parse_current
 
+VILLES =
 
 class WeatherThread(QThread):
     """Traitement qui récupère la météo d'une ville sans bloquer l'interface"""
@@ -14,7 +15,7 @@ class WeatherThread(QThread):
     # Il signale s'il y a une erreur, en envoyant un message d'erreur
     error = Signal(str, str)
 
-    def __init__(self, ville_data):
+    def __init__(self):
         super().__init__()
         self.ville = ville_data["ville"]
         self.code_country = ville_data["code_country"]
