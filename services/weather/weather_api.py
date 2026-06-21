@@ -2,6 +2,42 @@ import requests
 
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
 
+def fetch_weather_for_list_cities(villes_data: list):
+    """
+    Récupère la météo de la liste des villes en une seule requête
+
+    Parameters
+        villes_data: liste de dictionnaires contenant la liste des villes
+        - latitude
+        - longitude
+
+    Returns
+        Données météo pour toutes les villes
+    """
+    lat = [ville["latitude"] for ville in villes_data]
+    lon = [ville["longitude"] for ville in villes_data]
+
+    params = {
+        "latitude": ",".join(map(str, lat)),
+        "longitude": ",".join(map(str, lon)),
+        "current":
+            "temperature_2m,"
+            "is_day,"
+            "weather_code,"
+            "relative_humidity_2m",
+
+        "timeformat": "unixtime"
+    }
+
+    response = requests.get(BASE_URL, params=params)
+
+    if response.status_code != 200:
+        print(f"Erreur API: {response.status_code}")
+        return None
+
+    response.raise_for_status()
+    return response.json()
+
 def fetch_weather(lat: float, lon: float):
     params = {
         "latitude": lat,

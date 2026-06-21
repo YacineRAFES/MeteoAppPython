@@ -63,12 +63,11 @@ class Header(QWidget):
             self.loading_label.setText("Aucune ville dans les favoris.")
             return
 
-        for ville in villes:
-            worker = WeatherThread(ville)
-            worker.finished.connect(self.on_weather_loaded)
-            worker.error.connect(self.on_weather_error)
-            self.worker.append(worker)
-            worker.start()
+        worker = WeatherThread()
+        worker.finished.connect(self.on_weather_loaded)
+        worker.error.connect(self.on_weather_error)
+        self.worker.append(worker)
+        worker.start()
 
     def refresh(self):
         """Appelé depuis l'extérieur pour rafraîchir la liste"""
