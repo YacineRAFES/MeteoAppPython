@@ -36,7 +36,12 @@ def fetch_weather_for_list_cities(villes_data: list):
         return None
 
     response.raise_for_status()
-    return response.json()
+    data = response.json()
+
+    if isinstance(data, dict):
+        data = [data]
+
+    return data
 
 def fetch_weather(lat: float, lon: float):
     params = {
