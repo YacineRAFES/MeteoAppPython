@@ -30,3 +30,13 @@ def parse_daily(data):
         "preci_proba": daily["precipitation_probability_max"],
         "time": daily["time"]
     }
+
+def parse_already_current(data):
+
+    return {
+        "temperature_2m": data["temperature_2m"],
+        "weather_code": data["weather_code"],
+        "is_day": data["is_day"],
+        "humidity": data["relative_humidity_2m"],
+        "time": data["time"]
+    }
