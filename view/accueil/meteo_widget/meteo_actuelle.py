@@ -31,7 +31,6 @@ class MeteoAujourdhui(QWidget):
 
         icons = QLabel()
         icons.setObjectName("meteo_icon")
-        pixmap = QPixmap()
         premiere_colonne.addWidget(icons)
 
         # ---------- PARTIE TEMPÉRATURE ----------
