@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt, Signal
 
 from utilitaire.msg_box import message_box_geocoding, message_box
 from view.accueil.meteo_widget.meteo_actuelle import MeteoAujourdhui
+from view.accueil.meteo_widget.meteo_aujourd_charts import MeteoAujourdhuiCharts
 from view.accueil.meteo_widget.meteo_journee import MeteoJournee
 from view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
 from controllers.weather_controller import WeatherController
@@ -49,12 +50,14 @@ class Body(QWidget):
 
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
+        self.meteo_aujourd_charts = MeteoAujourdhuiCharts()
         self.meteo_journee = MeteoJournee("")
         self.meteo_semaine = MeteoSemaine("")
 
         self.meteo_aujourdhui.setVisible(False)
         self.meteo_journee.setVisible(False)
         self.meteo_semaine.setVisible(False)
+        self.meteo_aujourd_charts.setVisible(True)
 
         # Layout pour la météo actuelle et la journée
         layout_meteo_AJ = QHBoxLayout()
@@ -62,6 +65,9 @@ class Body(QWidget):
         layout_meteo_AJ.addWidget(self.meteo_journee, 1)
 
         layout_principal.addLayout(layout_meteo_AJ)
+
+        # Ajout du graphique des températures
+        layout_principal.addWidget(self.meteo_aujourd_charts)
 
         layout_principal.addWidget(self.meteo_semaine)
         layout_principal.addStretch()
