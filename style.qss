@@ -135,3 +135,14 @@
     border: 2px solid #0093D6;
     background-color: #217AA3;
 }
+
+/* Scroll Area de Body */
+#scrollArea {
+    border : none;
+    background-color: transparent;
+}
+
+/* Conteneur Meteo dans Body */
+#meteo_conteneur {
+    background-color: transparent;
+}

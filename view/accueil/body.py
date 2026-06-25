@@ -1,5 +1,5 @@
 from PySide6.QtGui import QShortcut
-from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton
+from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton, QScrollArea
 from PySide6.QtCore import Qt, Signal
 
 from utilitaire.msg_box import message_box_geocoding, message_box
@@ -48,6 +48,18 @@ class Body(QWidget):
 
         layout_principal.addLayout(layout_input)
 
+        # Scroll Area
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setFixedHeight(370)
+        scroll_area.setObjectName("scrollArea")
+
+        # Conteneur Meteo pour meteo_actuelle, meteo_journee, meteo_semaire
+        meteo_conteneur = QWidget()
+        meteo_conteneur.setObjectName("meteo_conteneur")
+
+        layout_meteo = QVBoxLayout(meteo_conteneur)
+
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
         self.meteo_aujourd_charts = MeteoAujourdhuiCharts()
@@ -57,20 +69,21 @@ class Body(QWidget):
         self.meteo_aujourdhui.setVisible(False)
         self.meteo_journee.setVisible(False)
         self.meteo_semaine.setVisible(False)
-        self.meteo_aujourd_charts.setVisible(True)
+        self.meteo_aujourd_charts.setVisible(False)
 
         # Layout pour la météo actuelle et la journée
         layout_meteo_AJ = QHBoxLayout()
         layout_meteo_AJ.addWidget(self.meteo_aujourdhui, 0)
         layout_meteo_AJ.addWidget(self.meteo_journee, 1)
 
-        layout_principal.addLayout(layout_meteo_AJ)
+        layout_meteo.addLayout(layout_meteo_AJ)
+        layout_meteo.addWidget(self.meteo_aujourd_charts)
+        layout_meteo.addWidget(self.meteo_semaine)
+        layout_meteo.addStretch()
 
-        # Ajout du graphique des températures
-        layout_principal.addWidget(self.meteo_aujourd_charts)
+        scroll_area.setWidget(meteo_conteneur)
 
-        layout_principal.addWidget(self.meteo_semaine)
-        layout_principal.addStretch()
+        layout_principal.addWidget(scroll_area)
 
         self.setLayout(layout_principal)
 
@@ -99,3 +112,4 @@ class Body(QWidget):
         self.meteo_aujourdhui.setVisible(True)
         self.meteo_journee.setVisible(True)
         self.meteo_semaine.setVisible(True)
+        self.meteo_aujourd_charts.setVisible(True)

@@ -13,6 +13,8 @@ class MeteoAujourdhuiCharts(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
+        self.setMinimumHeight(250)
+
         # Créer les données du graphique
         x = np.linspace(0, 2 * np.pi, 200)
         y = np.sin(x)
@@ -26,5 +28,10 @@ class MeteoAujourdhuiCharts(QWidget):
         # Créer un canvas pour afficher la figure dans Qt
         canvas = FigureCanvas(fig)
 
+        canvas.wheelEvent = self.canvas_wheel_event
+
         # Ajouter le canvas au layout
         layout.addWidget(canvas)
+
+    def canvas_wheel_event(self, event):
+        event.ignore()
