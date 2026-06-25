@@ -1,5 +1,5 @@
 from PySide6.QtGui import QShortcut
-from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton, QScrollArea
+from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton, QScrollArea, QSizePolicy
 from PySide6.QtCore import Qt, Signal
 
 from utilitaire.msg_box import message_box_geocoding, message_box
@@ -47,11 +47,13 @@ class Body(QWidget):
         layout_input.addWidget(self.buttoninput)
 
         layout_principal.addLayout(layout_input)
+        layout_principal.addStretch(1)
 
         # Scroll Area
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
-        scroll_area.setFixedHeight(370)
+        scroll_area.setMinimumHeight(400)
+        scroll_area.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         scroll_area.setObjectName("scrollArea")
 
         # Conteneur Meteo pour meteo_actuelle, meteo_journee, meteo_semaire
@@ -79,7 +81,6 @@ class Body(QWidget):
         layout_meteo.addLayout(layout_meteo_AJ)
         layout_meteo.addWidget(self.meteo_aujourd_charts)
         layout_meteo.addWidget(self.meteo_semaine)
-        layout_meteo.addStretch()
 
         scroll_area.setWidget(meteo_conteneur)
 

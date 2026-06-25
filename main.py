@@ -57,7 +57,7 @@ class MyWindow(QMainWindow):
         assemblage_layout.addWidget(menu_widget)
         assemblage_layout.addWidget(self.stack)
 
-        assemblage_layout.addStretch()
+        assemblage_layout.addStretch(0)
 
         central_widget = QWidget()
         central_widget.setLayout(assemblage_layout)
