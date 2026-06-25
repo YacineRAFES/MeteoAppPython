@@ -1,5 +1,4 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
-import matplotlib.pyplot as plt
+from PySide6.QtWidgets import QWidget, QVBoxLayout
 import numpy as np
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
