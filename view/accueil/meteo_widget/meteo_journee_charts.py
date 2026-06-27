@@ -1,10 +1,11 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 import numpy as np
+from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 
-class MeteoAujourdhuiCharts(QWidget):
+class MeteoJourneeCharts(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -14,14 +15,11 @@ class MeteoAujourdhuiCharts(QWidget):
 
         self.setMinimumHeight(250)
 
-        # Créer les données du graphique
-        x = np.linspace(0, 2 * np.pi, 200)
-        y = np.sin(x)
 
         # Créer une figure matplotlib
         fig = Figure()
-        ax = fig.add_subplot(111)
-        ax.plot(x, y)
+        ax = fig.subplots(1, 1)
+        ax.plot(["11:00", "14:00", "15:00", "16:00"], [34, 36, 38, 39])
         ax.set_title("Températures aujourd'hui")
 
         # Créer un canvas pour afficher la figure dans Qt
@@ -34,3 +32,7 @@ class MeteoAujourdhuiCharts(QWidget):
 
     def canvas_wheel_event(self, event):
         event.ignore()
+
+    def maj_charts(self):
+        meteoHeure = QVBoxLayout()
+
