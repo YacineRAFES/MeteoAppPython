@@ -4,7 +4,7 @@ from PySide6.QtCore import Qt, Signal
 
 from utilitaire.msg_box import message_box_geocoding, message_box
 from view.accueil.meteo_widget.meteo_actuelle import MeteoAujourdhui
-from view.accueil.meteo_widget.meteo_aujourd_charts import MeteoAujourdhuiCharts
+from view.accueil.meteo_widget.meteo_journee_charts import MeteoJourneeCharts
 from view.accueil.meteo_widget.meteo_journee import MeteoJournee
 from view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
 from controllers.weather_controller import WeatherController
@@ -53,7 +53,6 @@ class Body(QWidget):
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
         scroll_area.setMinimumHeight(400)
-        scroll_area.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         scroll_area.setObjectName("scrollArea")
 
         # Conteneur Meteo pour meteo_actuelle, meteo_journee, meteo_semaire
@@ -64,14 +63,14 @@ class Body(QWidget):
 
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
-        self.meteo_aujourd_charts = MeteoAujourdhuiCharts()
+        self.meteo_journee_charts = MeteoJourneeCharts()
         self.meteo_journee = MeteoJournee("")
         self.meteo_semaine = MeteoSemaine("")
 
         self.meteo_aujourdhui.setVisible(False)
         self.meteo_journee.setVisible(False)
+        self.meteo_journee_charts.setVisible(False)
         self.meteo_semaine.setVisible(False)
-        self.meteo_aujourd_charts.setVisible(False)
 
         # Layout pour la météo actuelle et la journée
         layout_meteo_AJ = QHBoxLayout()
@@ -79,7 +78,7 @@ class Body(QWidget):
         layout_meteo_AJ.addWidget(self.meteo_journee, 1)
 
         layout_meteo.addLayout(layout_meteo_AJ)
-        layout_meteo.addWidget(self.meteo_aujourd_charts)
+        layout_meteo.addWidget(self.meteo_journee_charts)
         layout_meteo.addWidget(self.meteo_semaine)
 
         scroll_area.setWidget(meteo_conteneur)
@@ -113,4 +112,4 @@ class Body(QWidget):
         self.meteo_aujourdhui.setVisible(True)
         self.meteo_journee.setVisible(True)
         self.meteo_semaine.setVisible(True)
-        self.meteo_aujourd_charts.setVisible(True)
+        self.meteo_journee_charts.setVisible(True)
