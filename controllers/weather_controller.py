@@ -50,9 +50,11 @@ class WeatherController:
             # Vider les données précédentes
             self.view.meteo_aujourdhui.vider() # appel du widget meteo_actuelle.py
             self.view.meteo_journee.vider() # appel du widget meteo_journee.py
+            # self.view.meteo_semaine_charts.vider()
             self.view.meteo_semaine.vider() # appel du widget meteo_semaine.py
 
             # Mise à jour UI
             self.view.meteo_aujourdhui.maj_current(current, value["city"]) # appel du widget meteo_actuelle.py
             self.view.meteo_journee.maj_journee(hourly) # appel du widget meteo_journee.py
+            # self.view.meteo_journee_charts.maj_charts(hourly)
             self.view.meteo_semaine.maj_daily(daily) # appel du widget meteo_semaine.py
