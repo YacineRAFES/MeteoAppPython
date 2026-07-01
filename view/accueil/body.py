@@ -27,7 +27,7 @@ class Body(QWidget):
 
         # Position de la barre de recherche au centre
         layout_input.setAlignment(Qt.AlignCenter)
-        layout_input.setContentsMargins(0, 20, 0, 10)
+        layout_input.setContentsMargins(0, 10, 0, 10)
 
         # réduire la taille de la barre de recherche
         self.input_text.setFixedWidth(300)

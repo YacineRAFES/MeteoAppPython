@@ -35,7 +35,7 @@ class Header(QWidget):
         self.loading_label = None
         self.worker = []
 
-        self.setFixedHeight(230)
+        self.setFixedHeight(200)
 
         # Premier chargement au lancement du widget
         self.charger_meteo()
