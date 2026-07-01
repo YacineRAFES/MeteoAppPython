@@ -16,8 +16,7 @@ class Accueil(QWidget):
 
         # Affichage de la barre de recherche d'une ville
         body = Body()
-        layout_main.addWidget(body)
+        layout_main.addWidget(body, 1)
 
-        layout_main.addStretch()
 
         self.setLayout(layout_main)

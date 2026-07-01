@@ -47,7 +47,6 @@ class Body(QWidget):
         layout_input.addWidget(self.buttoninput)
 
         layout_principal.addLayout(layout_input)
-        layout_principal.addStretch(1)
 
         # Scroll Area
         scroll_area = QScrollArea()
