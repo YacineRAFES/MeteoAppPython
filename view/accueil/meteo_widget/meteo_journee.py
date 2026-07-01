@@ -47,6 +47,7 @@ class MeteoJournee(QWidget):
             temp_label = QLabel(
                 f"{hourly.get_temperatures(i)}°C"
             )
+            temp_label.setToolTip("Température")
             temp_label.setObjectName("meteoTemp")
             temp_label.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(temp_label)
@@ -55,6 +56,7 @@ class MeteoJournee(QWidget):
             precip_label = QLabel(
                 f"{hourly.get_precipitations(i)} %"
             )
+            precip_label.setToolTip("Probabilité de précipitation")
             precip_label.setObjectName("precipProba")
             precip_label.setAlignment(Qt.AlignCenter)
             meteoHeure.addWidget(precip_label)
