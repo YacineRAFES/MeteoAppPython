@@ -1,7 +1,6 @@
 from PySide6.QtCore import Slot
 from PySide6.QtGui import QPixmap, Qt
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel
-
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QScrollArea, QScroller, QScrollerProperties
 
 
 class MeteoJournee(QWidget):
@@ -11,17 +10,38 @@ class MeteoJournee(QWidget):
 
         print("MeteoJournee : ", self.nomville)
 
+        # Conteneur principale
         self.layout_principal = QVBoxLayout()
         self.layout_principal.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout_principal)
 
+        # Scrollbar
+        scrollArea = QScrollArea()
+        scrollArea.setWidgetResizable(True)
+        scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scrollArea.setFrameShape(QScrollArea.NoFrame)
+        QScroller.grabGesture(scrollArea, QScroller.LeftMouseButtonGesture)
+
+        scroller = QScroller.scroller(scrollArea)
+
+        proprietes = scroller.scrollerProperties()
+
+        proprietes.setScrollMetric(QScrollerProperties.HorizontalOvershootPolicy, QScrollerProperties.OvershootAlwaysOff)
+        proprietes.setScrollMetric(QScrollerProperties.VerticalOvershootPolicy, QScrollerProperties.OvershootAlwaysOff)
+
+        scroller.setScrollerProperties(proprietes)
+
+        # Conteneur par heure
         self.meteoJourneeLayout = QHBoxLayout()
 
         meteoJournee = QWidget()
         meteoJournee.setObjectName("meteo_journee")
         meteoJournee.setLayout(self.meteoJourneeLayout)
 
-        self.layout_principal.addWidget(meteoJournee)
+        scrollArea.setWidget(meteoJournee)
+
+        self.layout_principal.addWidget(scrollArea)
 
     def maj_journee(self, hourly):
 
