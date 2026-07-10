@@ -62,7 +62,7 @@ class Body(QWidget):
 
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
-        self.meteo_journee_charts = MeteoJourneeCharts()
+        self.meteo_journee_charts = MeteoJourneeCharts("")
         self.meteo_journee = MeteoJournee("")
         self.meteo_semaine = MeteoSemaine("")
 
