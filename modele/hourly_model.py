@@ -26,3 +26,9 @@ class WeatherHourly:
 
     def get_times(self, index):
         return Conversion.from_timestamp_to_hour(self.times[index])
+
+    def get_all_temperatures(self):
+        return [self.get_temperatures(i) for i in range(len(self.temperatures))]
+
+    def get_all_times(self):
+        return [self.get_times(i) for i in range(len(self.times))]
