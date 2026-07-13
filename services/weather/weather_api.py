@@ -57,7 +57,8 @@ def fetch_weather(lat: float, lon: float):
             "temperature_2m,"
             "precipitation_probability,"
             "weather_code,"
-            "is_day",
+            "is_day,"
+            "precipitation",
 
         "daily":
             "weather_code,"
