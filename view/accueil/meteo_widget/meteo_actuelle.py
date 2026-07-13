@@ -94,7 +94,7 @@ class MeteoAujourdhui(QWidget):
 
         # Température actuelle
         self.findChild(QLabel, "meteo_temperature").setText(
-            f"{current.get_temperature()}°C"
+            f"{current.get_temperature_2m()}°C"
         )
 
         # Description du temps (ensoleillé, nuageux, etc.)
@@ -103,7 +103,7 @@ class MeteoAujourdhui(QWidget):
         )
         # Humidité
         self.findChild(QLabel, "meteo_humidity").setText(
-            f"{current.get_humidity()}%"
+            f"{current.get_relative_humidity_2m()}%"
         )
 
     def vider(self):

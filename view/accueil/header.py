@@ -91,7 +91,7 @@ class Header(QWidget):
 
         # Afficher les données
         self.header_du_bloc(layout_ville, results.city, results.code_country)
-        self.corps_du_bloc(layout_ville, str(results.get_temperature()), desc, icon)
+        self.corps_du_bloc(layout_ville, str(results.get_temperature_2m()), desc, icon)
 
         self.layout_meteoInternational.addWidget(ville_widget)
         self.layout_meteoInternational.setAlignment(Qt.AlignCenter)

@@ -47,26 +47,30 @@ class MeteoSemaine(QWidget):
             icons.setAlignment(Qt.AlignCenter)
             premier_colonne.addWidget(icons)
 
+            # ---Températures---
             meteo_temp_layout = QHBoxLayout()
 
             meteo_temp_layout.addStretch()
 
+            # ---Températures minimale---
             meteo_temp_min = QLabel(
-                f"{daily.get_temp_min(i)}°"
+                f"{daily.get_temperature_2m_min(i)}°"
             )
             meteo_temp_min.setToolTip("Température minimale")
-            meteo_temp_min.setObjectName("meteo_temp_semaine")
+            meteo_temp_min.setObjectName("meteo_temp_min")
             meteo_temp_layout.addWidget(meteo_temp_min)
 
+            # ---Températures séparateur---
             meteo_temp_separateur = QLabel(" / ")
             meteo_temp_separateur.setObjectName("meteo_temp_semaine")
             meteo_temp_layout.addWidget(meteo_temp_separateur)
 
+            # ---Températures maximale---
             meteo_temp_max = QLabel(
-                f"{daily.get_temp_max(i)}°"
+                f"{daily.get_temperature_2m_max(i)}°"
             )
             meteo_temp_max.setToolTip("Température maximale")
-            meteo_temp_max.setObjectName("meteo_temp_semaine")
+            meteo_temp_max.setObjectName("meteo_temp_max")
             meteo_temp_layout.addWidget(meteo_temp_max)
 
             meteo_temp_layout.addStretch()
@@ -86,7 +90,7 @@ class MeteoSemaine(QWidget):
             meteo_preci_layout.addWidget(icons_precipitation)
 
             meteo_preci = QLabel(
-                f" {daily.get_precipitations(i)} %"
+                f" {daily.get_precipitation_probability_max(i)} %"
             )
             meteo_preci.setObjectName("meteo_preci_semaine")
             meteo_preci.setAlignment(Qt.AlignCenter)
