@@ -81,6 +81,18 @@
     font-weight: bold;
 }
 
+#meteo_temp_min {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(66, 116, 217);
+}
+
+#meteo_temp_max {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(149, 39, 29);
+}
+
 #meteo_preci_semaine {
     font-size: 18px;
     font-weight: bold;
