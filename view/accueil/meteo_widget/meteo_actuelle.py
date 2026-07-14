@@ -31,8 +31,6 @@ class MeteoAujourdhui(QWidget):
 
         icons = QLabel()
         icons.setObjectName("meteo_icon")
-        pixmap = QPixmap()
-        icons.setPixmap(pixmap.scaled(200, 200))
         premiere_colonne.addWidget(icons)
 
         # ---------- PARTIE TEMPÉRATURE ----------
@@ -87,7 +85,7 @@ class MeteoAujourdhui(QWidget):
         # met à jour les labels avec les données récupérées
         # Nom de la ville
         self.findChild(QLabel, "meteo_nom_ville").setText(
-            nomville.capitalize()
+            nomville
         )
 
         # Icone météo
@@ -96,7 +94,7 @@ class MeteoAujourdhui(QWidget):
 
         # Température actuelle
         self.findChild(QLabel, "meteo_temperature").setText(
-            f"{current.get_temperature()}°C"
+            f"{current.get_temperature_2m()}°C"
         )
 
         # Description du temps (ensoleillé, nuageux, etc.)
@@ -105,7 +103,7 @@ class MeteoAujourdhui(QWidget):
         )
         # Humidité
         self.findChild(QLabel, "meteo_humidity").setText(
-            f"{current.get_humidity()}%"
+            f"{current.get_relative_humidity_2m()}%"
         )
 
     def vider(self):

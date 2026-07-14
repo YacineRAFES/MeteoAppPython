@@ -81,6 +81,18 @@
     font-weight: bold;
 }
 
+#meteo_temp_min {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(66, 116, 217);
+}
+
+#meteo_temp_max {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(149, 39, 29);
+}
+
 #meteo_preci_semaine {
     font-size: 18px;
     font-weight: bold;
@@ -134,4 +146,15 @@
     border-radius: 5px;
     border: 2px solid #0093D6;
     background-color: #217AA3;
+}
+
+/* Scroll Area de Body */
+#scrollArea {
+    border : none;
+    background-color: transparent;
+}
+
+/* Conteneur Meteo dans Body */
+#meteo_conteneur {
+    background-color: transparent;
 }

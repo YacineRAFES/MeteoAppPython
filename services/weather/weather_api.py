@@ -57,7 +57,8 @@ def fetch_weather(lat: float, lon: float):
             "temperature_2m,"
             "precipitation_probability,"
             "weather_code,"
-            "is_day",
+            "is_day,"
+            "precipitation",
 
         "daily":
             "weather_code,"
@@ -68,7 +69,7 @@ def fetch_weather(lat: float, lon: float):
         "timeformat": "unixtime",
         "forecast_days": 6,
         "forecast_hours": 24,
-        "temporal_resolution": "hourly_3"
+        "temporal_resolution": "hourly_1"
     }
 
     response = requests.get(BASE_URL, params=params)
