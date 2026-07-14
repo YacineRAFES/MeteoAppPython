@@ -85,7 +85,7 @@ class MeteoAujourdhui(QWidget):
         # met à jour les labels avec les données récupérées
         # Nom de la ville
         self.findChild(QLabel, "meteo_nom_ville").setText(
-            nomville.capitalize()
+            nomville
         )
 
         # Icone météo
