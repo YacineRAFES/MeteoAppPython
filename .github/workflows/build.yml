@@ -50,9 +50,14 @@ jobs:
       - name: Install release-it
         run: npm install -g release-it @release-it/conventional-changelog
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Run release-it
         env:
-          GITHUB_TOKEN: ${{ GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx release-it \
             --no-git.push \
