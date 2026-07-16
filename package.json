@@ -1,0 +1,12 @@
+{
+  "name": "MeteoAppPython",
+  "version": "1.0.0",
+  "scripts": {
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^11.0.1",
+    "auto-changelog": "^2.6.0",
+    "release-it": "^20.2.1"
+  }
+}

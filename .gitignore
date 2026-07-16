@@ -30,7 +30,6 @@ Thumbs.db
 desktop.ini
 
 package-lock.json
-package.json
 
 node_modules
 cache/*
