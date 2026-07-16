@@ -29,7 +29,6 @@ htmlcov/
 Thumbs.db
 desktop.ini
 
-.release-it.json
 package-lock.json
 package.json
 

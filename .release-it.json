@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "git": {
+    "requiredBranch": "main",
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}"
+  },
+  "npm": false,
+  "hooks": {
+    "before:init": "pyinstaller --onefile --windowed main.py",
+    "after:bump": "npx auto-changelog -p"
+  },
+  "github": {
+    "release": true,
+    "token": "$GITHUB_TOKEN",
+    "assets": ["dist/*.exe"]
+  }
+}

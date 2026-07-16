@@ -60,6 +60,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx release-it \
-            --no-git.push \
-            --no-git.tag \
             --config .release-it.json
