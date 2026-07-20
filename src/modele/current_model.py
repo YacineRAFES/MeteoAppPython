@@ -1,5 +1,5 @@
-from utilitaire.conversion import Conversion
-from utilitaire.get_weather_icon import weather_icon
+from src.utilitaire.conversion import Conversion
+from src.utilitaire.get_weather_icon import weather_icon
 
 
 class WeatherCurrent:

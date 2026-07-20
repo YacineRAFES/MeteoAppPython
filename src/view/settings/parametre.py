@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout
 
-from view.settings.fonctionnalite.les_villes_favoris import FavouriteCity
-from view.accueil.header import Header
+from src.view.settings.fonctionnalite.les_villes_favoris import FavouriteCity
 
 
 class Parametre(QWidget):

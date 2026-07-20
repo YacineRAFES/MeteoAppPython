@@ -35,4 +35,4 @@ package.json
 .release-it.json
 
 node_modules
-cache/*
+src/cache/*

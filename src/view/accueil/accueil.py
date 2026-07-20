@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
-from view.accueil.body import Body
-from view.accueil.header import Header
+from src.view.accueil.body import Body
 
 
 class Accueil(QWidget):

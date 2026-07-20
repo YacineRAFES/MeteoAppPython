@@ -1,8 +1,8 @@
 from PySide6.QtCore import QThread, Signal
-from manager.city_favourite_cache import get_favorite_cities
-from modele.current_model import WeatherCurrent
-from services.weather.weather_api import fetch_weather_for_list_cities
-from services.weather.weather_parser import parse_already_current
+from src.manager.city_favourite_cache import get_favorite_cities
+from src.modele.current_model import WeatherCurrent
+from src.services.weather.weather_api import fetch_weather_for_list_cities
+from src.services.weather.weather_parser import parse_already_current
 
 
 class WeatherThread(QThread):

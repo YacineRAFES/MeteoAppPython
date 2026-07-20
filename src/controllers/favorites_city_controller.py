@@ -1,6 +1,6 @@
-from manager.city_favourite_cache import add_favorite_city, get_favorite_cities, remove_favorite_cities
-from services.geo.geocoding import get_geocoding
-from utilitaire.gestion_erreur import gestion_erreur
+from src.manager.city_favourite_cache import add_favorite_city, get_favorite_cities, remove_favorite_cities
+from src.services.geo.geocoding import get_geocoding
+from src.utilitaire.gestion_erreur import gestion_erreur
 
 
 class CityFavouriteController:

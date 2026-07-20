@@ -1,13 +1,13 @@
 from PySide6.QtGui import QShortcut
-from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton, QScrollArea, QSizePolicy
+from PySide6.QtWidgets import QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QPushButton, QScrollArea
 from PySide6.QtCore import Qt, Signal
 
-from utilitaire.msg_box import message_box_geocoding, message_box
-from view.accueil.meteo_widget.meteo_actuelle import MeteoAujourdhui
-from view.accueil.meteo_widget.meteo_journee_charts import MeteoJourneeCharts
-from view.accueil.meteo_widget.meteo_journee import MeteoJournee
-from view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
-from controllers.weather_controller import WeatherController
+from src.utilitaire.msg_box import message_box_geocoding, message_box
+from src.view.accueil.meteo_widget.meteo_actuelle import MeteoAujourdhui
+from src.view.accueil.meteo_widget.meteo_journee_charts import MeteoJourneeCharts
+from src.view.accueil.meteo_widget.meteo_journee import MeteoJournee
+from src.view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
+from src.controllers.weather_controller import WeatherController
 
 # TODO : Meteo Actuelle à revoir sur les styles (la taille de la police et les couleurs)
 class Body(QWidget):

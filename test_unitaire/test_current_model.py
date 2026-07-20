@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from modele.current_model import WeatherCurrent
+from src.modele.current_model import WeatherCurrent
 
 
 class TestWeatherCurrent(TestCase):
