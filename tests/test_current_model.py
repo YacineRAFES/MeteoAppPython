@@ -9,13 +9,13 @@ class TestWeatherCurrent(TestCase):
             "temperature_2m": 20.6,
             "weather_code": 1,
             "is_day": 1,
-            "humidity": 50,
+            "relative_humidity_2m": 50,
             "time": 1776266616
         }
         self.current = WeatherCurrent(self.data)
 
     def test_get_temperature_arrondi(self):
-        self.assertEqual(self.current.get_temperature(), 21, "Température arrondie devrait être 21")
+        self.assertEqual(self.current.get_temperature_2m(), 21, "Température arrondie devrait être 21")
 
     def test_get_weather_code(self):
         icon, desc = self.current.get_weather_code
@@ -24,7 +24,7 @@ class TestWeatherCurrent(TestCase):
         self.assertIsInstance(desc, str)
 
     def test_get_humidity(self):
-        self.assertEqual(self.current.get_humidity(), 50, "Humidité devrait être 50")
+        self.assertEqual(self.current.get_relative_humidity_2m(), 50, "Humidité devrait être 50")
 
     def test_get_time(self):
         result = self.current.get_time()
