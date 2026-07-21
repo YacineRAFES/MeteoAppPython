@@ -2,6 +2,8 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy
 
+from src.resources import resource_path
+
 
 class MeteoAujourdhui(QWidget):
     def __init__(self, nomville):
@@ -38,7 +40,7 @@ class MeteoAujourdhui(QWidget):
 
         icons_thermometre = QLabel()
         icons_thermometre.setObjectName("meteo_icon_thermometre")
-        pixmap_thermometre = QPixmap("assets/thermometer.png")
+        pixmap_thermometre = QPixmap(str(resource_path("assets", "thermometer.png")))
         icons_thermometre.setPixmap(pixmap_thermometre.scaled(30, 30))
         layout_temperature.addWidget(icons_thermometre)
 
@@ -54,7 +56,7 @@ class MeteoAujourdhui(QWidget):
 
         icons_humidity = QLabel()
         icons_humidity.setObjectName("meteo_icon_humidity")
-        pixmap_humidity = QPixmap("assets/humidity.png")
+        pixmap_humidity = QPixmap(str(resource_path("assets", "humidity.png")))
         icons_humidity.setPixmap(pixmap_humidity.scaled(30, 30))
         layout_humidity.addWidget(icons_humidity)
 

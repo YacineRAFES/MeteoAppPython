@@ -1,6 +1,8 @@
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtWidgets import QMessageBox, QHBoxLayout, QLabel, QPushButton, QGridLayout, QWidget, QDialog
 
+from src.resources import resource_path
+
 def message_box(message):
     msgBox = QMessageBox()
     msgBox.setText(message)
@@ -50,7 +52,7 @@ def message_box_geocoding(data):
     layout = QGridLayout(fenetre)
 
     for i, entry in enumerate(data):
-        pixmap = QPixmap("assets/01d@2x.png")
+        pixmap = QPixmap(str(resource_path("assets", "01d@2x.png")))
         icon = QLabel()
         icon.setPixmap(pixmap.scaled(32, 32))
         layout.addWidget(icon, i, 0)

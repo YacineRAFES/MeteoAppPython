@@ -1,10 +1,22 @@
-from string import capwords
 from threading import Lock
 import pandas as pd
 from pathlib import Path
+import os
+import sys
 
 
-FAVORITES_CITY = Path(__file__).parent.parent / "cache" / "favorites_city.csv"
+def _favorites_city_path() -> Path:
+    """Return a writable cache path in development and in the packaged app."""
+    if getattr(sys, "frozen", False):
+        cache_dir = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MeteoAppPython"
+    else:
+        cache_dir = Path(__file__).resolve().parent.parent / "cache"
+
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    return cache_dir / "favorites_city.csv"
+
+
+FAVORITES_CITY = _favorites_city_path()
 _lock = Lock()
 
 def add_favorite_city(value):
@@ -38,7 +50,7 @@ def add_favorite_city(value):
 
         # Si la ville n'existe pas, je la rajoute dans le FAVOURITE_CITY
         if resultat.empty:
-            print("Depuis city favourite cache:" + resultat.columns)
+            print("Colonnes du cache :", list(resultat.columns))
 
             print("Ville non trouvée dans la liste, ajout en cours...")
 
@@ -62,7 +74,7 @@ def add_favorite_city(value):
                 "message": "Ville ajouté"
             }
 
-        print("Ville trouvée dans la liste : " + resultat["ville"])
+        print("Ville trouvée dans la liste :", resultat["ville"].iloc[0])
         return {
             "erreur": True,
             "message": "Ville déjà existant"

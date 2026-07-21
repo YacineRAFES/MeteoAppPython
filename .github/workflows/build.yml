@@ -7,10 +7,22 @@ on:
     branches:
       - main
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
 jobs:
+  tests:
+    name: Tests unitaires
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.14"
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
@@ -25,7 +37,7 @@ jobs:
 
   build:
     name: Build .exe
-    needs: sonarqube
+    needs: [tests, sonarqube]
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -34,20 +46,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.14"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pyinstaller
 
       - name: Build .exe with PyInstaller
         run: |
-          python -m PyInstaller --onefile --windowed --add-data "src/assets/weather_code.json;src/assets" src/main.py
-
-      - name: Rename .exe
-        run: mv dist/main.exe dist/MeteoAppPython.exe
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name MeteoAppPython --paths . --paths src --add-data "src/assets;assets" --add-data "src/style.qss;." src/main.py
 
       - name: Upload .exe
         uses: actions/upload-artifact@v4
@@ -58,7 +66,10 @@ jobs:
   release:
     name: Create Release
     needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

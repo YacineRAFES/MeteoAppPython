@@ -1,9 +1,8 @@
 import json
-import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from src.resources import resource_path
 
-with open(os.path.join(BASE_DIR, "assets", "weather_code.json")) as f:
+with resource_path("assets", "weather_code.json").open(encoding="utf-8") as f:
     WEATHER_DATA = json.load(f)
 
 class weather_icon:
@@ -16,6 +15,6 @@ class weather_icon:
         weather = WEATHER_DATA[str(weather_code)][period]
 
         return {
-            "icon": os.path.join(BASE_DIR, "assets", os.path.basename(weather['image'])),
+            "icon": str(resource_path("assets", weather["image"].split("/")[-1])),
             "description": weather["description"]
         }

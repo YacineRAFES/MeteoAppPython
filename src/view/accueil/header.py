@@ -1,10 +1,10 @@
-from pathlib import Path
 import pandas as pd
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QScrollArea, QScroller
 from PySide6.QtCore import Qt
 
 from src.utilitaire.weather_thread import WeatherThread
+from src.manager.city_favourite_cache import FAVORITES_CITY
 
 class Header(QWidget):
     def __init__(self):
@@ -144,11 +144,9 @@ class Header(QWidget):
         layout_ville.addLayout(layout_icons_temp)
 
     def get_villes(self):
-        FAVOURITE_CITY = Path(__file__).parent.parent.parent / "cache" / "favorites_city.csv"
-
         # Si le fichier n'existe pas encore ou il est vide
-        if not FAVOURITE_CITY.exists() or FAVOURITE_CITY.stat().st_size == 0:
+        if not FAVORITES_CITY.exists() or FAVORITES_CITY.stat().st_size == 0:
             return []
 
-        df = pd.read_csv(FAVOURITE_CITY)
+        df = pd.read_csv(FAVORITES_CITY)
         return df[["id", "ville", "pays", "region", "departement", "municipale", "latitude", "longitude", "code_country"]].to_dict('records')

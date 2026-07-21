@@ -12,6 +12,7 @@ ENV/
 # Packaging / build artifacts
 build/
 dist/
+*.spec
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
@@ -36,3 +37,5 @@ package.json
 
 node_modules
 src/cache/*
+
+CHANGELOG.md

@@ -2,6 +2,8 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QLabel
 
+from src.resources import resource_path
+
 
 
 class MeteoSemaine(QWidget):
@@ -85,7 +87,7 @@ class MeteoSemaine(QWidget):
             icons_precipitation = QLabel()
             icons_precipitation.setToolTip("Probabilité de précipitation")
             icons_precipitation.setObjectName("meteo_icon_precipitation")
-            pixmap_precipitation = QPixmap("assets/precipitation.png")
+            pixmap_precipitation = QPixmap(str(resource_path("assets", "precipitation.png")))
             icons_precipitation.setPixmap(pixmap_precipitation.scaled(30, 30))
             meteo_preci_layout.addWidget(icons_precipitation)
 

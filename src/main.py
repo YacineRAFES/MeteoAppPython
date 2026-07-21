@@ -4,6 +4,7 @@ import sys
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QPushButton, QStackedWidget
 
+from src.resources import resource_path
 from view.accueil.accueil import Accueil
 from view.accueil.header import Header
 from view.settings.parametre import Parametre
@@ -99,7 +100,7 @@ if __name__ == "__main__":
     myWindow.show()
 
 
-    with open('style.qss', 'r') as f:
+    with resource_path("style.qss").open(encoding="utf-8") as f:
         style = f.read()
 
     app.setStyleSheet(style)
