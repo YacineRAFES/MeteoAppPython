@@ -36,5 +36,3 @@ package.json
 
 node_modules
 src/cache/*
-
-pyproject.toml
