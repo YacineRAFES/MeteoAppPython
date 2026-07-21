@@ -67,24 +67,21 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install semantic-release
-        run: pip install python-semantic-release
-
-      - name: Bump version & create tag
-        run: semantic-release version
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Download .exe
         uses: actions/download-artifact@v4
         with:
           name: MeteoAppPython
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: MeteoAppPython/main.exe
-          generate_release_notes: true
+      - name: Move .exe to dist
+        run: |
+          mkdir -p dist
+          mv MeteoAppPython/main.exe dist/MeteoAppPython.exe
+
+      - name: Install semantic-release
+        run: pip install python-semantic-release
+
+      - name: Publish release
+        run: semantic-release publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
