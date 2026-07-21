@@ -44,7 +44,7 @@ jobs:
           pyinstaller --onefile --windowed src/main.py
 
       - name: Upload .exe
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MeteoAppPython
           path: dist/MeteoAppPython.exe
@@ -73,14 +73,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download .exe
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: MeteoAppPython.exe
+          name: MeteoAppPython
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: MeteoAppPython.exe
+          files: MeteoAppPython/MeteoAppPython.exe
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
