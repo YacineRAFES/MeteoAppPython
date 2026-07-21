@@ -46,11 +46,14 @@ jobs:
         run: |
           python -m PyInstaller --onefile --windowed src/main.py
 
+      - name: Rename .exe
+        run: mv dist/main.exe dist/MeteoAppPython.exe
+
       - name: Upload .exe
         uses: actions/upload-artifact@v4
         with:
           name: MeteoAppPython
-          path: dist/main.exe
+          path: dist/MeteoAppPython.exe
 
   release:
     name: Create Release
@@ -67,15 +70,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Download .exe
+      - name: Download .exe to dist
         uses: actions/download-artifact@v4
         with:
           name: MeteoAppPython
-
-      - name: Move .exe to dist
-        run: |
-          mkdir -p dist
-          mv MeteoAppPython/main.exe dist/MeteoAppPython.exe
+          path: dist
 
       - name: Install semantic-release
         run: pip install python-semantic-release
