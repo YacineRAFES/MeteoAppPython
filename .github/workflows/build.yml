@@ -44,7 +44,7 @@ jobs:
 
       - name: Build .exe with PyInstaller
         run: |
-          python -m PyInstaller --onefile --windowed src/main.py
+          python -m PyInstaller --onefile --windowed --add-data "src/assets/weather_code.json;src/assets" src/main.py
 
       - name: Rename .exe
         run: mv dist/main.exe dist/MeteoAppPython.exe
