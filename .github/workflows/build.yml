@@ -8,6 +8,8 @@ on:
       - main
 permissions:
   contents: write
+  pull-requests: write
+  issues: write
 jobs:
   sonarqube:
     name: SonarQube
@@ -71,7 +73,7 @@ jobs:
       - name: Bump version & create tag
         run: semantic-release version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download .exe
         uses: actions/download-artifact@v4
