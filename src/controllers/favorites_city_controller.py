@@ -26,7 +26,6 @@ class CityFavouriteController:
                 }
         elif action == "Add":
             print("Controller : Ajouter une ville favorite !")
-            print(value)
             result = add_favorite_city(value)
 
             if result["erreur"]:
