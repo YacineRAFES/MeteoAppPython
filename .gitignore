@@ -36,6 +36,7 @@ package.json
 .release-it.json
 
 node_modules
-src/cache/*
+src\cache\*
 
 CHANGELOG.md
+"src/cache/favorites_city.csv" 
