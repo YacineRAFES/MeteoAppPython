@@ -16,6 +16,8 @@ class Parametre(QWidget):
         layout_main.addWidget(titre_parametres)
 
         les_villes_favoris = FavouriteCity(header_instance=main_header)
+        # Ajout Weather Models
+        # Ajout les paramètres pour °C et °F
 
         layout_ligne_un.addWidget(les_villes_favoris)
         layout_ligne_un.addStretch()
