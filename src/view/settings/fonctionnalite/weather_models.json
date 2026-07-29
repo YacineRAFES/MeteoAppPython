@@ -1,0 +1,86 @@
+{
+  "weather_models": {
+    "general": {
+      "Best Match": "best_match",
+      "ECMWF IFS HRES 9km": "",
+      "ECMWF IFS 0.25°": "",
+      "ECMWF AIFS 0.25° Single": "",
+      "CMA GRAPES Global": "",
+      "BOM ACCESS Global": ""
+    },
+    "JMA": {
+      "JMA Seamless": "",
+      "JMA MSM": "",
+      "JMA GSM": ""
+    },
+    "DWD ICON": {
+      "DWD ICON Seamless": "",
+      "DWD ICON Global": "",
+      "DWD ICON EU": "",
+      "DWD ICON D2": ""
+    },
+    "Météo France": {
+      "Météo-France Seamless": "",
+      "Météo-France ARPEGE World": "",
+      "Météo-France ARPEGE Europe": "",
+      "Météo-France AROME France": "",
+      "Météo-France AROME France HD": ""
+    },
+    "MET Norway": {
+      "MET Norway Nordic Seamless (with ECMWF)": "",
+      "MET Norway Nordic": ""
+    },
+    "GeoSphere": {
+      "GeoSphere Seamless (with ECMWF)": "",
+      "GeoSphere AROME Austria": ""
+    },
+    "NCEP": {
+      "NCEP GFS Seamless": "",
+      "NCEP GFS Global 0.11°/0.25°": "",
+      "NCEP HRRR U.S Conus": "",
+      "NCEP NBM U.S Conus": "",
+      "NCEP NAM U.S Conus": "",
+      "NCEP AIGFS 0.25°": "",
+      "NCEP HGEFS 0.25° Ensemble Mean": ""
+    },
+    "KMA": {
+      "KMA Seamless": "",
+      "KMA LDPS": "",
+      "KMA GDPS": ""
+    },
+    "GEM": {
+      "GEM Seamless": "",
+      "GEM Global": "",
+      "GEM Regional": "",
+      "GEM HRDPS Continental": "",
+      "GEM HRDPS West": ""
+    },
+    "ItaliaMeteo": {
+      "ItaliaMeteo ARPAE ICON 2I": ""
+    },
+    "KNMI": {
+      "KNMI Seamless (with ECMWF)": "",
+      "KNMI Harmonie AROME Europe": "",
+      "KNMI Harmonie AROME": ""
+    },
+    "DMI" : {
+      "DMI Seamless (with ECMWF)": "",
+      "DMI Harmonie AROME Europe": ""
+    },
+    "MeteoSwiss": {
+      "MeteoSwiss ICON Seamless": "",
+      "MeteoSwiss ICON CH1": "",
+      "MeteoSwiss ICON CH2": ""
+    },
+    "UK MET": {
+      "UK Met Office Seamless": "",
+      "UK Met Office Global 10km": "",
+      "UK Met Office UK 2km": ""
+    },
+    "CHMI": {
+      "CHMI Aladin Seamless": "",
+      "CHMI Aladin Central Europe 2km": "",
+      "CHMI Aladin CZ 1km": ""
+    }
+  }
+}
