@@ -1,6 +1,6 @@
 {
   "weather_models": {
-    "general": {
+    "General": {
       "Best Match": "best_match",
       "ECMWF IFS HRES 9km": "",
       "ECMWF IFS 0.25°": "",
