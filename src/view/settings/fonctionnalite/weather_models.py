@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QVBoxLayout, QCheckB
 from src.resources import resource_path
 
 with resource_path("view","settings","fonctionnalite","weather_models.json").open(encoding="utf-8") as f:
-    MODELS_DATA = json.load(f)
+    MODELS_DATA = json.load(f)["weather_models"]
 
 class WeatherModels(QWidget):
     def __init__(self, header_instance=None):
@@ -19,17 +19,38 @@ class WeatherModels(QWidget):
         self.titre.setObjectName("weatherModels")
         self.layout.addWidget(self.titre)
 
-        self.layout_add_city = QHBoxLayout()
-        for provider, models in MODELS_DATA.items():
-            provider_label = QLabel(provider)
-            provider_label.setObjectName("providerLabel")
-            self.layout.addWidget(provider_label)
+        rangee = QHBoxLayout()
+        rangee.setContentsMargins(0, 0, 0, 10)
+        rangee_compteur = 0
 
-            for model_name, model_id in models.items():
-                checkbox = QCheckBox(model_name)
+        for fournisseur, modeles in MODELS_DATA.items():
+            colonne = QVBoxLayout()
+
+            fournisseur_label = QLabel(fournisseur)
+            fournisseur_label.setObjectName("providerLabel")
+            colonne.addWidget(fournisseur_label)
+
+            for modeles_nom, modeles_id in modeles.items():
+                checkbox = QCheckBox(modeles_nom)
                 checkbox.clicked.connect(
-                    lambda checked, m_id=model_id, m_name=model_name: self.on_model_toggled(checked, m_id, m_name)
+                    lambda checked, m_id=modeles_id, m_name=modeles_nom: self.on_model_toggled(checked, m_id, m_name)
                 )
+                colonne.addWidget(checkbox)
+
+            colonne.addStretch()
+            rangee.addLayout(colonne)
+            rangee_compteur += 1
+
+            if rangee_compteur == 5:
+            # Je crée un QVBoxLayout dans le layout_model
+                self.layout.addLayout(rangee)
+                rangee = QHBoxLayout()
+                rangee.setContentsMargins(0, 0, 0, 10)
+                rangee_compteur = 0
+
+        if rangee_compteur > 0:
+            rangee.addStretch()
+            self.layout.addLayout(rangee)
 
         self.layout.addStretch()
         self.setLayout(self.layout)
