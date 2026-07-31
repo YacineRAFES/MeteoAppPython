@@ -2,85 +2,85 @@
   "weather_models": {
     "General": {
       "Best Match": "best_match",
-      "ECMWF IFS HRES 9km": "",
-      "ECMWF IFS 0.25°": "",
-      "ECMWF AIFS 0.25° Single": "",
-      "CMA GRAPES Global": "",
-      "BOM ACCESS Global": ""
+      "ECMWF IFS HRES 9km": "ecmwf_ifs",
+      "ECMWF IFS 0.25°": "ecmwf_ifs025",
+      "ECMWF AIFS 0.25° Single": "ecmwf_aifs025_single",
+      "CMA GRAPES Global": "cma_grapes_global",
+      "BOM ACCESS Global": "bom_access_global"
     },
     "JMA": {
-      "JMA Seamless": "",
-      "JMA MSM": "",
-      "JMA GSM": ""
+      "JMA Seamless": "jma_seamless",
+      "JMA MSM": "jma_msm",
+      "JMA GSM": "jma_gsm"
     },
     "DWD ICON": {
-      "DWD ICON Seamless": "",
-      "DWD ICON Global": "",
-      "DWD ICON EU": "",
-      "DWD ICON D2": ""
+      "DWD ICON Seamless": "dwd_icon_seamless",
+      "DWD ICON Global": "dwd_icon_global",
+      "DWD ICON EU": "dwd_icon_eu",
+      "DWD ICON D2": "dwd_icon_d2"
     },
     "Météo France": {
-      "Météo-France Seamless": "",
-      "Météo-France ARPEGE World": "",
-      "Météo-France ARPEGE Europe": "",
-      "Météo-France AROME France": "",
-      "Météo-France AROME France HD": ""
+      "Météo-France Seamless": "meteofrance_seamless",
+      "Météo-France ARPEGE World": "meteofrance_arpege_world",
+      "Météo-France ARPEGE Europe": "meteofrance_arpege_europe",
+      "Météo-France AROME France": "meteofrance_arome_france",
+      "Météo-France AROME France HD": "meteofrance_arome_france_hd"
     },
     "MET Norway": {
-      "MET Norway Nordic Seamless (with ECMWF)": "",
-      "MET Norway Nordic": ""
+      "MET Norway Nordic Seamless (with ECMWF)": "metno_seamless",
+      "MET Norway Nordic": "metno_nordic"
     },
     "GeoSphere": {
-      "GeoSphere Seamless (with ECMWF)": "",
-      "GeoSphere AROME Austria": ""
+      "GeoSphere Seamless (with ECMWF)": "geosphere_seamless",
+      "GeoSphere AROME Austria": "geosphere_arome_austria"
     },
     "NCEP": {
-      "NCEP GFS Seamless": "",
-      "NCEP GFS Global 0.11°/0.25°": "",
-      "NCEP HRRR U.S Conus": "",
-      "NCEP NBM U.S Conus": "",
-      "NCEP NAM U.S Conus": "",
-      "NCEP AIGFS 0.25°": "",
-      "NCEP HGEFS 0.25° Ensemble Mean": ""
+      "NCEP GFS Seamless": "ncep_gfs_seamless",
+      "NCEP GFS Global 0.11°/0.25°": "ncep_gfs_global",
+      "NCEP HRRR U.S Conus": "ncep_hrrr_conus",
+      "NCEP NBM U.S Conus": "ncep_nbm_conus",
+      "NCEP NAM U.S Conus": "ncep_nam_conus",
+      "NCEP AIGFS 0.25°": "ncep_aigfs025",
+      "NCEP HGEFS 0.25° Ensemble Mean": "ncep_hgefs025_ensemble_mean"
     },
     "KMA": {
-      "KMA Seamless": "",
-      "KMA LDPS": "",
-      "KMA GDPS": ""
+      "KMA Seamless": "kma_seamless",
+      "KMA LDPS": "kma_ldps",
+      "KMA GDPS": "kma_gdps"
     },
     "GEM": {
-      "GEM Seamless": "",
-      "GEM Global": "",
-      "GEM Regional": "",
-      "GEM HRDPS Continental": "",
-      "GEM HRDPS West": ""
+      "GEM Seamless": "cmc_gem_seamless",
+      "GEM Global": "cmc_gem_gdps",
+      "GEM Regional": "cmc_gem_rdps",
+      "GEM HRDPS Continental": "cmc_gem_hrdps",
+      "GEM HRDPS West": "cmc_gem_hrdps_west"
     },
     "ItaliaMeteo": {
-      "ItaliaMeteo ARPAE ICON 2I": ""
+      "ItaliaMeteo ARPAE ICON 2I": "italia_meteo_arpae_icon_2i"
     },
     "KNMI": {
-      "KNMI Seamless (with ECMWF)": "",
-      "KNMI Harmonie AROME Europe": "",
-      "KNMI Harmonie AROME": ""
+      "KNMI Seamless (with ECMWF)": "knmi_seamless",
+      "KNMI Harmonie AROME Europe": "knmi_harmonie_arome_europe",
+      "KNMI Harmonie AROME": "knmi_harmonie_arome_netherlands"
     },
     "DMI" : {
-      "DMI Seamless (with ECMWF)": "",
-      "DMI Harmonie AROME Europe": ""
+      "DMI Seamless (with ECMWF)": "dmi_seamless",
+      "DMI Harmonie AROME Europe": "dmi_harmonie_arome_europe"
     },
     "MeteoSwiss": {
-      "MeteoSwiss ICON Seamless": "",
-      "MeteoSwiss ICON CH1": "",
-      "MeteoSwiss ICON CH2": ""
+      "MeteoSwiss ICON Seamless": "meteoswiss_icon_seamless",
+      "MeteoSwiss ICON CH1": "meteoswiss_icon_ch1",
+      "MeteoSwiss ICON CH2": "meteoswiss_icon_ch2"
     },
     "UK MET": {
-      "UK Met Office Seamless": "",
-      "UK Met Office Global 10km": "",
-      "UK Met Office UK 2km": ""
+      "UK Met Office Seamless": "ukmo_seamless",
+      "UK Met Office Global 10km": "ukmo_global_deterministic_10km",
+      "UK Met Office UK 2km": "ukmo_uk_deterministic_2km"
     },
     "CHMI": {
-      "CHMI Aladin Seamless": "",
-      "CHMI Aladin Central Europe 2km": "",
-      "CHMI Aladin CZ 1km": ""
+      "CHMI Aladin Seamless": "chmi_aladin_seamless",
+      "CHMI Aladin Central Europe 2km": "chmi_aladin_central_europe_2km",
+      "CHMI Aladin CZ 1km": "chmi_aladin_cz_1km"
     }
   }
 }
