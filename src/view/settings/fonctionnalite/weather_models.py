@@ -1,11 +1,23 @@
 import json
+import os
 
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QVBoxLayout, QCheckBox
+from configparser import ConfigParser
 
 from src.resources import resource_path
 
 with resource_path("view","settings","fonctionnalite","weather_models.json").open(encoding="utf-8") as f:
     MODELS_DATA = json.load(f)["weather_models"]
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+chemin = os.path.normpath(os.path.join(script_dir, "..", "..", "..", "cache", "UserSettings.ini"))
+
+print("Chemin résolu:", chemin)
+print("Existe ?", os.path.exists(chemin))
+
+config = ConfigParser()
+fichiers_lus = config.read(chemin)
+print("Lu avec succès ?", bool(fichiers_lus))
 
 class WeatherModels(QWidget):
     def __init__(self, header_instance=None):
