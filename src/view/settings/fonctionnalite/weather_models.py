@@ -1,5 +1,4 @@
 import json
-import os
 
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QVBoxLayout, QCheckBox
 from configparser import ConfigParser
@@ -9,15 +8,12 @@ from src.resources import resource_path
 with resource_path("view","settings","fonctionnalite","weather_models.json").open(encoding="utf-8") as f:
     MODELS_DATA = json.load(f)["weather_models"]
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-chemin = os.path.normpath(os.path.join(script_dir, "..", "..", "..", "cache", "UserSettings.ini"))
+CONFIG = ConfigParser()
+CONFIG.read(resource_path("cache","UserSettings.ini"), encoding="utf-8")
 
-print("Chemin résolu:", chemin)
-print("Existe ?", os.path.exists(chemin))
+print(CONFIG.sections())
+print(CONFIG["WEATHER_MODELS"]["MODELS"])
 
-config = ConfigParser()
-fichiers_lus = config.read(chemin)
-print("Lu avec succès ?", bool(fichiers_lus))
 
 class WeatherModels(QWidget):
     def __init__(self, header_instance=None):
@@ -70,6 +66,7 @@ class WeatherModels(QWidget):
     def on_model_toggled(self, checked, model_id, m_name):
         if checked:
             self.selected_models.append(model_id)
+
         else:
             if model_id in self.selected_models:
                 self.selected_models.remove(model_id)

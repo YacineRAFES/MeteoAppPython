@@ -30,12 +30,10 @@ class WeatherController:
                     "data": geo
                 }
         if action == "Choice":
+            # Récupère le modèle choisi par l'utilisateur
 
             # Appel API
-            data = fetch_weather(value["latitude"], value["longitude"])
-            # if not data:
-            #     view.show_error("Erreur API")
-            #     return
+            data = fetch_weather(value["latitude"], value["longitude"], ["best_match"])
 
             # Parsing
             current_data = parse_current(data)
