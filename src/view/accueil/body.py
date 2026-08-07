@@ -59,6 +59,10 @@ class Body(QWidget):
 
         layout_meteo = QVBoxLayout(meteo_conteneur)
 
+        self.layout_models_meteo = QHBoxLayout()
+        self.models_buttons()
+        layout_principal.addLayout(self.layout_models_meteo)
+
         # Ajout des différentes parties au layout principal
         self.meteo_aujourdhui = MeteoAujourdhui("")
         self.meteo_journee_charts = MeteoJourneeCharts("")
@@ -111,3 +115,13 @@ class Body(QWidget):
         self.meteo_journee.setVisible(True)
         self.meteo_semaine.setVisible(True)
         self.meteo_journee_charts.setVisible(True)
+
+    def models_buttons(self):
+        # Layout pour les modèles de météos
+        self.layout_models_meteo.setSpacing(0)
+        self.layout_models_meteo.addStretch()
+        for _ in range(5):
+            button = QPushButton("Test")
+            self.layout_models_meteo.addWidget(button)
+
+        self.layout_models_meteo.addStretch()
