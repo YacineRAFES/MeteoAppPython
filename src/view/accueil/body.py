@@ -76,7 +76,7 @@ class Body(QWidget):
         layout_meteo_today.addWidget(self.meteo_aujourdhui, 0)
         layout_meteo_today.addWidget(self.meteo_journee, 1)
 
-        layout_meteo.addLayout(layout_meteo_AJ)
+        layout_meteo.addLayout(layout_meteo_today)
         layout_meteo.addWidget(self.meteo_journee_charts)
         layout_meteo.addWidget(self.meteo_semaine)
 
