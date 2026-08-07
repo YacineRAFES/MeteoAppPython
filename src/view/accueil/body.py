@@ -72,9 +72,9 @@ class Body(QWidget):
         self.meteo_semaine.setVisible(False)
 
         # Layout pour la météo actuelle et la journée
-        layout_meteo_AJ = QHBoxLayout()
-        layout_meteo_AJ.addWidget(self.meteo_aujourdhui, 0)
-        layout_meteo_AJ.addWidget(self.meteo_journee, 1)
+        layout_meteo_today = QHBoxLayout()
+        layout_meteo_today.addWidget(self.meteo_aujourdhui, 0)
+        layout_meteo_today.addWidget(self.meteo_journee, 1)
 
         layout_meteo.addLayout(layout_meteo_AJ)
         layout_meteo.addWidget(self.meteo_journee_charts)
