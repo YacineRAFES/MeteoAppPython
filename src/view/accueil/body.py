@@ -9,7 +9,6 @@ from src.view.accueil.meteo_widget.meteo_journee import MeteoJournee
 from src.view.accueil.meteo_widget.meteo_semaine import MeteoSemaine
 from src.controllers.weather_controller import WeatherController
 
-# TODO : Meteo Actuelle à revoir sur les styles (la taille de la police et les couleurs)
 class Body(QWidget):
     ville_recherchee = Signal(float, float, str)
     def __init__(self):
